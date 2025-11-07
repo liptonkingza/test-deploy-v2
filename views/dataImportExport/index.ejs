@@ -379,52 +379,74 @@
               skipped: data.skipped,
               total: data.total,
               errorCount: data.errorCount,
-              timestamp: new Date().toISOString()
+              timestamp: new Date().toISOString(),
+              tableName: currentTableName
             };
             
-            // Show detailed errors in console with full details
-            console.group('🚨 ===== IMPORT ERRORS DETAILS =====');
-            console.log(`📊 Import Summary:`, {
+            // Store in localStorage for persistence
+            try {
+              localStorage.setItem('lastImportErrors', JSON.stringify(data.errors));
+              localStorage.setItem('lastErrorSummary', JSON.stringify(data.errorSummary));
+              localStorage.setItem('lastImportResult', JSON.stringify(window.lastImportResult));
+            } catch (e) {
+              console.warn('Cannot save to localStorage:', e);
+            }
+            
+            // Use console.error to prevent auto-clear and make it more visible
+            console.error('🚨 ===== IMPORT ERRORS DETAILS =====');
+            console.error(`📊 Import Summary:`, {
               'Total Records': data.total,
               'Successfully Inserted': data.inserted,
               'Skipped (Duplicates)': data.skipped,
               'Errors': data.errorCount,
+              'Success Rate': `${((data.inserted / data.total) * 100).toFixed(1)}%`,
               'Timestamp': new Date().toLocaleString('th-TH')
             });
             
             if (data.errorSummary) {
-              console.group('📈 Error Summary');
-              console.log('Duplicate Keys:', data.errorSummary.duplicateKeys);
-              console.log('Constraint Violations:', data.errorSummary.constraintViolations);
-              console.log('Data Type Errors:', data.errorSummary.dataTypeErrors);
-              console.log('Other Errors:', data.errorSummary.otherErrors);
-              console.groupEnd();
+              console.error('📈 Error Summary:', {
+                'Duplicate Keys': data.errorSummary.duplicateKeys,
+                'Constraint Violations': data.errorSummary.constraintViolations,
+                'Data Type Errors': data.errorSummary.dataTypeErrors,
+                'Other Errors': data.errorSummary.otherErrors
+              });
             }
             
-            console.group('📋 Error Details (Table Format)');
+            // Show first 10 errors in detail
+            console.error('📋 First 10 Errors:');
+            data.errors.slice(0, 10).forEach((err, idx) => {
+              console.error(`\n${idx + 1}. Row ${err.row}:`, {
+                Error: err.error,
+                DuplicateKey: err.duplicateKey || 'N/A',
+                Data: err.data
+              });
+            });
+            
+            if (data.errors.length > 10) {
+              console.error(`\n... และอีก ${data.errors.length - 10} รายการ (ดูทั้งหมดใน window.lastImportErrors)`);
+            }
+            
+            // Show table format
+            console.error('📋 Error Details (Table Format):');
             console.table(data.errors.map(err => ({
               Row: err.row,
               Error: err.error,
               DuplicateKey: err.duplicateKey || '-',
-              Data: err.data ? JSON.stringify(err.data).substring(0, 100) + '...' : '-'
+              'Sample Data': err.data ? Object.keys(err.data).slice(0, 3).map(k => `${k}:${err.data[k]}`).join(', ') : '-'
             })));
-            console.groupEnd();
             
-            console.group('📝 Full Error Details (JSON)');
-            console.log('To view full details, type: window.lastImportErrors');
-            console.log('To view summary, type: window.lastErrorSummary');
-            console.log('To view all results, type: window.lastImportResult');
-            console.log(JSON.stringify(data.errors, null, 2));
-            console.groupEnd();
+            // Show full JSON
+            console.error('📝 Full Error Details (JSON):');
+            console.error(JSON.stringify(data.errors, null, 2));
             
-            console.group('💡 Tips');
-            console.log('1. Type "window.lastImportErrors" to see all errors');
-            console.log('2. Type "window.lastErrorSummary" to see error summary');
-            console.log('3. Type "window.lastImportResult" to see import result');
-            console.log('4. Errors are stored in browser memory until page reload');
-            console.groupEnd();
-            
-            console.groupEnd();
+            // Instructions
+            console.error('💡 To view errors again, type in console:');
+            console.error('   - window.lastImportErrors (all errors)');
+            console.error('   - window.lastErrorSummary (summary)');
+            console.error('   - window.lastImportResult (full result)');
+            console.error('   - viewImportErrors() (re-display)');
+            console.error('   - localStorage.getItem("lastImportErrors") (from storage)');
+            console.error('🚨 ===== END OF IMPORT ERRORS =====');
           }
           
           // Show alert with appropriate type
@@ -526,21 +548,72 @@
     }
     
     // Helper function to view errors in console (kept for backward compatibility)
-    function viewErrorsInConsole() {
-      if (window.lastImportErrors) {
-        console.group('🚨 ===== IMPORT ERRORS (From Memory) =====');
-        console.log('Import Result:', window.lastImportResult);
-        console.log('Error Summary:', window.lastErrorSummary);
-        console.log('All Errors:', window.lastImportErrors);
-        console.table(window.lastImportErrors);
-        console.groupEnd();
+    function viewImportErrors() {
+      // Try to load from memory first, then localStorage
+      let errors = window.lastImportErrors;
+      let summary = window.lastErrorSummary;
+      let result = window.lastImportResult;
+      
+      if (!errors) {
+        try {
+          const storedErrors = localStorage.getItem('lastImportErrors');
+          const storedSummary = localStorage.getItem('lastErrorSummary');
+          const storedResult = localStorage.getItem('lastImportResult');
+          
+          if (storedErrors) {
+            errors = JSON.parse(storedErrors);
+            window.lastImportErrors = errors;
+          }
+          if (storedSummary) {
+            summary = JSON.parse(storedSummary);
+            window.lastErrorSummary = summary;
+          }
+          if (storedResult) {
+            result = JSON.parse(storedResult);
+            window.lastImportResult = result;
+          }
+        } catch (e) {
+          console.error('Error loading from localStorage:', e);
+        }
+      }
+      
+      if (errors && errors.length > 0) {
+        console.error('🚨 ===== IMPORT ERRORS (From Memory/Storage) =====');
+        console.error('Import Result:', result);
+        console.error('Error Summary:', summary);
+        console.error('Total Errors:', errors.length);
+        console.error('All Errors:', errors);
+        console.table(errors.map(err => ({
+          Row: err.row,
+          Error: err.error,
+          DuplicateKey: err.duplicateKey || '-',
+          'Sample Data': err.data ? Object.keys(err.data).slice(0, 3).map(k => `${k}:${err.data[k]}`).join(', ') : '-'
+        })));
+        console.error('Full JSON:', JSON.stringify(errors, null, 2));
+        console.error('🚨 ===== END OF IMPORT ERRORS =====');
       } else {
-        console.warn('No import errors found in memory. Please run import again.');
+        console.warn('⚠️ No import errors found in memory or storage. Please run import again.');
+        console.warn('If you just imported, check the console output above.');
       }
     }
     
     // Make function globally available
-    window.viewImportErrors = viewErrorsInConsole;
+    window.viewImportErrors = viewImportErrors;
+    
+    // Auto-display errors from localStorage on page load (if any)
+    window.addEventListener('load', () => {
+      try {
+        const storedResult = localStorage.getItem('lastImportResult');
+        if (storedResult) {
+          const result = JSON.parse(storedResult);
+          if (result.errorCount > 0) {
+            console.warn('📋 Previous import had errors. Type "viewImportErrors()" to see details.');
+          }
+        }
+      } catch (e) {
+        // Ignore
+      }
+    });
   </script>
 </body>
 </html>

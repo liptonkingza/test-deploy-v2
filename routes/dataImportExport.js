@@ -380,6 +380,7 @@ router.post('/import/:tableName',
             
             // Try to identify which key is duplicate
             let duplicateKey = 'unknown';
+            let duplicateValue = null;
             try {
               // Check for unique constraints
               const uniqueColumns = tableColumns.filter(col => 
@@ -397,20 +398,22 @@ router.post('/import/:tableName',
                   );
                   if (existing[0].count > 0) {
                     duplicateKey = col.Field;
+                    duplicateValue = values[colIdx];
                     break;
                   }
                 }
               }
             } catch (checkErr) {
-              // Ignore check errors
+              console.error(`Error checking duplicate for row ${rowNumber}:`, checkErr);
             }
             
             errors.push({
               row: rowNumber,
               error: duplicateKey !== 'unknown' 
-                ? `Duplicate key: ${duplicateKey} (skipped)`
+                ? `Duplicate key: ${duplicateKey} = "${duplicateValue}" (skipped)`
                 : 'Duplicate key or constraint violation (skipped)',
               duplicateKey: duplicateKey,
+              duplicateValue: duplicateValue,
               data: Object.fromEntries(validDataColumns.map((col, idx) => [col, values[idx]]))
             });
           } else {
