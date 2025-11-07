@@ -311,8 +311,6 @@
 
     // Submit import
     function submitImport() {
-      const form = document.getElementById('importForm');
-      const formData = new FormData(form);
       const fileInput = document.getElementById('csvFileInput');
       
       if (!fileInput.files[0]) {
@@ -320,6 +318,8 @@
         return;
       }
 
+      // Create FormData manually to avoid unexpected fields
+      const formData = new FormData();
       formData.append('csvFile', fileInput.files[0]);
       formData.append('mode', document.querySelector('input[name="mode"]:checked').value);
 

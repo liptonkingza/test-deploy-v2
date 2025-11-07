@@ -134,23 +134,47 @@ const handleMulterError = (err, req, res, next) => {
     if (err.code === 'LIMIT_FILE_SIZE') {
       return res.status(400).json({ error: 'File too large. Maximum size is 50MB' });
     }
-    return res.status(400).json({ error: `Upload error: ${err.message}` });
+    if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+      return res.status(400).json({ error: 'Unexpected file field. Please use "csvFile" as the field name.' });
+    }
+    return res.status(400).json({ error: `Upload error: ${err.message} (code: ${err.code})` });
   }
   if (err) {
+    console.error('Multer error:', err);
     return res.status(400).json({ error: err.message || 'File upload error' });
   }
   next();
 };
 
-// Import CSV endpoint
-router.post('/import/:tableName', upload.single('csvFile'), handleMulterError, async (req, res) => {
+// Import CSV endpoint with proper error handling
+router.post('/import/:tableName', 
+  // Log request
+  (req, res, next) => {
+    console.log('📥 Import request received:', {
+      tableName: req.params.tableName,
+      contentType: req.headers['content-type']
+    });
+    next();
+  },
+  // Multer upload middleware
+  upload.single('csvFile'),
+  // Error handler for multer (must be 4-parameter function)
+  (err, req, res, next) => {
+    if (err) {
+      console.error('❌ Multer error:', err);
+      return handleMulterError(err, req, res, next);
+    }
+    next();
+  },
+  // Main handler
+  async (req, res) => {
   let uploadedFilePath = null;
   
   try {
     const { tableName } = req.params;
     const { mode } = req.body; // 'append' or 'replace'
     
-    console.log('📥 Import request:', { tableName, mode, hasFile: !!req.file });
+    console.log('📥 Processing import:', { tableName, mode, hasFile: !!req.file, fileName: req.file?.originalname });
     
     // Validate table name
     const table = exportableTables.find(t => t.tableName === tableName);
