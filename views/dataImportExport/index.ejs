@@ -330,7 +330,14 @@
         method: 'POST',
         body: formData
       })
-      .then(response => response.json())
+      .then(async response => {
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          throw new Error(`Server error: ${response.status} ${response.statusText}. ${text.substring(0, 200)}`);
+        }
+        return response.json();
+      })
       .then(data => {
         progressDiv.classList.add('d-none');
         
@@ -349,12 +356,16 @@
             location.reload();
           }, 1500);
         } else {
-          showAlert('danger', `เกิดข้อผิดพลาด: ${data.error || 'ไม่ทราบสาเหตุ'}`);
+          const errorMsg = data.error || data.message || 'ไม่ทราบสาเหตุ';
+          const details = data.details ? `\nรายละเอียด: ${data.details}` : '';
+          showAlert('danger', `เกิดข้อผิดพลาด: ${errorMsg}${details}`);
         }
       })
       .catch(error => {
         progressDiv.classList.add('d-none');
-        showAlert('danger', `เกิดข้อผิดพลาด: ${error.message}`);
+        console.error('Import error:', error);
+        const errorMsg = error.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์';
+        showAlert('danger', errorMsg);
       });
     }
 

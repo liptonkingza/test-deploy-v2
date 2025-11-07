@@ -6,17 +6,38 @@ const { stringify } = require('csv-stringify/sync');
 const { parse } = require('csv-parse/sync');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const router = express.Router();
 
+// Ensure uploads directory exists
+const uploadsDir = path.join(process.cwd(), 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  try {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+    console.log('✅ Created uploads directory');
+  } catch (err) {
+    console.error('❌ Failed to create uploads directory:', err);
+    // Use system temp directory as fallback
+    const tempDir = os.tmpdir();
+    console.log(`⚠️  Using system temp directory: ${tempDir}`);
+  }
+}
+
 // Configure multer for file upload
+// Use system temp directory on Railway if uploads/ doesn't work
+const multerDest = fs.existsSync(uploadsDir) ? uploadsDir : os.tmpdir();
+
 const upload = multer({
-  dest: 'uploads/',
+  dest: multerDest,
   limits: {
     fileSize: 50 * 1024 * 1024 // 50MB limit
   },
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === 'text/csv' || file.originalname.endsWith('.csv')) {
+    if (file.mimetype === 'text/csv' || 
+        file.originalname.endsWith('.csv') ||
+        file.mimetype === 'application/vnd.ms-excel' ||
+        file.mimetype === 'text/plain') {
       cb(null, true);
     } else {
       cb(new Error('Only CSV files are allowed'), false);
@@ -107,13 +128,29 @@ router.get('/export/:tableName', async (req, res) => {
   }
 });
 
+// Multer error handler middleware
+const handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ error: 'File too large. Maximum size is 50MB' });
+    }
+    return res.status(400).json({ error: `Upload error: ${err.message}` });
+  }
+  if (err) {
+    return res.status(400).json({ error: err.message || 'File upload error' });
+  }
+  next();
+};
+
 // Import CSV endpoint
-router.post('/import/:tableName', upload.single('csvFile'), async (req, res) => {
+router.post('/import/:tableName', upload.single('csvFile'), handleMulterError, async (req, res) => {
   let uploadedFilePath = null;
   
   try {
     const { tableName } = req.params;
     const { mode } = req.body; // 'append' or 'replace'
+    
+    console.log('📥 Import request:', { tableName, mode, hasFile: !!req.file });
     
     // Validate table name
     const table = exportableTables.find(t => t.tableName === tableName);
@@ -122,10 +159,18 @@ router.post('/import/:tableName', upload.single('csvFile'), async (req, res) => 
     }
 
     if (!req.file) {
+      console.error('❌ No file uploaded');
       return res.status(400).json({ error: 'No file uploaded' });
     }
 
     uploadedFilePath = req.file.path;
+    console.log('📁 File uploaded to:', uploadedFilePath);
+    
+    // Verify file exists
+    if (!fs.existsSync(uploadedFilePath)) {
+      console.error('❌ Uploaded file does not exist:', uploadedFilePath);
+      return res.status(500).json({ error: 'Uploaded file not found' });
+    }
 
     // Read and parse CSV file
     // Try to read as UTF-8 first, if fails try other encodings
@@ -153,16 +198,45 @@ router.post('/import/:tableName', upload.single('csvFile'), async (req, res) => 
     }
 
     // Parse CSV
-    const records = parse(csvContent, {
-      columns: true,
-      skip_empty_lines: true,
-      trim: true,
-      bom: true
-    });
+    let records = [];
+    try {
+      records = parse(csvContent, {
+        columns: true,
+        skip_empty_lines: true,
+        trim: true,
+        bom: true,
+        relax_column_count: true,
+        relax_quotes: true
+      });
+    } catch (parseError) {
+      console.error('❌ CSV parse error:', parseError);
+      // Clean up uploaded file
+      if (uploadedFilePath && fs.existsSync(uploadedFilePath)) {
+        try {
+          fs.unlinkSync(uploadedFilePath);
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
+      return res.status(400).json({ 
+        error: 'Failed to parse CSV file',
+        details: parseError.message 
+      });
+    }
 
     if (records.length === 0) {
+      // Clean up uploaded file
+      if (uploadedFilePath && fs.existsSync(uploadedFilePath)) {
+        try {
+          fs.unlinkSync(uploadedFilePath);
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
       return res.status(400).json({ error: 'CSV file is empty or has no valid data' });
     }
+    
+    console.log(`✅ Parsed ${records.length} records from CSV`);
 
     // Get column names from first record
     const columns = Object.keys(records[0]);
@@ -237,21 +311,30 @@ router.post('/import/:tableName', upload.single('csvFile'), async (req, res) => 
     });
 
   } catch (err) {
-    console.error('Import error:', err);
+    console.error('❌ Import error:', err);
+    console.error('Error stack:', err.stack);
     
     // Clean up uploaded file on error
     if (uploadedFilePath && fs.existsSync(uploadedFilePath)) {
       try {
         fs.unlinkSync(uploadedFilePath);
       } catch (e) {
-        // Ignore cleanup errors
+        console.error('Failed to cleanup file:', e);
       }
     }
 
-    res.status(500).json({ 
-      error: err.message,
-      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-    });
+    // Return detailed error in development, generic in production
+    const errorResponse = {
+      error: 'Failed to import data',
+      message: err.message
+    };
+    
+    if (process.env.NODE_ENV === 'development') {
+      errorResponse.stack = err.stack;
+      errorResponse.details = err.toString();
+    }
+
+    res.status(500).json(errorResponse);
   }
 });
 
@@ -290,4 +373,5 @@ router.get('/table-info/:tableName', async (req, res) => {
 });
 
 module.exports = router;
+
 
