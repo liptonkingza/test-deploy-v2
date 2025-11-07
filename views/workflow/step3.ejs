@@ -1,0 +1,11 @@
+<% const pageTitle = title || 'สร้างรายการใหม่ – เลือกสื่อ'; %>
+<%- include('../workflow_layout', {
+  title: pageTitle,
+  currentStep: 'step3',
+  customerId: customerId || '',
+  salesRepOptions: salesRepOptions || [],
+  body: include('./step3_content', {
+    customerId,
+  })
+}) %>
+

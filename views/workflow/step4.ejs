@@ -1,0 +1,10 @@
+<% const pageTitle = title || 'สร้างรายการใหม่ – เลือกสินค้าและการขนส่ง'; %>
+<%- include('../workflow_layout', {
+  title: pageTitle,
+  currentStep: 'step4',
+  customerId: customerId || '',
+  salesRepOptions: salesRepOptions || [],
+  body: include('./step4_content', {
+    customerId,
+  })
+}) %>

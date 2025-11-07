@@ -1,0 +1,1241 @@
+﻿<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+    .dashboard-container {
+        background-color: white;
+        padding: 15px 30px;
+        margin: 0 auto;
+        max-width: 1400px;
+    }
+    .search-summary-bar {
+        background: #f5f5f5;
+        padding: 10px 15px;
+        margin: 0 0 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: nowrap;
+        border-bottom: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .search-box {
+        flex: 0 0 300px;
+    }
+    .search-box input {
+        width: 100%;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 13px;
+    }
+    .search-box input:focus {
+        outline: none;
+        border-color: #999;
+    }
+    .summary-info {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex: 1;
+        font-size: 14px;
+        color: #333;
+        font-weight: normal;
+    }
+    .summary-value {
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+    }
+    .data-table-section {
+        background: white;
+        border: 1px solid #ddd;
+        margin: 0 0 15px 0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .data-table-section table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+    .data-table-section th {
+        background: #f8f9fa;
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        font-size: 11px;
+        color: #333;
+    }
+    .data-table-section td {
+        padding: 6px 8px;
+        border: 1px solid #ddd;
+    }
+    .data-table-section tbody tr:hover {
+        background-color: #f0f8ff;
+        cursor: pointer;
+    }
+    .data-table-section tbody tr.selected {
+        background: #e3f2fd;
+    }
+    .detail-form-section {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .detail-layout {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 15px;
+    }
+    .detail-left {
+        border-right: 1px solid #ddd;
+        padding-right: 15px;
+    }
+    .detail-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .form-field {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .form-field label {
+        width: 100px;
+        margin: 0;
+        font-size: 12px;
+        font-weight: 500;
+        flex-shrink: 0;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        flex: 1;
+        border: 1px solid #ccc;
+        padding: 4px 8px;
+        font-size: 12px;
+        border-radius: 2px;
+    }
+    .form-field input[readonly] {
+        background-color: #f9f9f9;
+    }
+    .form-row-inline {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+    .form-row-inline .form-field {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    .form-row-inline .form-field label {
+        width: auto;
+        margin-right: 5px;
+    }
+    .detail-right-top {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    .form-field-small {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .form-field-small label {
+        font-size: 11px;
+        margin: 0;
+        white-space: nowrap;
+    }
+    .form-field-small input {
+        width: 60px;
+        border: 1px solid #ccc;
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    #relatedItemsContainer {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .badge-small {
+        padding: 2px 6px;
+        font-size: 11px;
+        border-radius: 3px;
+        display: inline-block;
+        color: #333;
+        font-weight: 500;
+    }
+    .badge-SEM { 
+        background-color: #e3f2fd;
+        color: #333;
+    }
+    .badge-SHOPEE { 
+        background-color: #ffe0e0;
+        color: #333;
+    }
+    .badge-LAZADA { 
+        background-color: #e8eaf6;
+        color: #333;
+    }
+    .badge-default { 
+        background-color: #f5f5f5;
+        color: #333;
+    }
+    .text-truncate-td {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .export-section button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.2s ease;
+    }
+    .export-section button:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .export-section button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    #datePreviewTable tbody tr:hover {
+        background-color: #f0f8ff !important;
+    }
+    #datePreviewContainer {
+        animation: fadeIn 0.3s ease-in;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+// Define all global variables and functions BEFORE any HTML uses them
+var deliveriesData = [];
+var selectedDeliveryData = null;
+
+// Function to select row by index
+function selectRow(index) {
+    console.log('selectRow called with index:', index);
+    
+    if (!deliveriesData || deliveriesData.length === 0) {
+        console.error('No deliveries data available');
+        return;
+    }
+    
+    // Remove selected class from all rows
+    var table = document.getElementById('deliveriesTable');
+    if (!table) {
+        console.error('Table not found');
+        return;
+    }
+    
+    var tbody = table.getElementsByTagName('tbody')[0];
+    var rows = tbody.getElementsByTagName('tr');
+    for (var i = 0; i < rows.length; i++) {
+        rows[i].classList.remove('selected');
+    }
+    
+    // Add selected class to clicked row
+    if (rows[index]) {
+        rows[index].classList.add('selected');
+    }
+    
+    // Get delivery data
+    var delivery = deliveriesData[index];
+    if (!delivery) {
+        console.error('Delivery not found at index:', index);
+        return;
+    }
+    
+    // Prepare delivery data (keep full object for CSV export)
+    var deliveryData = delivery;
+
+    selectedDeliveryData = deliveryData;
+    
+    console.log('=== Delivery Data ===');
+    console.log('customerid:', deliveryData.customerid);
+    console.log('mediadesc:', deliveryData.mediadesc);
+    console.log('channeldes:', deliveryData.channeldes);
+    
+    // Load customer details first, then generate content with data
+    loadCustomerDetailsAndRender(deliveryData);
+}
+
+// Load customer details and render
+function loadCustomerDetailsAndRender(deliveryData) {
+    console.log('🔄 Loading customer details and rendering...');
+    
+    if (!deliveryData.customerid) {
+        console.log('⚠️ No customerid, rendering without customer data');
+        var detailContent = generateDetailContent(deliveryData, null);
+        document.getElementById('detailContent').innerHTML = detailContent;
+        loadRelatedDeliveries(deliveryData.delivernum);
+        return;
+    }
+    
+    var url = '/dashboard/api/customer-details?customerid=' + encodeURIComponent(deliveryData.customerid);
+    console.log('📡 Fetching customer from:', url);
+    
+    fetch(url)
+        .then(function(response) {
+            console.log('📥 Response status:', response.status);
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function(result) {
+            console.log('✅ Customer data received:', result);
+            var customerData = result.success && result.data ? result.data : null;
+            
+            // Generate content with customer data
+            var detailContent = generateDetailContent(deliveryData, customerData);
+            document.getElementById('detailContent').innerHTML = detailContent;
+            console.log('✅ Detail content rendered with customer data');
+            
+            // Load related deliveries
+            loadRelatedDeliveries(deliveryData.delivernum);
+        })
+        .catch(function(error) {
+            console.error('❌ Error loading customer details:', error);
+            // Render without customer data
+            var detailContent = generateDetailContent(deliveryData, null);
+            document.getElementById('detailContent').innerHTML = detailContent;
+            loadRelatedDeliveries(deliveryData.delivernum);
+        });
+}
+
+// Generate detail form content
+function generateDetailContent(data, customerData) {
+    // Escape HTML to prevent display issues
+    function escapeHtml(text) {
+        if (!text) return '';
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+    
+    return '<div class="detail-layout">' +
+        '<div class="detail-left">' +
+        '<div class="form-field"><label>อาการ :</label><input type="text" value="' + escapeHtml(data.symptom || '') + '" readonly></div>' +
+        '<div class="form-field"><label>ระดับความปวด :</label><input type="text" value="' + escapeHtml(data.urgency || '') + '" readonly></div>' +
+        '<div class="form-field"><label>Keyword :</label><input type="text" value="' + escapeHtml(data.mooban2 || '') + '" readonly></div>' +
+        '<div class="form-row-inline"><div class="form-field"><label>Follow Up :</label><input type="text" value="' + escapeHtml(data.followupdays || '0') + '" readonly style="width: 40px;"><span style="font-size: 11px;">วัน</span></div></div>' +
+        '<div class="form-row-inline"><div class="form-field"><label>วิธีทาน :</label><input type="text" value="0" readonly style="width: 40px;"></div></div>' +
+        '<div class="form-field"><label>Remark1 :</label><input type="text" value="' + escapeHtml(data.remark1 || '') + '" readonly></div>' +
+        '<div class="form-field"><label>Remark2 :</label><input type="text" value="' + escapeHtml(data.remark2 || '') + '" readonly></div>' +
+        '<div class="form-field"><label>Channel :</label><input type="text" value="' + escapeHtml(data.mediadesc) + ' ' + escapeHtml(data.channeldes) + '" readonly></div>' +
+        '</div>' +
+        '<div class="detail-right">' +
+        '<div class="detail-right-top">' +
+        '<div style="display: flex; gap: 10px; margin-bottom: 8px; align-items: center;">' +
+        '<div class="form-field-small"><label>CustID :</label><input type="text" value="' + escapeHtml(data.customerid) + '" readonly style="width: 120px;"></div>' +
+        '<div class="form-field" style="flex: 1;"><label>ชื่อ-นามสกุล :</label><input type="text" value="' + escapeHtml((data.prename || '') + ' ' + (data.firstname || '') + ' ' + (data.lastname || '')).trim() + '" readonly></div>' +
+        '</div>' +
+        '<div style="display: flex; gap: 10px; align-items: center;">' +
+        '<div class="form-field-small"><label>เพศ :</label><input type="text" id="customerSex" name="customerSex" value="' + (customerData && customerData.sex !== null && customerData.sex !== undefined ? escapeHtml(customerData.sex) : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูลลูกค้า' : '') + '"></div>' +
+        '<div class="form-field-small"><label>อายุ :</label><input type="text" id="customerAge" name="customerAge" value="' + (customerData && customerData.age !== null && customerData.age !== undefined ? customerData.age : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูล' : '') + '"></div>' +
+        '<div class="form-field-small"><label>น้ำหนัก :</label><input type="text" id="customerWeight" name="customerWeight" value="' + (customerData && customerData.weight !== null && customerData.weight !== undefined ? customerData.weight : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูล' : '') + '"><span style="font-size: 10px;">กก.</span></div>' +
+        '<div class="form-field-small"><label>สูง :</label><input type="text" id="customerHeight" name="customerHeight" value="' + (customerData && customerData.height !== null && customerData.height !== undefined ? customerData.height : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูล' : '') + '"><span style="font-size: 10px;">ซม.</span></div>' +
+        '</div>' +
+        '</div>' +
+        (!customerData ? '<div style="padding: 10px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin: 10px 0; text-align: center;"><strong>⚠️ ไม่พบข้อมูลลูกค้าในระบบ</strong></div>' : '') +
+        '<div class="form-field"><label style="width: 100px;">โรคประจำตัว :</label><input type="text" id="customerSickness" name="customerSickness" value="' + (customerData && (customerData.sickness1 || customerData.sickness2) ? escapeHtml(customerData.sickness1 || customerData.sickness2) : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูล' : '') + '"></div>' +
+        '<div class="form-field"><label style="width: 100px;">Tag :</label><input type="text" value="" readonly></div>' +
+        '<div class="form-field"><label style="width: 100px;">LineID :</label><input type="text" id="customerLineId" name="customerLineId" value="' + (customerData && customerData.lineid ? escapeHtml(customerData.lineid) : '') + '" readonly placeholder="' + (!customerData ? 'ไม่พบข้อมูล' : '') + '"></div>' +
+        '<div id="relatedItemsContainer"><p style="padding: 10px; text-align: center; color: #999;">กำลังโหลดรายการสินค้า...</p></div>' +
+        '</div>' +
+        '</div>';
+}
+
+// Load related deliveries
+function loadRelatedDeliveries(delivernum) {
+    console.log('Loading related deliveries for:', delivernum);
+    fetch('/dashboard/api/related-deliveries?delivernum=' + encodeURIComponent(delivernum))
+        .then(function(response) { return response.json(); })
+        .then(function(result) {
+            console.log('Related deliveries result:', result);
+            var container = document.getElementById('relatedItemsContainer');
+            if (result.success && result.data.length > 0) {
+                var relatedTable = generateRelatedDeliveriesTable(result.data);
+                if (container) {
+                    container.innerHTML = relatedTable;
+                    console.log('Related table rendered with', result.data.length, 'items');
+                }
+            } else {
+                if (container) {
+                    container.innerHTML = '<p style="padding: 10px; text-align: center; color: #999;">ไม่พบรายการสินค้า</p>';
+                }
+                console.log('No related deliveries found');
+            }
+        })
+        .catch(function(error) {
+            console.error('Error loading related deliveries:', error);
+            var container = document.getElementById('relatedItemsContainer');
+            if (container) {
+                container.innerHTML = '<p style="padding: 10px; text-align: center; color: red;">เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
+            }
+        });
+}
+
+// Generate related deliveries table
+function generateRelatedDeliveriesTable(deliveries) {
+    // Escape HTML to prevent display issues
+    function escapeHtml(text) {
+        if (!text) return '';
+        var map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+    
+    var tableRows = deliveries.map(function(delivery) {
+        return '<tr>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; font-size: 11px;">' + escapeHtml(delivery.delivernum || '') + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; font-size: 11px;">' + escapeHtml(delivery.code || '') + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; font-size: 11px;">' + escapeHtml(delivery.title || '') + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; text-align: right; font-size: 11px;">' + parseFloat(delivery.price || 0).toFixed(2) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; text-align: center; font-size: 11px;">' + (delivery.qty || 0) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; text-align: right; font-size: 11px;">' + parseFloat(delivery.total || 0).toFixed(2) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 4px 6px; font-size: 11px;">' + escapeHtml(delivery.datadesc || '') + '</td>' +
+            '</tr>';
+    }).join('');
+    
+    return '<table style="width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 10px;">' +
+        '<thead><tr>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Delivernum</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Code</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Title</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Price</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Qty</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Amount</th>' +
+        '<th style="border: 1px solid #ddd; padding: 5px; background: #f8f9fa; font-size: 11px; text-align: left;">Type</th>' +
+        '</tr></thead>' +
+        '<tbody>' + tableRows + '</tbody>' +
+        '</table>';
+}
+
+// Filter table based on search input
+function filterTable() {
+    var searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    
+    var searchValue = searchInput.value.toLowerCase();
+    var table = document.getElementById('deliveriesTable');
+    if (!table) return;
+    
+    var tbody = table.getElementsByTagName('tbody')[0];
+    var rows = tbody.getElementsByTagName('tr');
+    
+    var visibleCount = 0;
+    var visibleTotal = 0;
+    
+    if (!deliveriesData || deliveriesData.length === 0) return;
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        if (row.cells.length === 1) continue;
+        if (!deliveriesData[i]) continue;
+        
+        var delivery = deliveriesData[i];
+        var total = parseFloat(delivery.total) || 0;
+        
+        var searchText = (
+            (delivery.delivernum || '') + ' ' +
+            (delivery.prename || '') + ' ' +
+            (delivery.firstname || '') + ' ' +
+            (delivery.lastname || '') + ' ' +
+            (delivery.appttel || '') + ' ' +
+            (delivery.apptaddr || '')
+        ).toLowerCase();
+        
+        if (searchValue === '' || searchText.indexOf(searchValue) !== -1) {
+            row.style.display = '';
+            visibleCount++;
+            visibleTotal += total;
+        } else {
+            row.style.display = 'none';
+        }
+    }
+    
+    document.getElementById('billCount').textContent = visibleCount;
+    document.getElementById('totalAmount').textContent = visibleTotal.toLocaleString('th-TH', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+// Load data immediately
+(function() {
+    try {
+        deliveriesData = JSON.parse(decodeURIComponent('<%= encodeURIComponent(JSON.stringify(deliveries || [])) %>'));
+        console.log('Data loaded:', deliveriesData.length, 'deliveries');
+    } catch (e) {
+        console.error('Error loading data:', e);
+        deliveriesData = [];
+    }
+})();
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM Ready');
+        filterTable();
+    });
+} else {
+    console.log('DOM Already Ready');
+    filterTable();
+}
+
+// ========================================
+// Export CSV Functions
+// ========================================
+
+// Convert date to dd/mm/yyyy format
+function formatDateToDDMMYYYY(dateString) {
+    if (!dateString) return '';
+    
+    var date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString; // Return original if invalid
+    
+    var day = String(date.getDate()).padStart(2, '0');
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var year = date.getFullYear();
+    
+    return day + '/' + month + '/' + year;
+}
+
+// Escape CSV field (handle commas, quotes, newlines)
+function escapeCSVField(field) {
+    if (field === null || field === undefined) return '';
+    
+    var str = String(field);
+    // If contains comma, quote, or newline, wrap in quotes and escape existing quotes
+    if (str.indexOf(',') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+        str = '"' + str.replace(/"/g, '""') + '"';
+    }
+    return str;
+}
+
+// Convert delivery data to CSV row (EgDeliver9 format)
+function deliveryToCSVRow(delivery) {
+    var fields = [
+        // 1-8: Work Information
+        formatDateToDDMMYYYY(delivery.workdate),        // 1. WORKDATE
+        delivery.worktime || '',                         // 2. WORKTIME
+        delivery.operator || '',                         // 3. OPERATOR
+        delivery.chkminute || '',                        // 4. CHKMINUTE
+        delivery.delivernum || '',                       // 5. DELIVERNUM
+        delivery.tohomenum || '',                        // 6. TOHOMENUM
+        delivery.timein || '',                           // 7. TIMEIN
+        delivery.timeout || '',                          // 8. TIMEOUT
+        
+        // 9-17: Type & Media
+        delivery.buy || '',                              // 9. BUY
+        delivery.datatype || '',                         // 10. DATATYPE
+        delivery.datadesc || '',                         // 11. DATADESC
+        delivery.processtyp || '',                       // 12. PROCESSTYP
+        delivery.processdes || '',                       // 13. PROCESSDES
+        delivery.mediatype || '',                        // 14. MEDIATYPE
+        delivery.mediadesc || '',                        // 15. MEDIADESC
+        delivery.channel || '',                          // 16. CHANNEL
+        delivery.channeldes || '',                       // 17. CHANNELDES
+        
+        // 18-42: Payment Information
+        delivery.paytype || '',                          // 18. PAYTYPE
+        delivery.paydesc || '',                          // 19. PAYDESC
+        delivery.paytype1 || '',                         // 20. PAYTYPE1
+        delivery.subpay1 || '',                          // 21. SUBPAY1
+        delivery.subpay2 || '',                          // 22. SUBPAY2
+        delivery.payment || '',                          // 23. PAYMENT
+        formatDateToDDMMYYYY(delivery.payday),          // 24. PAYDAY
+        delivery.cusbankno || '',                        // 25. CUSBANKNO
+        delivery.cusbankna || '',                        // 26. CUSBANKNA
+        delivery.cusbankbr || '',                        // 27. CUSBANKBR
+        delivery.cusbankac || '',                        // 28. CUSBANKAC
+        delivery.cusbankref || '',                       // 29. CUSBANKREF
+        delivery.credit || '',                           // 30. CREDIT
+        delivery.credittype || '',                       // 31. CREDITTYPE
+        delivery.creditdesc || '',                       // 32. CREDITDESC
+        delivery.creditno || '',                         // 33. CREDITNO
+        delivery.creditexpm || '',                       // 34. CREDITEXPM
+        delivery.creditexpy || '',                       // 35. CREDITEXPY
+        delivery.creditref || '',                        // 36. CREDITREF
+        delivery.last3digit || '',                       // 37. LAST3DIGIT
+        delivery.bankno || '',                           // 38. BANKNO
+        delivery.bankna || '',                           // 39. BANKNA
+        delivery.bankbr || '',                           // 40. BANKBR
+        delivery.bankac || '',                           // 41. BANKAC
+        delivery.bankref || '',                          // 42. BANKREF
+        
+        // 43-57: Shipping & Personnel
+        delivery.shiptype || '',                         // 43. SHIPTYPE
+        delivery.shipdesc || '',                         // 44. SHIPDESC
+        delivery.deliverto || '',                        // 45. DELIVERTO
+        delivery.userid || '',                           // 46. USERID
+        delivery.username || '',                         // 47. USERNAME
+        delivery.salerepid || '',                        // 48. SALEREPID
+        delivery.salename || '',                         // 49. SALENAME
+        delivery.ring || '',                             // 50. RING
+        delivery.ringdesc || '',                         // 51. RINGDESC
+        delivery.routerun || '',                         // 52. ROUTERUN
+        delivery.routeno || '',                          // 53. ROUTENO
+        delivery.routedesc || '',                        // 54. ROUTEDESC
+        delivery.routedist || '',                        // 55. ROUTEDIST
+        delivery.routetimes || '',                       // 56. ROUTETIMES
+        delivery.milesp2p || '',                         // 57. MILESP2P
+        
+        // 58-64: Messenger & Date
+        delivery.timesp2p || '',                         // 58. TIMESP2P
+        delivery.msnid || '',                            // 59. MSNID
+        delivery.msnname || '',                          // 60. MSNNAME
+        delivery.handtimes || '',                        // 61. HANDTIMES
+        delivery.day || '',                              // 62. DAY
+        formatDateToDDMMYYYY(delivery.date),            // 63. DATE
+        delivery.source || '',                           // 64. SOURCE
+        
+        // 65-77: Product Information
+        delivery.code || '',                             // 65. CODE
+        delivery.prdgroup || '',                         // 66. PRDGROUP
+        delivery.title || '',                            // 67. TITLE
+        delivery.cost || '',                             // 68. COST
+        delivery.price || '',                            // 69. PRICE
+        delivery.salprice || '',                         // 70. SALPRICE
+        delivery.qty || '',                              // 71. QTY
+        delivery.amount || '',                           // 72. AMOUNT
+        delivery.postfee || '',                          // 73. POSTFEE
+        delivery.total || '',                            // 74. TOTAL
+        delivery.freecode || '',                         // 75. FREECODE
+        delivery.dscamt || '',                           // 76. DSCAMT
+        delivery.transno || '',                          // 77. TRANSNO
+        
+        // 78-118: Customer Information (41 fields)
+        delivery.customerid || '',                       // 78. CUSTOMERID
+        delivery.memcode || '',                          // 79. MEMCODE
+        delivery.prename || '',                          // 80. PRENAME
+        delivery.firstname || '',                        // 81. FIRSTNAME
+        delivery.lastname || '',                         // 82. LASTNAME
+        delivery.addr1 || '',                            // 83. ADDR1
+        delivery.addr2 || '',                            // 84. ADDR2
+        delivery.homenum1 || '',                         // 85. HOMENUM1
+        delivery.homenum2 || '',                         // 86. HOMENUM2
+        delivery.precomnam1 || '',                       // 87. PRECOMNAM1
+        delivery.precomnam2 || '',                       // 88. PRECOMNAM2
+        delivery.comname1 || '',                         // 89. COMNAME1
+        delivery.comname2 || '',                         // 90. COMNAME2
+        delivery.lstcomnam1 || '',                       // 91. LSTCOMNAM1
+        delivery.lstcomnam2 || '',                       // 92. LSTCOMNAM2
+        delivery.building1 || '',                        // 93. BUILDING1
+        delivery.building2 || '',                        // 94. BUILDING2
+        delivery.floor1 || '',                           // 95. FLOOR1
+        delivery.floor2 || '',                           // 96. FLOOR2
+        delivery.room1 || '',                            // 97. ROOM1
+        delivery.room2 || '',                            // 98. ROOM2
+        delivery.soi1 || '',                             // 99. SOI1
+        delivery.soi2 || '',                             // 100. SOI2
+        delivery.road1 || '',                            // 101. ROAD1
+        delivery.road2 || '',                            // 102. ROAD2
+        delivery.kate1 || '',                            // 103. KATE1
+        delivery.kate2 || '',                            // 104. KATE2
+        delivery.kwang1 || '',                           // 105. KWANG1
+        delivery.kwang2 || '',                           // 106. KWANG2
+        delivery.mooban1 || '',                          // 107. MOOBAN1
+        delivery.mooban2 || '',                          // 108. MOOBAN2 (Keyword)
+        delivery.tumbon1 || '',                          // 109. TUMBON1
+        delivery.tumbon2 || '',                          // 110. TUMBON2
+        delivery.ampur1 || '',                           // 111. AMPUR1
+        delivery.ampur2 || '',                           // 112. AMPUR2
+        delivery.province1 || '',                        // 113. PROVINCE1
+        delivery.province2 || '',                        // 114. PROVINCE2
+        delivery.zipcode1 || '',                         // 115. ZIPCODE1
+        delivery.zipcode2 || '',                         // 116. ZIPCODE2
+        delivery.province || '',                         // 117. PROVINCE
+        delivery.zipcode || '',                          // 118. ZIPCODE
+        
+        // 119-137: Appointment Information (19 fields)
+        delivery.beforeaft || '',                        // 119. BEFOREAFT
+        delivery.apptday || '',                          // 120. APPTDAY
+        formatDateToDDMMYYYY(delivery.apptdate),        // 121. APPTDATE
+        delivery.appttime || '',                         // 122. APPTTIME
+        delivery.appttime1 || '',                        // 123. APPTTIME1
+        delivery.appttime2 || '',                        // 124. APPTTIME2
+        delivery.apptperson || '',                       // 125. APPTPERSON
+        delivery.appttel || '',                          // 126. APPTTEL
+        delivery.apptaddr || '',                         // 127. APPTADDR
+        delivery.apptaddr1 || '',                        // 128. APPTADDR1
+        delivery.apptaddr2 || '',                        // 129. APPTADDR2
+        delivery.apptkwang || '',                        // 130. APPTKWANG
+        delivery.apptkate || '',                         // 131. APPTKATE
+        delivery.appttumbon || '',                       // 132. APPTTUMBON
+        delivery.apptampur || '',                        // 133. APPTAMPUR
+        delivery.apptprov || '',                         // 134. APPTPROV
+        delivery.apptzip || '',                          // 135. APPTZIP
+        delivery.apptremk1 || '',                        // 136. APPTREMK1
+        delivery.apptremk2 || '',                        // 137. APPTREMK2
+        
+        // 138-202: Status Flags (65 fields)
+        delivery.aftdelical || '',                       // 138. AFTDELICAL
+        delivery.aftdeliti || '',                        // 139. AFTDELITI
+        formatDateToDDMMYYYY(delivery.aftdelida),       // 140. AFTDELIDA
+        delivery.autobrt9 || '',                         // 141. AUTOBRT9
+        formatDateToDDMMYYYY(delivery.autobrt9da),      // 142. AUTOBRT9DA
+        delivery.autobrt9ti || '',                       // 143. AUTOBRT9TI
+        delivery.autobrt9by || '',                       // 144. AUTOBRT9BY
+        delivery.deliver || '',                          // 145. DELIVER
+        delivery.deliverid || '',                        // 146. DELIVERID
+        formatDateToDDMMYYYY(delivery.deliverda),       // 147. DELIVERDA
+        delivery.deliverti || '',                        // 148. DELIVERTI
+        delivery.deliverby || '',                        // 149. DELIVERBY
+        delivery.receive || '',                          // 150. RECEIVE
+        formatDateToDDMMYYYY(delivery.receiveda),       // 151. RECEIVEDA
+        delivery.receiveti || '',                        // 152. RECEIVETI
+        delivery.receiveby || '',                        // 153. RECEIVEBY
+        delivery.update || '',                           // 154. UPDATE
+        formatDateToDDMMYYYY(delivery.updateda),        // 155. UPDATEDA
+        delivery.updateti || '',                         // 156. UPDATETI
+        delivery.updateby || '',                         // 157. UPDATEBY
+        delivery.finance || '',                          // 158. FINANCE
+        delivery.financetyp || '',                       // 159. FINANCETYP
+        delivery.financedes || '',                       // 160. FINANCEDES
+        formatDateToDDMMYYYY(delivery.financeda),       // 161. FINANCEDA
+        delivery.financeti || '',                        // 162. FINANCETI
+        delivery.financeby || '',                        // 163. FINANCEBY
+        delivery.prnorder || '',                         // 164. PRNORDER
+        formatDateToDDMMYYYY(delivery.prnorddate),      // 165. PRNORDDATE
+        delivery.prnordtime || '',                       // 166. PRNORDTIME
+        delivery.prnpick || '',                          // 167. PRNPICK
+        formatDateToDDMMYYYY(delivery.prnpicdate),      // 168. PRNPICDATE
+        delivery.prnpictime || '',                       // 169. PRNPICTIME
+        delivery.prnsticker || '',                       // 170. PRNSTICKER
+        formatDateToDDMMYYYY(delivery.prnstidate),      // 171. PRNSTIDATE
+        delivery.prnstitime || '',                       // 172. PRNSTITIME
+        delivery.prnfinan || '',                         // 173. PRNFINAN
+        formatDateToDDMMYYYY(delivery.prnfindate),      // 174. PRNFINDATE
+        delivery.prnfintime || '',                       // 175. PRNFINTIME
+        delivery.payflag || '',                          // 176. PAYFLAG
+        formatDateToDDMMYYYY(delivery.paydate),         // 177. PAYDATE
+        delivery.paytime || '',                          // 178. PAYTIME
+        delivery.delvflag || '',                         // 179. DELVFLAG
+        formatDateToDDMMYYYY(delivery.delvdate),        // 180. DELVDATE
+        delivery.delvtime || '',                         // 181. DELVTIME
+        delivery.taxinv || '',                           // 182. TAXINV
+        delivery.transfer || '',                         // 183. TRANSFER
+        delivery.scanflag || '',                         // 184. SCANFLAG
+        formatDateToDDMMYYYY(delivery.scandate),        // 185. SCANDATE
+        delivery.scantime || '',                         // 186. SCANTIME
+        delivery.scanby || '',                           // 187. SCANBY
+        delivery.feed || '',                             // 188. FEED
+        delivery.feedno || '',                           // 189. FEEDNO
+        delivery.feedback || '',                         // 190. FEEDBACK
+        delivery.feeddesc || '',                         // 191. FEEDDESC
+        formatDateToDDMMYYYY(delivery.feeddate),        // 192. FEEDDATE
+        delivery.feedtime || '',                         // 193. FEEDTIME
+        delivery.feedid || '',                           // 194. FEEDID
+        delivery.feedmemo || '',                         // 195. FEEDMEMO
+        delivery.weightloss || '',                       // 196. WEIGHTLOSS
+        delivery.weight || '',                           // 197. WEIGHT
+        delivery.remark1 || '',                          // 198. REMARK1
+        delivery.remark2 || '',                          // 199. REMARK2
+        delivery.statusid || '',                         // 200. STATUSID
+        delivery.statusdesc || '',                       // 201. STATUSDESC
+        delivery.finish || '',                           // 202. FINISH
+        
+        // 203-216: System & Additional (14 fields)
+        delivery.mapstat || '',                          // 203. MAPSTAT
+        delivery.uniqueid || '',                         // 204. UNIQUEID
+        delivery.accprint || '',                         // 205. ACCPRINT
+        formatDateToDDMMYYYY(delivery.accprintd),       // 206. ACCPRINTD
+        delivery.accprintt || '',                        // 207. ACCPRINTT
+        delivery.nkprint || '',                          // 208. NKPRINT
+        formatDateToDDMMYYYY(delivery.nkprintd),        // 209. NKPRINTD
+        delivery.nkprintt || '',                         // 210. NKPRINTT
+        formatDateToDDMMYYYY(delivery.routedate),       // 211. ROUTEDATE
+        delivery.editno || '',                           // 212. EDITNO
+        delivery.editflag || '',                         // 213. EDITFLAG
+        delivery.cnflag || '',                           // 214. CNFLAG
+        delivery.emailaddr || '',                        // 215. EMAILADDR
+        delivery.followup || ''                          // 216. FOLLOWUP
+    ];
+    
+    return fields.map(escapeCSVField).join(',');
+}
+
+// Generate CSV header (EgDeliver9 format) - 216 fields
+function getCSVHeader() {
+    var headers = [
+        // 1-8: Work Information
+        'WORKDATE', 'WORKTIME', 'OPERATOR', 'CHKMINUTE', 'DELIVERNUM', 'TOHOMENUM', 'TIMEIN', 'TIMEOUT',
+        // 9-17: Type & Media
+        'BUY', 'DATATYPE', 'DATADESC', 'PROCESSTYP', 'PROCESSDES', 'MEDIATYPE', 'MEDIADESC', 'CHANNEL', 'CHANNELDES',
+        // 18-42: Payment Information
+        'PAYTYPE', 'PAYDESC', 'PAYTYPE1', 'SUBPAY1', 'SUBPAY2', 'PAYMENT', 'PAYDAY',
+        'CUSBANKNO', 'CUSBANKNA', 'CUSBANKBR', 'CUSBANKAC', 'CUSBANKREF', 
+        'CREDIT', 'CREDITTYPE', 'CREDITDESC', 'CREDITNO', 'CREDITEXPM', 'CREDITEXPY', 'CREDITREF', 'LAST3DIGIT',
+        'BANKNO', 'BANKNA', 'BANKBR', 'BANKAC', 'BANKREF',
+        // 43-57: Shipping & Personnel
+        'SHIPTYPE', 'SHIPDESC', 'DELIVERTO', 'USERID', 'USERNAME', 'SALEREPID', 'SALENAME', 
+        'RING', 'RINGDESC', 'ROUTERUN', 'ROUTENO', 'ROUTEDESC', 'ROUTEDIST', 'ROUTETIMES', 'MILESP2P',
+        // 58-64: Messenger & Date
+        'TIMESP2P', 'MSNID', 'MSNNAME', 'HANDTIMES', 'DAY', 'DATE', 'SOURCE',
+        // 65-77: Product Information
+        'CODE', 'PRDGROUP', 'TITLE', 'COST', 'PRICE', 'SALPRICE', 'QTY', 'AMOUNT', 'POSTFEE', 'TOTAL', 'FREECODE', 'DSCAMT', 'TRANSNO',
+        // 78-118: Customer Information (41 fields)
+        'CUSTOMERID', 'MEMCODE', 'PRENAME', 'FIRSTNAME', 'LASTNAME', 'ADDR1', 'ADDR2', 
+        'HOMENUM1', 'HOMENUM2', 
+        'PRECOMNAM1', 'PRECOMNAM2', 'COMNAME1', 'COMNAME2', 'LSTCOMNAM1', 'LSTCOMNAM2',
+        'BUILDING1', 'BUILDING2', 'FLOOR1', 'FLOOR2', 'ROOM1', 'ROOM2',
+        'SOI1', 'SOI2', 'ROAD1', 'ROAD2', 'KATE1', 'KATE2', 'KWANG1', 'KWANG2', 
+        'MOOBAN1', 'MOOBAN2', 'TUMBON1', 'TUMBON2', 'AMPUR1', 'AMPUR2', 
+        'PROVINCE1', 'PROVINCE2', 'ZIPCODE1', 'ZIPCODE2', 'PROVINCE', 'ZIPCODE',
+        // 119-137: Appointment Information (19 fields)
+        'BEFOREAFT', 'APPTDAY', 'APPTDATE', 'APPTTIME', 'APPTTIME1', 'APPTTIME2', 'APPTPERSON', 'APPTTEL',
+        'APPTADDR', 'APPTADDR1', 'APPTADDR2', 'APPTKWANG', 'APPTKATE', 'APPTTUMBON', 'APPTAMPUR', 'APPTPROV', 'APPTZIP',
+        'APPTREMK1', 'APPTREMK2',
+        // 138-202: Status Flags (65 fields)
+        'AFTDELICAL', 'AFTDELITI', 'AFTDELIDA',
+        'AUTOBRT9', 'AUTOBRT9DA', 'AUTOBRT9TI', 'AUTOBRT9BY',
+        'DELIVER', 'DELIVERID', 'DELIVERDA', 'DELIVERTI', 'DELIVERBY',
+        'RECEIVE', 'RECEIVEDA', 'RECEIVETI', 'RECEIVEBY',
+        'UPDATE', 'UPDATEDA', 'UPDATETI', 'UPDATEBY',
+        'FINANCE', 'FINANCETYP', 'FINANCEDES', 'FINANCEDA', 'FINANCETI', 'FINANCEBY',
+        'PRNORDER', 'PRNORDDATE', 'PRNORDTIME',
+        'PRNPICK', 'PRNPICDATE', 'PRNPICTIME',
+        'PRNSTICKER', 'PRNSTIDATE', 'PRNSTITIME',
+        'PRNFINAN', 'PRNFINDATE', 'PRNFINTIME',
+        'PAYFLAG', 'PAYDATE', 'PAYTIME',
+        'DELVFLAG', 'DELVDATE', 'DELVTIME',
+        'TAXINV', 'TRANSFER',
+        'SCANFLAG', 'SCANDATE', 'SCANTIME', 'SCANBY',
+        'FEED', 'FEEDNO', 'FEEDBACK', 'FEEDDESC', 'FEEDDATE', 'FEEDTIME', 'FEEDID', 'FEEDMEMO',
+        'WEIGHTLOSS', 'WEIGHT', 'REMARK1', 'REMARK2', 'STATUSID', 'STATUSDESC', 'FINISH',
+        // 203-216: System & Additional (14 fields)
+        'MAPSTAT', 'UNIQUEID', 'ACCPRINT', 'ACCPRINTD', 'ACCPRINTT', 'NKPRINT', 'NKPRINTD', 'NKPRINTT',
+        'ROUTEDATE', 'EDITNO', 'EDITFLAG', 'CNFLAG', 'EMAILADDR', 'FOLLOWUP'
+    ];
+    
+    return headers.map(escapeCSVField).join(',');
+}
+
+// Download CSV file
+function downloadCSV(csvContent, filename) {
+    var BOM = '\uFEFF'; // UTF-8 BOM for Excel
+    var blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
+    
+    var link = document.createElement('a');
+    if (link.download !== undefined) {
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// Export selected row (all items with same delivernum)
+function exportSelectedRow() {
+    if (!selectedDeliveryData) {
+        alert('⚠️ กรุณาเลือกรายการจากตารางก่อน');
+        return;
+    }
+    
+    console.log('Exporting all rows with delivernum:', selectedDeliveryData.delivernum);
+    
+    // Find all deliveries with same delivernum
+    var relatedDeliveries = deliveriesData.filter(function(d) {
+        return d.delivernum === selectedDeliveryData.delivernum;
+    });
+    
+    if (relatedDeliveries.length === 0) {
+        alert('❌ ไม่พบข้อมูลที่เลือก');
+        return;
+    }
+    
+    var csvContent = getCSVHeader() + '\n';
+    relatedDeliveries.forEach(function(delivery) {
+        csvContent += deliveryToCSVRow(delivery) + '\n';
+    });
+    
+    var filename = 'delivery_' + selectedDeliveryData.delivernum + '_' + new Date().getTime() + '.csv';
+    downloadCSV(csvContent, filename);
+    
+    alert('✅ ส่งออกข้อมูลสำเร็จ!\nDelivernum: ' + selectedDeliveryData.delivernum + '\nพบ ' + relatedDeliveries.length + ' รายการ\nไฟล์: ' + filename);
+}
+
+// Preview data by date
+function previewDateData() {
+    var dateInput = document.getElementById('exportDateInput');
+    var previewContainer = document.getElementById('datePreviewContainer');
+    var previewTitle = document.getElementById('previewTitle');
+    var tableBody = document.getElementById('datePreviewTableBody');
+    
+    if (!dateInput || !dateInput.value) {
+        previewContainer.style.display = 'none';
+        return;
+    }
+    
+    var selectedDate = dateInput.value; // Format: YYYY-MM-DD
+    console.log('Previewing date:', selectedDate);
+    
+    // Filter deliveries by apptdate (use local date comparison)
+    var filteredDeliveries = deliveriesData.filter(function(delivery) {
+        if (!delivery.apptdate) return false;
+        
+        // Convert apptdate to YYYY-MM-DD format using LOCAL time (not UTC)
+        var apptDate = new Date(delivery.apptdate);
+        if (isNaN(apptDate.getTime())) return false;
+        
+        var year = apptDate.getFullYear();
+        var month = String(apptDate.getMonth() + 1).padStart(2, '0');
+        var day = String(apptDate.getDate()).padStart(2, '0');
+        var localDateString = year + '-' + month + '-' + day;
+        
+        return localDateString === selectedDate;
+    });
+    
+    // Update preview title
+    previewTitle.textContent = 'พบ ' + filteredDeliveries.length + ' รายการ ในวันที่ ' + formatDateToDDMMYYYY(selectedDate);
+    
+    // Generate table rows
+    if (filteredDeliveries.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #999;">ไม่พบข้อมูลในวันที่เลือก</td></tr>';
+        previewContainer.style.display = 'block';
+        return;
+    }
+    
+    var rows = filteredDeliveries.map(function(delivery) {
+        var customerName = ((delivery.prename || '') + ' ' + (delivery.firstname || '') + ' ' + (delivery.lastname || '')).trim();
+        
+        return '<tr style="background: white;">' +
+            '<td style="border: 1px solid #ddd; padding: 5px;">' + (delivery.delivernum || '') + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px;">' + customerName + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px;">' + formatDateToDDMMYYYY(delivery.apptdate) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px;">' + (delivery.title || '') + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px; text-align: right;">' + (delivery.qty || 0) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px; text-align: right;">' + parseFloat(delivery.total || 0).toFixed(2) + '</td>' +
+            '<td style="border: 1px solid #ddd; padding: 5px;">' + (delivery.datadesc || '') + '</td>' +
+            '</tr>';
+    }).join('');
+    
+    tableBody.innerHTML = rows;
+    previewContainer.style.display = 'block';
+}
+
+// Export by date
+function exportByDate() {
+    var dateInput = document.getElementById('exportDateInput');
+    if (!dateInput || !dateInput.value) {
+        alert('⚠️ กรุณาเลือกวันที่ก่อน');
+        return;
+    }
+    
+    var selectedDate = dateInput.value; // Format: YYYY-MM-DD
+    console.log('Exporting by date:', selectedDate);
+    
+    // Filter deliveries by apptdate (use local date comparison)
+    var filteredDeliveries = deliveriesData.filter(function(delivery) {
+        if (!delivery.apptdate) return false;
+        
+        // Convert apptdate to YYYY-MM-DD format using LOCAL time (not UTC)
+        var apptDate = new Date(delivery.apptdate);
+        if (isNaN(apptDate.getTime())) return false;
+        
+        var year = apptDate.getFullYear();
+        var month = String(apptDate.getMonth() + 1).padStart(2, '0');
+        var day = String(apptDate.getDate()).padStart(2, '0');
+        var localDateString = year + '-' + month + '-' + day;
+        
+        return localDateString === selectedDate;
+    });
+    
+    if (filteredDeliveries.length === 0) {
+        alert('⚠️ ไม่พบข้อมูลในวันที่เลือก\n(' + formatDateToDDMMYYYY(selectedDate) + ')');
+        return;
+    }
+    
+    var csvContent = getCSVHeader() + '\n';
+    filteredDeliveries.forEach(function(delivery) {
+        csvContent += deliveryToCSVRow(delivery) + '\n';
+    });
+    
+    var formattedDate = formatDateToDDMMYYYY(selectedDate).replace(/\//g, '-');
+    var filename = 'deliveries_' + formattedDate + '_' + new Date().getTime() + '.csv';
+    downloadCSV(csvContent, filename);
+    
+    alert('✅ ส่งออกข้อมูลสำเร็จ!\nพบ ' + filteredDeliveries.length + ' รายการ\nไฟล์: ' + filename);
+}
+
+// Download field mapping file
+function downloadFieldMapping() {
+    // Download CSV_EXPORT_MAPPING_SUMMARY.md
+    var link = document.createElement('a');
+    link.href = '/CSV_EXPORT_MAPPING_SUMMARY.md';
+    link.download = 'CSV_EXPORT_MAPPING_SUMMARY.md';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Show success message
+    alert('✅ กำลังดาวน์โหลดไฟล์\n📄 CSV_EXPORT_MAPPING_SUMMARY.md\n\nไฟล์นี้แสดงรายละเอียดครบถ้วนทั้ง 216 ฟิลด์');
+}
+</script>
+
+<div class="dashboard-container">
+
+<!-- Search and Summary Bar -->
+<div class="search-summary-bar">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ค้นหา Delivernum, ชื่อลูกค้า, เบอร์โทร..." onkeyup="filterTable()">
+    </div>
+    <div class="summary-info">
+        <span class="summary-value" id="billCount"><%= deliveries.length %></span>
+        <span>บิล</span>
+        <span style="margin-left: 10px;">เป็นเงิน</span>
+        <span class="summary-value" id="totalAmount"><%= parseFloat(summary.totalAmount || 0).toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+        <span>บาท</span>
+    </div>
+</div>
+
+<!-- Data Table Section -->
+<div class="data-table-section">
+    <div style="max-height: 350px; overflow-y: auto;">
+        <table id="deliveriesTable">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">ลำดับ</th>
+                    <th style="width: 100px;">Delivernum</th>
+                    <th style="width: 80px;">SaleID</th>
+                    <th style="width: 200px;">ชื่อ-นามสกุล ลูกค้า</th>
+                    <th style="width: 100px;">นัดส่งวันที่</th>
+                    <th style="width: 80px;">เคยซื้อ</th>
+                    <th style="width: 100px;">สื่อ</th>
+                    <th style="width: 100px;">เป็นเงิน</th>
+                    <th style="width: 120px;">วิธีส่งของ</th>
+                    <th>สถานที่รับของสินค้า</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (deliveries && deliveries.length > 0) { %>
+                    <% deliveries.forEach(function(delivery, index) { %>
+                        <tr onclick="selectRow(<%= index %>)">
+                            <td style="text-align: center;"><%= delivery.id || '' %></td>
+                            <td><span class="badge-small <%= 'badge-' + (String(delivery.mediadesc || 'default').replace(/\s/g, '').toUpperCase()) %>"><%= delivery.delivernum || '' %></span></td>
+                            <td><strong><%= delivery.salerepid || '' %></strong></td>
+                            <td><%= (delivery.prename || '') %> <%= (delivery.firstname || '') %> <%= (delivery.lastname || '') %></td>
+                            <td><%= delivery.apptdate ? new Date(delivery.apptdate).toString().split(' GMT')[0] : '' %></td>
+                            <td style="text-align: center;"><%= delivery.purchase_count || 0 %></td>
+                            <td><%= delivery.mediadesc || '' %></td>
+                            <td style="text-align: right;"><%= parseFloat(delivery.total || 0).toFixed(2) %></td>
+                            <td><%= delivery.shipdesc || '' %></td>
+                            <td class="text-truncate-td" title="<%= delivery.apptaddr || '' %>"><%= delivery.apptaddr || '' %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="10" style="text-align: center; padding: 20px;">ไม่พบข้อมูล</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Detail Form Section -->
+<div class="detail-form-section" id="detailFormSection">
+    <div id="detailContent">
+        <div class="detail-layout">
+            <!-- Left Column -->
+            <div class="detail-left">
+                <div class="form-field">
+                    <label>อาการ :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label>ระดับความปวด :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label>Keyword :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-row-inline">
+                    <div class="form-field">
+                        <label>Follow Up :</label>
+                        <input type="text" value="0" readonly style="width: 40px;">
+                        <span style="font-size: 11px;">วัน</span>
+                    </div>
+                </div>
+                
+                <div class="form-row-inline">
+                    <div class="form-field">
+                        <label>วิธีทาน :</label>
+                        <input type="text" value="0" readonly style="width: 40px;">
+                    </div>
+                </div>
+                
+                <div class="form-field">
+                    <label>Remark1 :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label>Remark2 :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label>Channel :</label>
+                    <input type="text" value="" readonly>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="detail-right">
+                <!-- Top section with small fields -->
+                <div class="detail-right-top">
+                    <div style="display: flex; gap: 10px; margin-bottom: 8px; align-items: center;">
+                        <div class="form-field-small">
+                            <label>CustID :</label>
+                            <input type="text" value="" readonly style="width: 120px;">
+                        </div>
+                        <div class="form-field" style="flex: 1;">
+                            <label>ชื่อ-นามสกุล :</label>
+                            <input type="text" value="" readonly>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div class="form-field-small">
+                            <label>เพศ :</label>
+                            <input type="text" id="customerSex" value="" readonly>
+                        </div>
+                        <div class="form-field-small">
+                            <label>อายุ :</label>
+                            <input type="text" id="customerAge" value="" readonly>
+                        </div>
+                        <div class="form-field-small">
+                            <label>น้ำหนัก :</label>
+                            <input type="text" id="customerWeight" value="" readonly>
+                            <span style="font-size: 10px;">กก.</span>
+                        </div>
+                        <div class="form-field-small">
+                            <label>สูง :</label>
+                            <input type="text" id="customerHeight" value="" readonly>
+                            <span style="font-size: 10px;">ซม.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-field">
+                    <label style="width: 100px;">โรคประจำตัว :</label>
+                    <input type="text" id="customerSickness" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label style="width: 100px;">Tag :</label>
+                    <input type="text" value="" readonly>
+                </div>
+                
+                <div class="form-field">
+                    <label style="width: 100px;">LineID :</label>
+                    <input type="text" id="customerLineId" value="" readonly>
+                </div>
+                
+                <!-- Items Table -->
+                <div id="relatedItemsContainer">
+                    <p style="padding: 10px; text-align: center; color: #999;">เลือกรายการจากตารางด้านบนเพื่อดูรายละเอียด</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export CSV Section -->
+<div class="export-section" style="background: white; border: 1px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+    <h3 style="margin: 0 0 15px 0; font-size: 14px; color: #333;">ส่งออกข้อมูล (Export CSV)</h3>
+    
+    <div style="display: flex; gap: 15px; align-items: flex-end;">
+        <!-- Export Selected Button -->
+        <div>
+            <button id="exportSelectedBtn" onclick="exportSelectedRow()" style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500;">
+                📥 ส่งออกรายการที่เลือก
+            </button>
+        </div>
+        
+        <!-- Export by Date -->
+        <div style="display: flex; gap: 10px; align-items: flex-end;">
+            <div>
+                <label style="display: block; font-size: 12px; margin-bottom: 4px; font-weight: 500;">เลือกวันที่ (ApptDate):</label>
+                <input type="date" id="exportDateInput" onchange="previewDateData()" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 3px; font-size: 13px;">
+            </div>
+            <button id="exportByDateBtn" onclick="exportByDate()" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500;">
+                📅 ส่งออกรายการตามวันที่
+            </button>
+            
+            <!-- Field Mapping Info Button -->
+            <button id="fieldMappingBtn" onclick="downloadFieldMapping()" style="padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500; margin-left: 10px;">
+                📥 ดาวน์โหลดคำอธิบายฟิลด์ทั้งหมด (216 ฟิลด์)
+            </button>
+        </div>
+    </div>
+    
+    <!-- Preview Table Container -->
+    <div id="datePreviewContainer" style="margin-top: 15px; display: none;">
+        <div style="border-top: 1px solid #ddd; padding-top: 15px;">
+            <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #333;">
+                <span id="previewTitle">ข้อมูลตัวอย่าง</span>
+            </h4>
+            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 3px;">
+                <table id="datePreviewTable" style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                    <thead style="background: #f8f9fa; position: sticky; top: 0;">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">Delivernum</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">ชื่อลูกค้า</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">วันที่นัดส่ง</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">สินค้า</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: right;">จำนวน</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: right;">ยอดรวม</th>
+                            <th style="border: 1px solid #ddd; padding: 6px; text-align: left;">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="datePreviewTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

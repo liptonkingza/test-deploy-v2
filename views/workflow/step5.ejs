@@ -1,0 +1,12 @@
+<% const pageTitle = title || 'สร้างรายการใหม่ – ชำระเงิน'; %>
+<%- include('../workflow_layout', {
+  title: pageTitle,
+  currentStep: 'step5',
+  customerId: customerId || '',
+  salesRepOptions: salesRepOptions || [],
+  body: include('./step5_content', {
+    customerId,
+  })
+}) %>
+
+

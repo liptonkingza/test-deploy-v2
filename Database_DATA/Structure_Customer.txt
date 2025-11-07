@@ -1,0 +1,60 @@
+
+Structure for table:          M:\SIAM\DISK1\TELESALE\CUSTOMER.DBF
+Number of data records:       60883   
+Date of last update:          15/09/2025
+Code Page:                    874     
+   Field   Field Name                Type                                Width        Dec      Index   Collate         Nulls         Next         Step
+       1   WORKDATE                  Date                                    8                                            No
+       2   WORKTIME                  Character                               8                                            No
+       3   OPERATOR                  Character                              10                                            No
+       4   CUSTOMERID                Character                              10                   Asc   Machine            No
+       5   DATE                      Date                                    8                   Asc   Machine            No
+       6   SOURCE                    Numeric                                 3                                            No
+       7   SALEREPID                 Character                               6                   Asc   Machine            No
+       8   IDTYPE                    Character                               2                                            No
+       9   PRENAME                   Character                              20                                            No
+      10   FIRSTNAME                 Character                              30                                            No
+      11   LASTNAME                  Character                              40                   Asc   Machine            No
+      12   NICKNAME                  Character                              20                                            No
+      13   COMNAME                   Character                              30                                            No
+      14   BIRTHDAY                  Date                                    8                                            No
+      15   AGE                       Numeric                                 3                                            No
+      16   WEIGHT                    Numeric                                 3                                            No
+      17   HEIGHT                    Numeric                                 3                                            No
+      18   SEX                       Character                               1                                            No
+      19   WORK                      Character                               1                                            No
+      20   HOMENUM                   Character                              30                                            No
+      21   MOO                       Character                               5                                            No
+      22   BUILDING                  Character                              60                                            No
+      23   SOI                       Character                              30                                            No
+      24   ROAD                      Character                              30                                            No
+      25   KATE                      Character                              30                                            No
+      26   KWANG                     Character                              30                                            No
+      27   PROVCODE                  Numeric                                 3                                            No
+      28   ADDR1                     Character                              50                                            No
+      29   ADDR2                     Character                             100                                            No
+      30   ADDR3                     Character                              50                                            No
+      31   ADDR4                     Character                              50                                            No
+      32   ADDR5                     Character                              50                                            No
+      33   PROVINCE                  Character                              20                   Asc   Machine            No
+      34   ZIPCODE                   Character                               5                                            No
+      35   MOBILETEL                 Character                              11                   Asc   Machine            No
+      36   OFFICETEL                 Character                              11                   Asc   Machine            No
+      37   OFFICEEXT                 Character                               6                                            No
+      38   HOMETEL                   Character                              11                   Asc   Machine            No
+      39   HOMEEXT                   Character                               6                                            No
+      40   FAX                       Character                              11                                            No
+      41   EMAIL                     Character                              80                                            No
+      42   MEDIA                     Character                              30                                            No
+      43   CHANNEL                   Character                              30                                            No
+      44   REMARK1                   Character                              80                                            No
+      45   REMARK2                   Character                              80                                            No
+      46   SIGNDATE                  Date                                    8                                            No
+      47   EMAILADDR                 Character                              30                   Asc   Machine            No
+      48   SICKNESS1                 Character                              60                                            No
+      49   SICKNESS2                 Character                              60                                            No
+      50   CUSTTAG                   Character                              80                                            No
+      51   LINEID                    Character                              30                                            No
+      52   BANED                     Logical                                 1                                            No
+      53   BANREMARK                 Character                              60                                            No
+** Total **                                                               1443

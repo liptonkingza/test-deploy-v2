@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="th" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title || 'Workflow - Siamdrug' %></title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Font: Sarabun (Thai) -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- App styles placed after Bootstrap to override if needed -->
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: #f8f9fa;
+      }
+      .workflow-container {
+        display: flex;
+        height: calc(100vh - 60px);
+      }
+      .top-tabs {
+        background: #2c3e50;
+        border-bottom: 2px solid #34495e;
+        padding: 0;
+      }
+      .top-tabs .nav-link {
+        color: #bdc3c7;
+        font-weight: 500;
+        padding: 12px 20px;
+        border: none;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+      .top-tabs .nav-link:hover {
+        background-color: #34495e;
+        color: #ffffff;
+      }
+      .top-tabs .nav-link.active {
+        color: #ffffff;
+        background-color: #3498db;
+        border-bottom-color: #2980b9;
+      }
+      .side-tabs {
+        width: 220px;
+        background: #2c3e50;
+        border-right: 1px solid #34495e;
+        padding: 20px 0;
+        overflow-y: auto;
+      }
+      .side-tabs .nav-link {
+        color: #bdc3c7;
+        padding: 12px 20px;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      .side-tabs .nav-link:hover {
+        background-color: #34495e;
+        color: #ffffff;
+      }
+      .side-tabs .nav-link.active {
+        background-color: #3498db;
+        color: #ffffff;
+        border-left-color: #2980b9;
+      }
+      .content-area {
+        flex: 1;
+        overflow-y: auto;
+        background: #ffffff;
+        padding: 30px;
+      }
+      .sales-rep-section {
+        padding: 15px;
+        background: #34495e;
+        border-top: 1px solid #2c3e50;
+      }
+      .sales-rep-section label {
+        color: #ecf0f1;
+        font-size: 0.875rem;
+      }
+      .sales-rep-section .form-control,
+      .sales-rep-section .form-select {
+        background-color: #2c3e50;
+        border-color: #34495e;
+        color: #ffffff;
+      }
+      .sales-rep-section .form-control:focus,
+      .sales-rep-section .form-select:focus {
+        background-color: #2c3e50;
+        border-color: #3498db;
+        color: #ffffff;
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+      }
+      .sales-rep-section .form-control::placeholder {
+        color: #95a5a6;
+      }
+      .sales-rep-section .form-select option {
+        background-color: #2c3e50;
+        color: #ffffff;
+      }
+      
+      /* Dark theme support */
+      [data-bs-theme="dark"] .content-area {
+        background: #1a1a1a;
+        color: #e0e0e0;
+      }
+      [data-bs-theme="dark"] .top-tabs {
+        background: #1e1e1e;
+        border-bottom-color: #2d2d2d;
+      }
+      [data-bs-theme="dark"] .side-tabs {
+        background: #1e1e1e;
+        border-right-color: #2d2d2d;
+      }
+      [data-bs-theme="dark"] .sales-rep-section {
+        background: #252525;
+        border-top-color: #1e1e1e;
+      }
+      [data-bs-theme="dark"] #sidebar-sales-rep-message {
+        color: #e0e0e0;
+      }
+    </style>
+    <script>
+      // Early theme apply to avoid flash
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.setAttribute('data-bs-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    
+    <!-- Top Tabs -->
+    <div class="top-tabs">
+      <div class="container-fluid px-0">
+        <ul class="nav nav-tabs border-0">
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step1' ? 'active' : '' %>" href="/workflow">
+              <i class="bi bi-person me-1"></i>ลูกค้า
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step2' ? 'active' : '' %>" href="/workflow/step2<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-geo-alt me-1"></i>ที่ตั้ง
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step3' ? 'active' : '' %>" href="/workflow/step3<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-megaphone me-1"></i>สื่อ
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step4' ? 'active' : '' %>" href="/workflow/step4<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-box-seam me-1"></i>สินค้า
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step5' ? 'active' : '' %>" href="/workflow/step5<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-credit-card me-1"></i>ชำระเงิน
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Workflow Container -->
+    <div class="workflow-container">
+      <!-- Side Tabs -->
+      <div class="side-tabs">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step1' ? 'active' : '' %>" href="/workflow">
+              <i class="bi bi-person me-2"></i>ลูกค้า
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step2' ? 'active' : '' %>" href="/workflow/step2<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-geo-alt me-2"></i>ที่ตั้ง
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step3' ? 'active' : '' %>" href="/workflow/step3<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-megaphone me-2"></i>สื่อ
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step4' ? 'active' : '' %>" href="/workflow/step4<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-box-seam me-2"></i>สินค้า
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= currentStep === 'step5' ? 'active' : '' %>" href="/workflow/step5<%= customerId ? '?customerId=' + customerId : '' %>">
+              <i class="bi bi-credit-card me-2"></i>ชำระเงิน
+            </a>
+          </li>
+        </ul>
+        
+        <!-- Sales Rep Section -->
+        <div class="sales-rep-section">
+          <label class="form-label small fw-bold mb-2">พนักงานขาย</label>
+          <input type="text" class="form-control form-control-sm mb-2" id="sidebar-sales-rep-search" placeholder="ค้นหารหัสพนักงาน" autocomplete="off">
+          <select class="form-select form-select-sm mb-1" id="sidebar-sales-rep" data-sales-rep-select>
+            <option value="">— เลือกพนักงานขาย —</option>
+            <% if (typeof salesRepOptions !== 'undefined' && salesRepOptions) { %>
+              <% salesRepOptions.forEach(function(rep){ %>
+                <option value="<%= rep.value %>" data-pn-id="<%= rep.value %>"><%= rep.label %></option>
+              <% }); %>
+            <% } %>
+          </select>
+          <div id="sidebar-sales-rep-message" class="small" style="min-height: 18px;"></div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <%- body %>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      // Theme toggle button handler + icon sync
+      function setTheme(next) {
+        document.documentElement.setAttribute('data-bs-theme', next);
+        try { localStorage.setItem('theme', next); } catch (err) {}
+        var icon = document.querySelector('[data-theme-icon]');
+        if (icon) {
+          icon.classList.remove('bi-sun','bi-moon-stars');
+          icon.classList.add(next === 'dark' ? 'bi-sun' : 'bi-moon-stars');
+        }
+      }
+      (function initTheme() {
+        var current = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        setTheme(current); // ensure icon correct
+      })();
+      document.addEventListener('click', function(e){
+        var btn = e.target.closest('[data-toggle-theme]');
+        if (!btn) return;
+        var current = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+      });
+
+      // Sales Rep synchronization
+      (function() {
+        const sidebarSelect = document.getElementById('sidebar-sales-rep');
+        const searchInput = document.getElementById('sidebar-sales-rep-search');
+        const messageEl = document.getElementById('sidebar-sales-rep-message');
+        const formSelect = document.querySelector('select[name="salerepid"]');
+        
+        // Function to show message
+        function showMessage(text, type = 'info') {
+          if (!messageEl) return;
+          messageEl.textContent = text;
+          messageEl.className = 'small';
+          if (type === 'success') {
+            messageEl.style.color = '#28a745';
+          } else if (type === 'error') {
+            messageEl.style.color = '#dc3545';
+          } else {
+            messageEl.style.color = '#6c757d';
+          }
+        }
+        
+        // Function to clear message
+        function clearMessage() {
+          if (messageEl) {
+            messageEl.textContent = '';
+            messageEl.className = 'small';
+          }
+        }
+        
+        // Store all original options for filtering
+        let allOptions = [];
+        function initializeOptions() {
+          if (sidebarSelect) {
+            allOptions = Array.from(sidebarSelect.options).map(opt => ({
+              value: opt.value,
+              text: opt.textContent,
+              element: opt.cloneNode(true)
+            }));
+          }
+        }
+        
+        // Initialize options when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initializeOptions);
+        } else {
+          initializeOptions();
+        }
+        
+        // Filter function for sales rep search
+        function filterSalesRepOptions(keyword, autoSelect = false) {
+          if (!sidebarSelect) return;
+          
+          // Re-initialize options if empty
+          if (allOptions.length === 0) {
+            initializeOptions();
+          }
+          
+          // Save current selected value before filtering
+          const currentSelectedValue = sidebarSelect.value;
+          const savedSalesRep = localStorage.getItem('selectedSalesRep');
+          
+          const searchTerm = keyword.trim().toLowerCase();
+          
+          // Clear all options except the first one (placeholder)
+          sidebarSelect.innerHTML = '<option value="">— เลือกพนักงานขาย —</option>';
+          
+          const filteredOptions = [];
+          
+          if (!searchTerm) {
+            // If no search term, show all options
+            allOptions.forEach(opt => {
+              if (opt.value) {
+                sidebarSelect.appendChild(opt.element.cloneNode(true));
+                filteredOptions.push(opt);
+              }
+            });
+          } else {
+            // Filter options by pn_id (รหัสพนักงาน)
+            allOptions.forEach(opt => {
+              if (opt.value && String(opt.value).toLowerCase().includes(searchTerm)) {
+                sidebarSelect.appendChild(opt.element.cloneNode(true));
+                filteredOptions.push(opt);
+              }
+            });
+          }
+          
+          // Show message based on search results
+          if (!searchTerm) {
+            // No search term, clear message
+            clearMessage();
+          } else if (filteredOptions.length === 0) {
+            // No results found
+            showMessage('ไม่พบรหัสพนักงาน', 'error');
+          } else {
+            // Results found, but don't show message yet (wait for selection)
+            clearMessage();
+          }
+          
+          // Auto-select if only one result found and autoSelect is true
+          if (autoSelect && filteredOptions.length === 1) {
+            const selectedOption = filteredOptions[0];
+            sidebarSelect.value = selectedOption.value;
+            // Save to localStorage and sync
+            localStorage.setItem('selectedSalesRep', selectedOption.value);
+            if (formSelect) {
+              formSelect.value = selectedOption.value;
+              formSelect.dispatchEvent(new Event('change'));
+            }
+            // Show success message
+            showMessage('ค้นหาสำเร็จ', 'success');
+            // Clear search input after auto-select to show all options
+            if (searchInput) {
+              searchInput.value = '';
+              // Use setTimeout to clear message and filter
+              setTimeout(() => {
+                clearMessage();
+                filterSalesRepOptions('', false);
+              }, 2000);
+            }
+          } else {
+            // Restore selected value if it still exists in filtered options
+            const valueToRestore = currentSelectedValue || savedSalesRep;
+            if (valueToRestore && Array.from(sidebarSelect.options).some(opt => opt.value === valueToRestore)) {
+              sidebarSelect.value = valueToRestore;
+            } else {
+              sidebarSelect.value = '';
+            }
+          }
+        }
+        
+        // Search input event listener
+        if (searchInput) {
+          let searchTimeout;
+          searchInput.addEventListener('input', function() {
+            const searchValue = this.value;
+            
+            // Clear previous timeout
+            clearTimeout(searchTimeout);
+            
+            // Debounce search to avoid too many updates
+            searchTimeout = setTimeout(() => {
+              // Auto-select if exactly one match
+              filterSalesRepOptions(searchValue, true);
+            }, 300);
+          });
+          
+          // Handle select change - ensure selected value is visible
+          if (sidebarSelect) {
+            sidebarSelect.addEventListener('change', function() {
+              if (this.value) {
+                // Save to localStorage
+                localStorage.setItem('selectedSalesRep', this.value);
+                
+                // Sync to form if exists
+                if (formSelect) {
+                  formSelect.value = this.value;
+                  formSelect.dispatchEvent(new Event('change'));
+                }
+                
+                // Show success message if search was performed
+                if (searchInput && searchInput.value) {
+                  showMessage('ค้นหาสำเร็จ', 'success');
+                  searchInput.value = '';
+                  // Clear message after 2 seconds
+                  setTimeout(() => {
+                    clearMessage();
+                    filterSalesRepOptions('', false);
+                  }, 2000);
+                } else {
+                  // Clear message if no search was performed
+                  clearMessage();
+                }
+              } else {
+                clearMessage();
+              }
+            });
+          }
+        }
+        
+        // Clear localStorage when starting new workflow (step1)
+        if (window.location.pathname === '/workflow' || window.location.pathname === '/workflow/') {
+          localStorage.removeItem('selectedSalesRep');
+        }
+        
+        // Get saved sales rep from localStorage
+        const savedSalesRep = localStorage.getItem('selectedSalesRep');
+        
+        if (sidebarSelect) {
+          // Initialize sidebar with saved value
+          if (savedSalesRep) {
+            sidebarSelect.value = savedSalesRep;
+          }
+        }
+        
+        if (formSelect) {
+          // Initialize form with saved value
+          if (savedSalesRep) {
+            formSelect.value = savedSalesRep;
+          }
+          
+          // Save to localStorage when form changes
+          formSelect.addEventListener('change', function() {
+            localStorage.setItem('selectedSalesRep', this.value);
+            
+            // Sync to sidebar if exists
+            if (sidebarSelect) {
+              sidebarSelect.value = this.value;
+            }
+          });
+        }
+        
+        // Clear localStorage when logout
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('a[href="/logout"]')) {
+            localStorage.removeItem('selectedSalesRep');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
+

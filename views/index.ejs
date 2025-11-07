@@ -1,0 +1,37 @@
+<% const pageTitle = 'ยินดีต้อนรับ'; %>
+<%- include('layout', { title: pageTitle, body: `
+  <div class='row justify-content-center'>
+    <div class='col-12 col-md-8 col-lg-6'>
+      <div class='card'>
+        <div class='card-body text-center py-5'>
+          <i class='bi bi-shield-lock-fill text-primary' style='font-size: 4rem;'></i>
+          <h2 class='mt-3 mb-3'>ยินดีต้อนรับสู่ระบบ Siamdrug</h2>
+          <p class='text-body-secondary mb-4'>กรุณาเข้าสู่ระบบเพื่อใช้งาน</p>
+          ${typeof error !== 'undefined' && error ? `
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+              <i class='bi bi-exclamation-triangle-fill me-2'></i>
+              ${error}
+              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+          ` : ''}
+          <div class='d-flex gap-2 justify-content-center'>
+            <a href='/register' class='btn btn-outline-primary'>
+              <i class='bi bi-person-plus me-2'></i>สมัครสมาชิก
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Auto-hide error message after 5 seconds
+    const alert = document.querySelector('.alert');
+    if (alert) {
+      setTimeout(() => {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+      }, 5000);
+    }
+  </script>
+` }) %>

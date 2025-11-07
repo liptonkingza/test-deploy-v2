@@ -1,0 +1,117 @@
+<h1 class="h4 fw-semibold mb-1">เธเธฑเนเธเธ•เธญเธเธ—เธตเน 4/5 โ€“ เน€เธฅเธทเธญเธเธชเธดเธเธเนเธฒเนเธฅเธฐเธเธฒเธฃเธเธเธชเนเธ</h1>
+<p class="text-muted mb-0">เธเธฑเธ”เธเธฒเธฃเธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒเนเธฅเธฐเธฃเธฒเธขเธฅเธฐเน€เธญเธตเธขเธ”เธเธฒเธฃเธเธฑเธ”เธชเนเธ (เธเนเธญเธกเธนเธฅเธเธตเนเธเธฐเธ–เธนเธเนเธเนเธ•เนเธญเนเธเธเธฑเนเธเธ•เธญเธเธ—เธตเน 5)</p>
+<a class="btn btn-outline-secondary" href="/workflow/step3?customerId=<%= customerId %>">เธขเนเธญเธเธเธฅเธฑเธเนเธเธเธฑเนเธเธ•เธญเธ 3/5 โ€“ เน€เธฅเธทเธญเธเธชเธทเนเธญเนเธฅเธฐเธเนเธญเธเธ—เธฒเธ</a>
+<button type="button" class="btn btn-outline-primary" data-step4-save-draft disabled>เธเธฑเธเธ—เธถเธเธฃเนเธฒเธเธญเธฑเธ•เนเธเธกเธฑเธ•เธด</button>
+<div class="card-header">เธเนเธญเธกเธนเธฅเธเธฑเธ”เธชเนเธเธ—เธตเนเน€เธฅเธทเธญเธ</div>
+<div class="text-muted">เธเธณเธฅเธฑเธเนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธเธฑเธ”เธชเนเธ...</div>
+<div class="card-header">เธเนเธญเธกเธนเธฅเธชเธทเนเธญเนเธฅเธฐเธเนเธญเธเธ—เธฒเธเธ—เธตเนเน€เธฅเธทเธญเธ</div>
+<span class="text-muted d-block">เธชเธทเนเธญ</span>
+<div data-step4-media-summary class="fw-semibold">เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ</div>
+<span class="text-muted d-block">เธเนเธญเธเธ—เธฒเธ</span>
+<div data-step4-channel-summary class="fw-semibold">เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ</div>
+<span class="text-muted d-block">เธ•เธดเธ”เธ•เธฒเธกเธเธฅเนเธ</span>
+<div><span data-step4-followup-summary class="fw-semibold">-</span> <span class="text-muted">เธงเธฑเธ</span></div>
+<div class="card-header">เธชเธ–เธฒเธเธฐเธฃเธฒเธขเธเธฒเธฃ</div>
+<dt class="col-sm-5">เธเธณเธเธงเธเธชเธดเธเธเนเธฒ</dt>
+<dd class="col-sm-7" data-step4-summary-count>0 เธฃเธฒเธขเธเธฒเธฃ</dd>
+<dt class="col-sm-5">เธเธณเธเธงเธเธเธดเนเธ</dt>
+<dt class="col-sm-5">เธขเธญเธ”เธฃเธงเธกเธชเธดเธเธเนเธฒ</dt>
+<dt class="col-sm-5">เธชเนเธงเธเธฅเธ”เธฃเธงเธก</dt>
+<dt class="col-sm-5">เธเนเธฒเธเธฑเธ”เธชเนเธ</dt>
+<dt class="col-sm-5">เธขเธญเธ”เธชเธธเธ—เธเธด</dt>
+<strong>เธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒเธ—เธตเนเน€เธฅเธทเธญเธ</strong>
+<div class="text-muted small">เน€เธเธดเนเธกเธซเธฃเธทเธญเนเธเนเนเธเธชเธดเธเธเนเธฒเนเธเธเธณเธชเธฑเนเธเธเธทเนเธญ</div>
+<input type="search" class="form-control form-control-sm" placeholder="เธเนเธเธซเธฒเธชเธดเธเธเนเธฒ..." data-step4-product-search>
+<button type="button" class="btn btn-sm btn-outline-secondary" data-step4-product-import disabled>เธเธณเน€เธเนเธฒเธเธฒเธเธฃเธฒเธขเธเธฒเธฃเน€เธ”เธดเธก</button>
+<label class="form-label" for="step4ProductPicker">เน€เธฅเธทเธญเธเธชเธดเธเธเนเธฒ</label>
+<input type="text" class="form-control" id="step4ProductPicker" data-step4-product-picker placeholder="เธเธดเธกเธเนเธฃเธซเธฑเธชเธซเธฃเธทเธญเธเธทเนเธญเธชเธดเธเธเนเธฒ" list="step4ProductOptions" autocomplete="off">
+<div class="form-text text-muted" data-step4-product-picker-status>เธขเธฑเธเนเธกเนเนเธ”เนเนเธซเธฅเธ”เธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒ</div>
+<label class="form-label">เธฃเธซเธฑเธชเธชเธดเธเธเนเธฒ</label>
+<input type="text" class="form-control" name="code" maxlength="50" placeholder="เน€เธเนเธ 66978">
+<label class="form-label">เธเธทเนเธญเธชเธดเธเธเนเธฒ *</label>
+<input type="text" class="form-control" name="title" required placeholder="เธฃเธฐเธเธธเธเธทเนเธญเธชเธดเธเธเนเธฒ">
+<label class="form-label">เธฃเธฒเธเธฒ *</label>
+<label class="form-label">เธเธณเธเธงเธ *</label>
+<label class="form-label">เธชเนเธงเธเธฅเธ”</label>
+<button type="submit" class="btn btn-primary w-100" data-step4-product-add>เน€เธเธดเนเธกเธชเธดเธเธเนเธฒ</button>
+<th style="width:110px">เธฃเธซเธฑเธช</th>
+<th>เธเธทเนเธญเธชเธดเธเธเนเธฒ</th>
+<th>เนเธเธฃเธเธ”เน</th>
+<th style="width:110px">เธซเธเนเธงเธข</th>
+<th class="text-end" style="width:110px">เธ•เนเธเธ—เธธเธ</th>
+<th class="text-end" style="width:110px">เธฃเธฒเธเธฒ</th>
+<th class="text-end" style="width:90px">เธเธณเธเธงเธ</th>
+<th class="text-end" style="width:120px">เธชเนเธงเธเธฅเธ”</th>
+<th class="text-end" style="width:120px">เธขเธญเธ”เธฃเธงเธก</th>
+<td colspan="11" class="text-center text-muted py-4">เธขเธฑเธเนเธกเนเธกเธตเธชเธดเธเธเนเธฒเนเธเธฃเธฒเธขเธเธฒเธฃ</td>
+<h6 class="fw-semibold mb-2">เน€เธฅเธทเธญเธเธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒเธเธฒเธเธฃเธฐเธเธ</h6>
+<td colspan="8" class="text-center text-muted py-3">เธเธณเธฅเธฑเธเนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ...</td>
+<div class="text-muted small">เธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒเธเธฐเธ–เธนเธเธเธฑเธเธ—เธถเธเน€เธกเธทเนเธญเธ”เธณเน€เธเธดเธเธเธฒเธฃเธเธฃเธเธ—เธธเธเธเธฑเนเธเธ•เธญเธ</div>
+<button type="button" class="btn btn-sm btn-outline-danger" data-step4-product-clear>เธฅเนเธฒเธเธฃเธฒเธขเธเธฒเธฃ</button>
+<button type="button" class="btn btn-sm btn-outline-secondary" data-step4-product-export disabled>เธชเนเธเธญเธญเธ</button>
+<div class="card-header">เธเธฒเธฃเธเธฑเธ”เธชเนเธ</div>
+<label class="form-label">เน€เธฅเธเธญเนเธฒเธเธญเธดเธเธเธณเธชเธฑเนเธเธเธทเนเธญ</label>
+<input type="text" class="form-control" name="reference" placeholder="เน€เธเนเธ 11344">
+<label class="form-label">เธเธนเธเธญเธเธชเนเธงเธเธฅเธ”</label>
+<option value="">เนเธกเนเธกเธต Coupon</option>
+<label class="form-label">เธเนเธฒเธเธฑเธ”เธชเนเธ (เธเธฒเธ—)</label>
+<span class="input-group-text">เธเธฒเธ—</span>
+<label class="form-check-label" for="step4NoCharge">เนเธกเนเธเธดเธ”เธเนเธฒเธเธฑเธ”เธชเนเธ</label>
+<label class="form-label">เน€เธฅเธทเธญเธเธเธเธชเนเธ</label>
+<div class="text-muted small">เน€เธฅเธทเธญเธเธ•เธฑเธงเน€เธฅเธทเธญเธเธเธเธชเนเธ</div>
+<label class="form-label">เธเธณเธเธงเธเธเธฑเธชเธ”เธธ</label>
+<label class="form-label">เธเธฃเธฐเน€เธ เธ—เธเธฒเธฃเธเธฑเธ”เธชเนเธ</label>
+<option value="standard">เธกเธฒเธ•เธฃเธเธฒเธ</option>
+<label class="form-label">เธซเธกเธฒเธขเน€เธซเธ•เธธเน€เธเธดเนเธกเน€เธ•เธดเธก</label>
+<textarea class="form-control" rows="2" name="remark" placeholder="เนเธเนเธเธฃเธฒเธขเธฅเธฐเน€เธญเธตเธขเธ”เน€เธเธดเนเธกเน€เธ•เธดเธก"></textarea>
+<div class="card-header">เธเธฒเธฃเนเธเนเธเน€เธ•เธทเธญเธเธฅเธนเธเธเนเธฒ</div>
+<label class="form-label">เธเนเธญเธเธ—เธฒเธเธ•เธดเธ”เธ•เนเธญ (เธเนเธญเธเธ—เธฒเธ 1)</label>
+<input type="text" class="form-control" data-step4-notify1 placeholder="เน€เธเนเธ เนเธ—เธฃ, LINE">
+<label class="form-label">เธเนเธญเธเธ—เธฒเธเธ•เธดเธ”เธ•เนเธญ (เธเนเธญเธเธ—เธฒเธ 2)</label>
+<input type="text" class="form-control" data-step4-notify2 placeholder="เธเนเธญเธเธ—เธฒเธเธชเธณเธฃเธญเธ">
+<label class="form-label">เธญเธฒเธเธฒเธฃ / เธซเธกเธฒเธขเน€เธซเธ•เธธ</label>
+<textarea class="form-control" rows="2" data-step4-symptom placeholder="เธฃเธฐเธเธธเธเธณเธญเธเธดเธเธฒเธขเน€เธเธดเนเธกเน€เธ•เธดเธก"></textarea>
+<label class="form-label d-block">เธฃเธฐเธ”เธฑเธเธเธงเธฒเธกเน€เธฃเนเธเธ”เนเธงเธ</label>
+<label class="form-check-label" for="urgency-normal">เธเธเธ•เธด</label>
+<div class="text-muted small">เธเนเธญเธกเธนเธฅเธ—เธฑเนเธเธซเธกเธ”เธเธฐเธ–เธนเธเธเธฑเธเธ—เธถเธเน€เธกเธทเนเธญเธ”เธณเน€เธเธดเธเธเธฒเธฃเธเธฃเธเธ—เธธเธเธเธฑเนเธเธ•เธญเธ</div>
+<a class="btn btn-outline-secondary" href="/workflow/step3?customerId=<%= customerId %>">เธขเนเธญเธเธเธฅเธฑเธ</a>
+<button type="button" class="btn btn-primary" data-step4-next>เนเธเธเธฑเนเธเธ•เธญเธเธ–เธฑเธ”เนเธ</button>
+console.warn('step4: เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธญเนเธฒเธเธชเธ–เธฒเธเธฐเธ—เธตเนเธเธฑเธเธ—เธถเธเนเธงเนเธเธฒเธเน€เธเธฃเธฒเธงเนเน€เธเธญเธฃเน', err);
+console.warn('step4: เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธเธฑเธเธ—เธถเธเธชเธ–เธฒเธเธฐเธเธญเธเนเธเธเธเธญเธฃเนเธก', err);
+setProductPickerStatus(catalogState.loaded ? 'เนเธกเนเธกเธตเธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ' : 'เธขเธฑเธเนเธกเนเนเธ”เนเธ”เธถเธเธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ');
+setProductPickerStatus('เธเธ ' + filtered.length + ' เธฃเธฒเธขเธเธฒเธฃ (เนเธชเธ”เธ ' + limited.length + ' เธฃเธฒเธขเธเธฒเธฃเนเธฃเธ)');
+setProductPickerStatus('เนเธกเนเธเธเธชเธดเธเธเนเธฒเธ—เธตเนเธ•เธฃเธเธเธฑเธเธเธณเธเนเธ');
+productCatalogTableBody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">เธเธณเธฅเธฑเธเนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ...</td></tr>';
+productCatalogTableBody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">เนเธกเนเธกเธตเธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒ</td></tr>';
+productCatalogTableBody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">เนเธกเนเธเธเธชเธดเธเธเนเธฒเธ—เธตเนเธ•เธฃเธเธเธฑเธเธเธณเธเนเธ</td></tr>';
+rowsHtml += '<td class="text-end"><button type="button" class="btn btn-sm btn-outline-primary" data-step4-catalog-select="' + escapeHtml(key) + '">เน€เธฅเธทเธญเธ</button></td>';
+setProductPickerStatus('เธเธณเธฅเธฑเธเนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ...');
+throw new Error(message || 'เนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒเนเธกเนเธชเธณเน€เธฃเนเธ');
+setProductPickerStatus('เธเธดเธกเธเนเน€เธเธทเนเธญเธเนเธเธซเธฒเธซเธฃเธทเธญเน€เธฅเธทเธญเธเธเธฒเธเธฃเธฒเธขเธเธฒเธฃเธ”เนเธฒเธเธฅเนเธฒเธ');
+const message = err && err.message ? err.message : 'เน€เธเธดเธ”เธเนเธญเธเธดเธ”เธเธฅเธฒเธ”เธฃเธฐเธซเธงเนเธฒเธเนเธซเธฅเธ”เธชเธดเธเธเนเธฒ';
+setProductPickerStatus('เนเธกเนเธเธเธชเธดเธเธเนเธฒ: ' + value);
+setProductPickerStatus('เธเธดเธกเธเนเธฃเธซเธฑเธชเธซเธฃเธทเธญเธเธทเนเธญเธชเธดเธเธเนเธฒเน€เธเธทเนเธญเน€เธฅเธทเธญเธ');
+setProductPickerStatus('เธขเธฑเธเนเธกเนเนเธ”เนเธ”เธถเธเธเนเธญเธกเธนเธฅเธชเธดเธเธเนเธฒ');
+let html = '<div class="text-muted">เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธเธเนเธญเธกเธนเธฅเธเธฑเธ”เธชเนเธ</div>';
+lines.push('<div><strong>' + (delivery.deliverto || 'เนเธกเนเธกเธตเธเนเธญเธกเธนเธฅเธเธนเนเธฃเธฑเธ') + '</strong></div>');
+lines.push('<div class="text-muted">เนเธ—เธฃ: ' + contact + '</div>');
+lines.push('<div class="text-muted">เธเธณเธซเธเธ”เธเธฑเธ”เธชเนเธ: ' + (date || '-') + ' ' + (time || '') + '</div>');
+console.warn('step4: เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธญเนเธฒเธเธเนเธญเธกเธนเธฅเธเธฑเธ”เธชเนเธเธเธฒเธเธเธฑเนเธเธเนเธญเธเธซเธเนเธฒ', err);
+console.warn('step4: เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธญเนเธฒเธเธเนเธญเธกเธนเธฅเธชเธทเนเธญ/เธเนเธญเธเธ—เธฒเธ', err);
+if (mediaSummaryEl) mediaSummaryEl.textContent = 'เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ';
+if (channelSummaryEl) channelSummaryEl.textContent = 'เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ';
+let mediaName = 'เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ';
+if (channelSummaryEl) channelSummaryEl.textContent = channelNames.length ? channelNames.join(', ') : 'เธขเธฑเธเนเธกเนเนเธ”เนเน€เธฅเธทเธญเธ';
+console.warn('step4: เนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเธชเธทเนเธญ/เธเนเธญเธเธ—เธฒเธเนเธกเนเธชเธณเน€เธฃเนเธ', err);
+if (mediaSummaryEl) mediaSummaryEl.textContent = 'เนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเนเธกเนเธชเธณเน€เธฃเนเธ';
+if (channelSummaryEl) channelSummaryEl.textContent = 'เนเธซเธฅเธ”เธเนเธญเธกเธนเธฅเนเธกเนเธชเธณเน€เธฃเนเธ';
+shippingOptionsWrap.innerHTML = '<div class="text-muted small">เนเธกเนเธกเธตเธ•เธฑเธงเน€เธฅเธทเธญเธเธเธเธชเนเธ</div>';
+productTableBody.innerHTML = '<tr><td colspan="11" class="text-center text-muted py-4">เธขเธฑเธเนเธกเนเธกเธตเธชเธดเธเธเนเธฒเนเธเธฃเธฒเธขเธเธฒเธฃ</td></tr>';
+rowsHtml += '<button type="button" class="btn btn-sm btn-outline-danger" data-step4-remove="' + escapeHtml(item.id || '') + '">เธฅเธ</button>';
+if (summaryCountEl) summaryCountEl.textContent = state.products.length + ' เธฃเธฒเธขเธเธฒเธฃ';
+setProductPickerStatus('เธขเธฑเธเนเธกเนเนเธ”เนเธ”เธถเธเธเนเธญเธกเธนเธฅเธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒ');
+alert('เธเธฃเธธเธ“เธฒเธฃเธฐเธเธธเธเธทเนเธญเธชเธดเธเธเนเธฒ');
+alert('เธเธฃเธญเธเธฃเธฒเธเธฒเธชเธดเธเธเนเธฒเนเธซเนเธ–เธนเธเธ•เนเธญเธ');
+alert('เธเธฃเธญเธเธเธณเธเธงเธเธชเธดเธเธเนเธฒเนเธซเนเธ–เธนเธเธ•เนเธญเธ');
+if (!confirm('เธ•เนเธญเธเธเธฒเธฃเธฅเนเธฒเธเธฃเธฒเธขเธเธฒเธฃเธชเธดเธเธเนเธฒเธ—เธฑเนเธเธซเธกเธ”เธซเธฃเธทเธญเนเธกเน?')) return;
+alert('เธเธฑเนเธเธ•เธญเธเธ–เธฑเธ”เนเธ (เธชเธฃเธธเธเธเธณเธชเธฑเนเธเธเธทเนเธญ) เธขเธฑเธเนเธกเนเน€เธเธดเธ”เนเธเนเธเธฒเธ');

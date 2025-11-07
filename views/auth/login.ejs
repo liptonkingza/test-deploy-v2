@@ -1,0 +1,24 @@
+﻿<%- include('../layout', { title: 'Login', body: `
+  <div class='row justify-content-center'>
+    <div class='col-12 col-md-6 col-lg-5'>
+      <div class='card'>
+        <div class='card-header'><strong>เข้าสู่ระบบ</strong></div>
+        <div class='card-body'>
+          ${error ? `<div class='alert alert-danger'>${error}</div>` : ''}
+          <form method='post' action='/login${typeof nextPath !== 'undefined' && nextPath ? ('?next=' + encodeURIComponent(nextPath)) : ''}' class='vstack gap-3'>
+            <div>
+              <label class='form-label'>รหัสพนักงาน (4 หลัก)</label>
+              <input type='text' class='form-control' name='pn_id' value='${(values && values.pn_id) || ''}' pattern='\\d{4}' inputmode='numeric' maxlength='4' required />
+            </div>
+            <div>
+              <label class='form-label'>รหัสผ่าน (4 หลัก)</label>
+              <input type='password' class='form-control' name='pass' pattern='\\d{4}' inputmode='numeric' maxlength='4' required />
+            </div>
+            <button type='submit' class='btn btn-primary w-100'><i class='bi bi-box-arrow-in-right me-1'></i>เข้าสู่ระบบ</button>
+          </form>
+          <!-- <p class='text-center mt-3 mb-0'>ยังไม่มีบัญชี? <a href='/register'>สมัครสมาชิก</a></p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+` }) %>

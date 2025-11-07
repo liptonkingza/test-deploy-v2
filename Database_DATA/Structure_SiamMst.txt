@@ -1,0 +1,70 @@
+
+Structure for table:          M:\SIAM\DISK1\SIAM\SIAMMST.DBF
+Number of data records:       42038   
+Date of last update:          15/09/2025
+Memo file block size:         64
+Code Page:                    874     
+   Field   Field Name                Type                                Width        Dec      Index   Collate         Nulls         Next         Step
+       1   CODE                      Numeric                                 5                   Asc   Machine            No
+       2   OLDCODE                   Numeric                                 5                   Asc   Machine            No
+       3   SCANCODE1                 Character                              13                   Asc   Machine            No
+       4   SCANCODE                  Character                              13                   Asc   Machine            No
+       5   SPRCODE                   Character                              13                   Asc   Machine            No
+       6   BATCH                     Character                              10                                            No
+       7   SUBCODE                   Character                              16                   Asc   Machine            No
+       8   GROUPNAME                 Character                              20                   Asc   Machine            No
+       9   PRODGROUP                 Numeric                                 5                                            No
+      10   EBRANDNAME                Character                              20                                            No
+      11   BRANDNAME                 Character                              20                   Asc   Machine            No
+      12   SPRTITLE                  Character                              50                   Asc   Machine            No
+      13   TTITLE                    Character                              40                   Asc   Machine            No
+      14   ETITLE                    Character                              40                   Asc   Machine            No
+      15   TITLE                     Character                              40                   Asc   Machine            No
+      16   SIG_NAME                  Character                              20                   Asc   Machine            No
+      17   UNIT                      Character                              10                                            No
+      18   UNITSALE                  Character                              10                   Asc   Machine            No
+      19   COST                      Numeric                                 9          2                                 No
+      20   VAT                       Character                               1                                            No
+      21   SUGPRICE                  Numeric                                 9          2                                 No
+      22   PRICE                     Numeric                                 9          2                                 No
+      23   GREENPRICE                Numeric                                 9          2                                 No
+      24   REDPRICE                  Numeric                                 9          2                                 No
+      25   PRICELIST                 Numeric                                 9          2                                 No
+      26   WHOLESALE                 Numeric                                 9          2        Asc   Machine            No
+      27   HOLDSALE                  Numeric                                 9          2                                 No
+      28   DRAWQTY                   Numeric                                 5                   Asc   Machine            No
+      29   STEPQTY                   Numeric                                10                                            No
+      30   STEPPRICE                 Numeric                                 9          2                                 No
+      31   DISCOUNT1                 Numeric                                 2                                            No
+      32   DISCOUNT2                 Numeric                                 2                                            No
+      33   DISCOUNT3                 Numeric                                 2                                            No
+      34   DISCOUNT4                 Numeric                                 2                                            No
+      35   DISCOUNT5                 Numeric                                 2                                            No
+      36   DISCOUNT6                 Numeric                                 2                                            No
+      37   MFD                       Date                                    8                   Asc   Machine            No
+      38   EXPIRE                    Date                                    8                   Asc   Machine            No
+      39   ACTIVE                    Character                               1                                            No
+      40   METHOD                    Character                               1                                            No
+      41   PUR_TYPE                  Character                               1                   Asc   Machine            No
+      42   BARCODE                   Character                               1                   Asc   Machine            No
+      43   SPECIAL                   Character                               1                   Asc   Machine            No
+      44   PROMOTION                 Character                               1                   Asc   Machine            No
+      45   AUTORPLN                  Character                               1                   Asc   Machine            No
+      46   PATIENT                   Character                               1                   Asc   Machine            No
+      47   WEEKAUDT                  Character                               1                   Asc   Machine            No
+      48   FIRSTIN                   Date                                    8                   Asc   Machine            No
+      49   IMPORTANT                 Character                               1                   Asc   Machine            No
+      50   STICKQTY                  Numeric                                 4                   Asc   Machine            No
+      51   STICKDATE                 Date                                    8                   Asc   Machine            No
+      52   STICKTIME                 Character                              10                                            No
+      53   LASTDATE                  Date                                    8                                            No
+      54   REDDATE                   Date                                    8                                            No
+      55   PROMODATE1                Date                                    8                                            No
+      56   PROMODATE2                Date                                    8                                            No
+      57   AUTOPO                    Character                               1                   Asc   Machine            No
+      58   DELE                      Character                               1                   Asc   Machine            No
+      59   LINKGROUP                 Numeric                                 5                                            No
+      60   CODEGROUP                 Numeric                                 5                                            No
+      61   PIC                       General                                10                                            No
+      62   CALLCENTRE                Character                               1                  Desc   Machine            No
+** Total **                                                                571

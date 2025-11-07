@@ -1,0 +1,873 @@
+<% const reps = salesRepOptions || []; %>
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+  <div>
+    <h1 class="h4 fw-semibold mb-1">ขั้นตอนที่ 1/5 – เลือกลูกค้า</h1>
+    <p class="text-muted mb-0">เลือกลูกค้าที่ต้องการ หรือเพิ่มลูกค้าใหม่ให้ครบถ้วนก่อนดำเนินการต่อ</p>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-12 col-md-6 col-lg-4">
+    <input type="search" class="form-control" placeholder="ค้นหาด้วยชื่อ / เบอร์โทร / รหัส" data-customer-search>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header">
+        <div>
+          <strong>เลือกลูกค้าที่มีอยู่</strong>
+          <div class="text-muted small">แสดงรายการล่าสุด 200 รายการ</div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive customers-table-scroll">
+          <table class="table table-hover table-sm align-middle mb-0" data-customers-table>
+            <thead class="table-light">
+              <tr>
+                <th style="width:42px"></th>
+                <th>รหัส</th>
+                <th>ชื่อ-สกุล</th>
+                <th>โทรศัพท์</th>
+                <th style="width:150px" class="text-end">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex flex-column flex-sm-row gap-2 align-items-stretch align-items-sm-center">
+        <div class="flex-grow-1 text-muted" data-selected-summary>ยังไม่ได้เลือกลูกค้า</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong data-form-title>เพิ่มลูกค้าใหม่</strong>
+        <button type="button" class="btn btn-sm btn-outline-secondary d-none" data-cancel-edit>ยกเลิกการแก้ไข</button>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success d-none" data-feedback></div>
+        <form class="row g-2 inline-form" data-customer-form>
+          <input type="hidden" name="id" data-field-id>
+          <div class="col-6 col-sm-3">
+            <input type="text" name="customerid" class="form-control form-control-sm" placeholder="ระบบกำหนดอัตโนมัติ" readonly>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">คำนำหน้าชื่อ</label>
+            <input type="text" name="prename" class="form-control form-control-sm" maxlength="50">
+          </div>
+          
+
+          <div class="col-6 col-sm-3">
+            <label class="form-label">ชื่อ *</label>
+            <input type="text" name="firstname" class="form-control form-control-sm" required maxlength="100">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">นามสกุล *</label>
+            <input type="text" name="lastname" class="form-control form-control-sm" required maxlength="100">
+          </div>
+
+          <div class="col-6 col-sm-3">
+            <label class="form-label">วันเกิด</label>
+            <input type="date" name="birthday" class="form-control form-control-sm">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">มือถือ *</label>
+            <input type="tel" name="mobiletel" class="form-control form-control-sm" inputmode="tel" maxlength="20" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control form-control-sm" maxlength="120">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">LineID</label>
+            <input type="text" name="lineid" class="form-control form-control-sm" maxlength="120">
+          </div>
+
+          
+
+          <div class="col-12 col-sm-4">
+            <label class="form-label">บ้านเลขที่</label>
+            <input type="text" name="homenum" class="form-control form-control-sm" maxlength="100">
+          </div>
+          <div class="col-12 col-sm-4">
+            <label class="form-label">หมู่</label>
+            <input type="text" name="moo" class="form-control form-control-sm" maxlength="50">
+          </div>
+
+          <div class="col-12 col-sm-4">
+            <label class="form-label">อาคาร</label>
+            <input type="text" name="building" class="form-control form-control-sm" maxlength="120">
+          </div>
+          <div class="col-12 col-sm-4">
+            <label class="form-label">ซอย</label>
+            <input type="text" name="soi" class="form-control form-control-sm" maxlength="120">
+          </div>
+
+          <div class="col-12 col-sm-4">
+            <label class="form-label">ถนน</label>
+            <input type="text" name="road" class="form-control form-control-sm" maxlength="120">
+          </div>
+          <div class="col-12 col-sm-4">
+            <label class="form-label">แขวง / ตำบล</label>
+            <input type="text" name="kwang" class="form-control form-control-sm" maxlength="120">
+          </div>
+
+          <div class="col-12 col-sm-4">
+            <label class="form-label">เขต / อำเภอ</label>
+            <input type="text" name="kate" class="form-control form-control-sm" maxlength="120">
+          </div>
+          <div class="col-12 col-sm-4">
+            <label class="form-label">จังหวัด</label>
+            <input type="text" name="province" class="form-control form-control-sm" maxlength="120">
+          </div>
+
+          <div class="col-12 col-sm-4">
+            <label class="form-label">รหัสไปรษณีย์</label>
+            <input type="tel" name="zipcode" class="form-control form-control-sm" maxlength="10" inputmode="numeric">
+          </div>
+
+          <div class="col-6 col-sm-3">
+            <label class="form-label">เพศ</label>
+            <select name="sex" class="form-select form-select-sm">
+              <option value="">ไม่ระบุ</option>
+              <option value="M">ชาย</option>
+              <option value="F">หญิง</option>
+              <option value="O">อื่น ๆ</option>
+            </select>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">อายุ</label>
+            <input type="number" name="age" class="form-control form-control-sm" min="0" step="1">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">น้ำหนัก (กก.)</label>
+            <input type="number" name="weight" class="form-control form-control-sm" step="0.1">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label class="form-label">สูง (ซม.)</label>
+            <input type="number" name="height" class="form-control form-control-sm" step="0.1">
+          </div>
+
+          
+
+          <div class="col-12 col-md-6">
+            <label class="form-label">โรคประจำตัว 1</label>
+            <input type="text" name="sickness1" class="form-control" maxlength="120">
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">โรคประจำตัว 2</label>
+            <input type="text" name="sickness2" class="form-control" maxlength="120">
+          </div>
+
+          <div class="col-12 col-sm-6">
+            <label class="form-label">Tag</label>
+            <input type="text" name="custtag" class="form-control form-control-sm" maxlength="120">
+          </div>
+
+          <div class="col-12 d-flex align-items-end gap-2">
+            <label class="form-label mb-0">เหตุผลการแบน</label>
+            <input type="text" name="banremark" class="form-control form-control-sm flex-grow-1" maxlength="255">
+            <input class="d-none" type="checkbox" name="baned" value="1" id="field-baned">
+            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle-ban>แบนลูกค้า</button>
+          </div>
+
+          <div class="col-12 d-flex justify-content-between gap-2 mt-3">
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-success" data-new-customer>New</button>
+              <button type="submit" class="btn btn-success" data-submit-btn>Save</button>
+            </div>
+            <button type="button" class="btn btn-primary" data-next-step disabled>Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const state = {
+      customers: [],
+      filtered: [],
+      selectedId: null,
+      editingId: null,
+      isSelecting: false, // Flag to prevent infinite loops
+      originalFormData: null, // เก็บข้อมูลเดิมของฟอร์มเพื่อตรวจสอบการเปลี่ยนแปลง
+    };
+
+    const customersApi = '<%= customersApi %>';
+    const nextStepUrl = '<%= nextStepUrl %>';
+
+    const tableBody = document.querySelector('[data-customers-table] tbody');
+    const searchInput = document.querySelector('[data-customer-search]');
+    const summaryEl = document.querySelector('[data-selected-summary]');
+    const nextBtn = document.querySelector('[data-next-step]');
+    const form = document.querySelector('[data-customer-form]');
+    const submitBtn = form?.querySelector('[data-submit-btn]');
+    const newCustomerBtn = document.querySelector('[data-new-customer]');
+    const cancelEditBtn = document.querySelector('[data-cancel-edit]');
+    const feedback = document.querySelector('[data-feedback]');
+    const formTitle = document.querySelector('[data-form-title]');
+    const addAddressBtn = document.querySelector('[data-address-add]');
+    const addressFields = ['addr1', 'addr2', 'addr3', 'addr4', 'addr5'];
+
+    const checkboxFields = ['baned'];
+
+    function setSummary(text, variant) {
+      if (!summaryEl) return;
+      summaryEl.textContent = text;
+      summaryEl.classList.remove('text-muted', 'text-success');
+      summaryEl.classList.add(variant === 'success' ? 'text-success' : 'text-muted');
+    }
+
+    function captureFormState() {
+      if (!form) return null;
+      const formData = new FormData(form);
+      const data = {};
+      Array.from(form.elements).forEach((el) => {
+        if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+        const name = el.name;
+        if (!name || name === 'id') return;
+        if (el.type === 'checkbox') {
+          data[name] = el.checked;
+        } else {
+          data[name] = formData.get(name) || '';
+        }
+      });
+      return JSON.stringify(data);
+    }
+
+    function hasFormChanged() {
+      if (!state.originalFormData) return false;
+      const currentData = captureFormState();
+      return state.originalFormData !== currentData;
+    }
+
+    function setFormMode(mode) {
+      if (!submitBtn || !formTitle) return;
+      if (mode === 'edit') {
+        submitBtn.textContent = 'Save';
+        formTitle.textContent = 'แก้ไขข้อมูลลูกค้า';
+        cancelEditBtn?.classList.remove('d-none');
+      } else {
+        submitBtn.textContent = 'Save';
+        formTitle.textContent = 'เพิ่มลูกค้าใหม่';
+        cancelEditBtn?.classList.add('d-none');
+      }
+    }
+
+    function resetForm() {
+      if (!form) return;
+      form.reset();
+      const idInput = form.querySelector('[data-field-id]');
+      if (idInput) idInput.value = '';
+      const customerIdInput = form.elements['customerid'];
+      if (customerIdInput) customerIdInput.value = '';
+      checkboxFields.forEach((field) => {
+        const input = form.elements[field];
+        if (input) input.checked = false;
+      });
+      addressFields.forEach((field) => {
+        hideAddressField(field, { clearValue: true });
+      });
+      state.editingId = null;
+      state.originalFormData = null;
+      setFormMode('create');
+    }
+
+    function renderCustomers() {
+      if (!tableBody) return;
+      if (!state.filtered.length) {
+        const keyword = (searchInput?.value || '').trim();
+        // Check if keyword looks like a phone number (contains digits)
+        const hasDigits = /\d/.test(keyword);
+        const notFoundHtml = hasDigits && keyword ? 
+          `<tr><td colspan="5" class="text-center py-4">
+            <div class="text-muted">ไม่พบลูกค้า</div>
+            <div class="text-success small mt-1">
+              <i class="bi bi-check-circle me-1"></i>ข้อมูลเบอร์ "${keyword}" ถูกกรอกไว้ในฟอร์มด้านล่างแล้ว
+            </div>
+          </td></tr>` :
+          '<tr><td colspan="5" class="text-center text-muted py-4">ไม่พบลูกค้า</td></tr>';
+        tableBody.innerHTML = notFoundHtml;
+        return;
+      }
+      tableBody.innerHTML = state.filtered
+        .map((item) => {
+          const fullName = [item.firstname, item.lastname].filter(Boolean).join(' ') || '-';
+          const phone = item.mobiletel || '-';
+          const checked = state.selectedId && String(state.selectedId) === String(item.id) ? 'checked' : '';
+          return `
+            <tr data-row-id="${item.id}">
+              <td><input type="radio" name="selectedCustomer" value="${item.id}" ${checked}></td>
+              <td>${item.customerid || '-'}</td>
+              <td>${fullName}</td>
+              <td>${phone}</td>
+              <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                  <button type="button" class="btn btn-outline-secondary" data-edit="${item.id}">Edit</button>
+                  <button type="button" class="btn btn-outline-danger" data-delete="${item.id}">ลบ</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        })
+        .join('');
+    }
+
+    function applyFilter() {
+      const keyword = (searchInput?.value || '').trim().toLowerCase();
+      if (!keyword) {
+        state.filtered = [...state.customers];
+      } else {
+        state.filtered = state.customers.filter((item) => {
+          const name = [item.firstname, item.lastname].filter(Boolean).join(' ').toLowerCase();
+          const phone = String(item.mobiletel || '').toLowerCase();
+          const code = String(item.customerid || '').toLowerCase();
+          return name.includes(keyword) || phone.includes(keyword) || code.includes(keyword);
+        });
+        
+        // Auto-fill form if no customers found and keyword has digits (likely a phone number)
+        if (state.filtered.length === 0 && /\d/.test(keyword) && form) {
+          resetForm();
+          const mobileInput = form.elements['mobiletel'];
+          const prenameInput = form.elements['prename'];
+          if (mobileInput) {
+            mobileInput.value = keyword;
+          }
+          if (prenameInput) {
+            prenameInput.value = 'คุณ';
+          }
+        }
+      }
+      renderCustomers();
+    }
+
+    async function loadCustomers() {
+      try {
+        if (tableBody) {
+          tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">กำลังโหลดข้อมูล...</td></tr>';
+        }
+        const res = await fetch(`${customersApi}?limit=200`);
+        if (!res.ok) throw new Error('โหลดข้อมูลลูกค้าไม่สำเร็จ');
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('โครงสร้างข้อมูลไม่ถูกต้อง');
+        state.customers = data.map((row) => ({
+          id: row.id,
+          customerid: row.customerid,
+          firstname: row.firstname,
+          lastname: row.lastname,
+          mobiletel: row.mobiletel,
+        }));
+        applyFilter();
+      } catch (err) {
+        if (tableBody) {
+          tableBody.innerHTML = `<tr><td colspan=\"5\" class=\"text-center text-danger py-4\">${err.message || 'เกิดข้อผิดพลาดในการโหลดข้อมูล'}</td></tr>`;
+        }
+      }
+    }
+
+    function handleSelectionChange(id) {
+      // Prevent infinite loops
+      if (state.isSelecting) return;
+      
+      state.selectedId = id;
+      
+      // Update radio button selection
+      if (tableBody) {
+        const radioButtons = tableBody.querySelectorAll('input[name="selectedCustomer"]');
+        radioButtons.forEach(radio => {
+          radio.checked = String(radio.value) === String(id);
+        });
+      }
+      
+      // Populate form with selected customer data (fetch from API like edit)
+      if (id && form) {
+        state.isSelecting = true;
+        loadCustomerForEdit(id).finally(() => {
+          state.isSelecting = false;
+        });
+      } else if (!id) {
+        // If no customer selected, reset original form data
+        state.originalFormData = null;
+      }
+      
+      if (nextBtn) {
+        if (id) {
+          nextBtn.removeAttribute('disabled');
+          const picked = state.customers.find((item) => String(item.id) === String(id));
+          const fullName = picked ? [picked.firstname, picked.lastname].filter(Boolean).join(' ') : '';
+          setSummary(fullName ? `เลือกลูกค้า: ${fullName}` : `เลือกรายการ #${id}`, 'success');
+        } else {
+          nextBtn.setAttribute('disabled', 'disabled');
+          setSummary('ยังไม่ได้เลือกลูกค้า');
+        }
+      }
+    }
+
+    function populateForm(record) {
+      if (!form || !record) return;
+      const idInput = form.querySelector('[data-field-id]');
+      if (idInput) idInput.value = record.id || '';
+      Object.keys(record).forEach((key) => {
+        const value = record[key];
+        const input = form.elements[key];
+        if (!input) return;
+        if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+          if (input.type === 'checkbox') {
+            input.checked = value === 1 || value === true || value === '1';
+          } else if (input.type === 'date') {
+            input.value = value ? String(value).slice(0, 10) : '';
+          } else {
+            input.value = value == null ? '' : String(value);
+          }
+        } else if (input instanceof HTMLSelectElement) {
+          const stringValue = value == null ? '' : String(value);
+          const optionExists = Array.from(input.options).some((opt) => opt.value === stringValue);
+          if (!optionExists && stringValue) {
+            const opt = document.createElement('option');
+            opt.value = stringValue;
+            opt.textContent = stringValue;
+            input.appendChild(opt);
+          }
+          input.value = stringValue;
+        }
+      });
+      addressFields.forEach((field) => {
+        const textarea = form.elements[field];
+        if (!textarea) return;
+        if (textarea.value && String(textarea.value).trim()) {
+          showAddressField(field);
+        } else {
+          hideAddressField(field, { clearValue: false });
+        }
+      });
+      updateAddressControls();
+      
+      // Capture form state after populating for change detection
+      setTimeout(() => {
+        state.originalFormData = captureFormState();
+      }, 100);
+    }
+
+    tableBody?.addEventListener('change', (event) => {
+      if (event.target && event.target.name === 'selectedCustomer') {
+        handleSelectionChange(event.target.value);
+      }
+    });
+
+    tableBody?.addEventListener('click', (event) => {
+      const editBtn = event.target.closest('[data-edit]');
+      if (editBtn) {
+        const id = editBtn.getAttribute('data-edit');
+        if (id) {
+          loadCustomerForEdit(id);
+        }
+        event.stopPropagation();
+        return;
+      }
+      const deleteBtn = event.target.closest('[data-delete]');
+      if (deleteBtn) {
+        const id = deleteBtn.getAttribute('data-delete');
+        if (id) {
+          deleteCustomer(id);
+        }
+        event.stopPropagation();
+        return;
+      }
+      const row = event.target.closest('tr[data-row-id]');
+      if (row) {
+        const radio = row.querySelector('input[name="selectedCustomer"]');
+        if (radio) {
+          radio.checked = true;
+          handleSelectionChange(radio.value);
+        }
+      }
+    });
+
+    searchInput?.addEventListener('input', () => {
+      applyFilter();
+    });
+
+    nextBtn?.addEventListener('click', async () => {
+      // ตรวจสอบว่ามีการแก้ไขฟอร์มที่ยังไม่ได้บันทึกหรือไม่
+      if (hasFormChanged()) {
+        // บันทึกอัตโนมัติก่อนไปขั้นตอนถัดไป
+        if (!form || !submitBtn) {
+          alert('ไม่สามารถบันทึกข้อมูลได้');
+          return;
+        }
+        
+        // แสดงสถานะกำลังบันทึก
+        const originalNextText = nextBtn.textContent;
+        nextBtn.textContent = 'กำลังบันทึก...';
+        nextBtn.setAttribute('disabled', 'disabled');
+        submitBtn.setAttribute('disabled', 'disabled');
+        
+        try {
+          const formData = new FormData(form);
+          const payload = {};
+          Array.from(form.elements).forEach((el) => {
+            if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+            const name = el.name;
+            if (!name) return;
+            if (name === 'id') return;
+            if (el.type === 'checkbox') {
+              payload[name] = el.checked ? 1 : 0;
+            } else {
+              const value = formData.get(name);
+              if (value == null) return;
+              const trimmed = typeof value === 'string' ? value.trim() : value;
+              payload[name] = trimmed === '' ? null : trimmed;
+            }
+          });
+
+          if (!payload.firstname || !payload.lastname || !payload.mobiletel) {
+            alert('กรุณากรอกข้อมูลชื่อ นามสกุล และเบอร์ติดต่อ');
+            nextBtn.textContent = originalNextText;
+            nextBtn.removeAttribute('disabled');
+            submitBtn.removeAttribute('disabled');
+            return;
+          }
+
+          let url = customersApi;
+          let method = 'POST';
+          if (state.editingId) {
+            url = `${customersApi}/${encodeURIComponent(state.editingId)}`;
+            method = 'PUT';
+          }
+          
+          const res = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          
+          if (!res.ok) {
+            const message = await res.text();
+            throw new Error(message || 'บันทึกไม่สำเร็จ');
+          }
+          
+          const responseData = await res.json().catch(() => ({}));
+          
+          // Show success feedback briefly
+          if (feedback) {
+            feedback.classList.remove('d-none');
+            feedback.textContent = '✓ บันทึกข้อมูลอัตโนมัติแล้ว กำลังไปขั้นตอนถัดไป...';
+          }
+          
+          // Update selectedId if it's a new customer
+          if (!state.editingId && responseData && responseData.id) {
+            state.selectedId = responseData.id;
+          }
+          
+          // Update original form data after successful save
+          state.originalFormData = captureFormState();
+          
+          // Proceed to next step after brief delay
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+        } catch (err) {
+          alert(err.message || 'เกิดข้อผิดพลาดขณะบันทึกข้อมูล');
+          nextBtn.textContent = originalNextText;
+          nextBtn.removeAttribute('disabled');
+          submitBtn.removeAttribute('disabled');
+          return;
+        }
+      }
+      
+      if (!state.selectedId) return;
+      const url = `${nextStepUrl}?customerId=${encodeURIComponent(state.selectedId)}`;
+      window.location.href = url;
+    });
+
+    cancelEditBtn?.addEventListener('click', () => {
+      resetForm();
+    });
+
+    newCustomerBtn?.addEventListener('click', () => {
+      resetForm();
+    });
+
+    addAddressBtn?.addEventListener('click', () => {
+      showNextAddressField();
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form || !submitBtn) return;
+      submitBtn.disabled = true;
+      feedback?.classList.add('d-none');
+
+      const formData = new FormData(form);
+      const payload = {};
+      Array.from(form.elements).forEach((el) => {
+        if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+        const name = el.name;
+        if (!name) return;
+        if (name === 'id') return;
+        if (el.type === 'checkbox') {
+          payload[name] = el.checked ? 1 : 0;
+        } else {
+          const value = formData.get(name);
+          if (value == null) return;
+          const trimmed = typeof value === 'string' ? value.trim() : value;
+          payload[name] = trimmed === '' ? null : trimmed;
+        }
+      });
+
+      if (!payload.firstname || !payload.lastname || !payload.mobiletel) {
+        alert('กรุณากรอกข้อมูลชื่อ นามสกุล และเบอร์ติดต่อ');
+        submitBtn.disabled = false;
+        return;
+      }
+
+      try {
+        let url = customersApi;
+        let method = 'POST';
+        if (state.editingId) {
+          url = `${customersApi}/${encodeURIComponent(state.editingId)}`;
+          method = 'PUT';
+        }
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'บันทึกไม่สำเร็จ');
+        }
+        const responseData = await res.json().catch(() => ({}));
+        feedback?.classList.remove('d-none');
+        if (state.editingId) {
+          feedback && (feedback.textContent = 'บันทึกข้อมูลลูกค้าเรียบร้อย');
+        } else {
+          feedback && (feedback.textContent = 'เพิ่มลูกค้าใหม่เรียบร้อย');
+          if (responseData && responseData.id) {
+            state.selectedId = responseData.id;
+          }
+        }
+        await loadCustomers();
+        if (state.selectedId) {
+          handleSelectionChange(state.selectedId);
+        }
+        
+        // Update original form data after successful save
+        setTimeout(() => {
+          state.originalFormData = captureFormState();
+        }, 100);
+        
+        resetForm();
+      } catch (err) {
+        alert(err.message || 'เกิดข้อผิดพลาดขณะบันทึกข้อมูล');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Toggle ban button -> sync hidden checkbox
+    document.querySelector('[data-toggle-ban]')?.addEventListener('click', () => {
+      const ban = form?.elements['baned'];
+      if (!ban) return;
+      ban.checked = !ban.checked;
+      const btn = document.querySelector('[data-toggle-ban]');
+      if (btn) {
+        if (ban.checked) {
+          btn.classList.remove('btn-outline-danger');
+          btn.classList.add('btn-danger');
+          btn.textContent = 'ยกเลิกแบนลูกค้า';
+        } else {
+          btn.classList.remove('btn-danger');
+          btn.classList.add('btn-outline-danger');
+          btn.textContent = 'แบนลูกค้า';
+        }
+      }
+    });
+
+    async function loadCustomerForEdit(id) {
+      if (!form) return;
+      try {
+        const res = await fetch(`${customersApi}/${encodeURIComponent(id)}`);
+        if (!res.ok) throw new Error('ไม่พบข้อมูลลูกค้าที่ต้องการแก้ไข');
+        const data = await res.json();
+        populateForm(data || {});
+        state.editingId = id;
+        setFormMode('edit');
+        state.selectedId = id;
+        // Only call handleSelectionChange if not already selecting to prevent loops
+        if (!state.isSelecting) {
+          handleSelectionChange(id);
+        }
+        window.scrollTo({ top: form.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      } catch (err) {
+        alert(err.message || 'ไม่สามารถโหลดข้อมูลเพื่อแก้ไขได้');
+      }
+    }
+
+    async function deleteCustomer(id) {
+      if (!confirm('ต้องการลบลูกค้ารายการนี้หรือไม่?')) return;
+      try {
+        const res = await fetch(`${customersApi}/${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+        });
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'ลบไม่สำเร็จ');
+        }
+        if (state.selectedId && String(state.selectedId) === String(id)) {
+          state.selectedId = null;
+          setSummary('ยังไม่ได้เลือกลูกค้า');
+          nextBtn?.setAttribute('disabled', 'disabled');
+        }
+        if (state.editingId && String(state.editingId) === String(id)) {
+          resetForm();
+        }
+        await loadCustomers();
+      } catch (err) {
+        alert(err.message || 'เกิดข้อผิดพลาดขณะลบข้อมูล');
+      }
+    }
+
+    function getAddressWrapper(name) {
+      if (!form) return null;
+      return form.querySelector(`[data-address-field="${name}"]`);
+    }
+
+    function updateAddressControls() {
+      if (!addAddressBtn) return;
+      const hasHidden = addressFields.some((field) => {
+        const wrapper = getAddressWrapper(field);
+        return wrapper && wrapper.classList.contains('d-none');
+      });
+      if (hasHidden) {
+        addAddressBtn.removeAttribute('disabled');
+      } else {
+        addAddressBtn.setAttribute('disabled', 'disabled');
+      }
+    }
+
+    function showAddressField(name) {
+      const wrapper = getAddressWrapper(name);
+      if (!wrapper) return;
+      wrapper.classList.remove('d-none');
+      updateAddressControls();
+    }
+
+    function hideAddressField(name, options = {}) {
+      const wrapper = getAddressWrapper(name);
+      if (!wrapper) return;
+      if (options.clearValue) {
+        const input = form?.elements[name];
+        if (input) input.value = '';
+      }
+      wrapper.classList.add('d-none');
+      updateAddressControls();
+    }
+
+    function showNextAddressField() {
+      const next = addressFields.find((field) => {
+        const wrapper = getAddressWrapper(field);
+        return wrapper && wrapper.classList.contains('d-none');
+      });
+      if (!next) return;
+      showAddressField(next);
+      const input = form?.elements[next];
+      if (input) {
+        input.focus();
+      }
+    }
+
+    form?.addEventListener('click', (event) => {
+      const removeBtn = event.target.closest('[data-address-remove]');
+      if (removeBtn) {
+        const field = removeBtn.getAttribute('data-address-remove');
+        if (field) {
+          hideAddressField(field, { clearValue: true });
+        }
+        event.preventDefault();
+      }
+    });
+
+    loadCustomers();
+    updateAddressControls();
+  })();
+</script>
+
+<style>
+  /* Inline labels: label followed immediately by the input on the same line */
+  .inline-form [class^="col-"],
+  .inline-form [class*=" col-"] {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem; /* tighter space between label and input */
+  }
+  .inline-form .form-label {
+    margin: 0;
+    line-height: 1.2;
+    min-width: 90px; /* tighter label width */
+    white-space: nowrap;
+  }
+  .inline-form .form-control-sm,
+  .inline-form .form-select-sm {
+    display: inline-block;
+    width: auto;
+    min-width: 140px; /* narrower base width of inputs */
+    flex: 1 1 auto;   /* allow input to take remaining width withoutทับ label */
+    width: 0;         /* with flex, let it shrink correctly */
+  }
+  .inline-form .form-control,
+  .inline-form .form-select {
+    flex: 1 1 auto;
+    width: 0;
+  }
+  .inline-form .form-check {
+    margin-bottom: 0;
+  }
+  /* Compact spacing between rows */
+  .inline-form.row.g-2 {
+    --bs-gutter-x: 0.5rem; /* column spacing */
+    --bs-gutter-y: 0.6rem;  /* increase vertical spacing per row */
+  }
+  /* On small screens stack label on top for readability */
+  @media (max-width: 576px) {
+    .inline-form [class^="col-"],
+    .inline-form [class*=" col-"] {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+    }
+    .inline-form .form-label {
+      min-width: 0;
+    }
+    .inline-form .form-control-sm,
+    .inline-form .form-select-sm {
+      min-width: 0;
+      width: 100%;
+    }
+  }
+</style>
+
+<style>
+  /* Limit customers table body to ~10 rows height with scroll */
+  .customers-table-scroll {
+    max-height: 360px; /* approx 10 compact rows incl. header height */
+    overflow: auto;
+  }
+  .customers-table-scroll table {
+    margin-bottom: 0;
+  }
+  .customers-table-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--bs-body-bg);
+  }
+</style>

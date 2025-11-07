@@ -1,0 +1,981 @@
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+  <div>
+    <h1 class="h4 fw-semibold mb-1">ขั้นตอนที่ 2/5 – เลือกข้อมูลการจัดส่ง</h1>
+    <p class="text-muted mb-0">เลือกรายการจัดส่งเดิมหรือสร้างข้อมูลจัดส่งใหม่ (จะบันทึกจริงเมื่อจบครบ 5 ขั้นตอน)</p>
+  </div>
+  <a class="btn btn-outline-secondary" href="/workflow">ย้อนกลับไปขั้นตอนลูกค้า</a>
+</div>
+
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card mb-3">
+      <div class="card-header">ข้อมูลลูกค้าที่เลือกไว้</div>
+      <div class="card-body" data-delivery-customer-preview>
+        <div class="text-muted">กำลังโหลดข้อมูลลูกค้า...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-header d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div>
+          <strong>ประวัติการจัดส่ง</strong>
+          <div class="text-muted small">เลือกรายการเดิมหรือร่างใหม่เพื่อใช้ในขั้นตอนถัดไป</div>
+        </div>
+        <div class="ms-auto">
+          <input type="search" class="form-control" placeholder="ค้นหาชื่อผู้รับหรือที่อยู่" data-delivery-search>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover table-sm align-middle mb-0" data-delivery-table>
+            <thead class="table-light">
+              <tr>
+                <th style="width:42px"></th>
+                <th>วันที่จัดส่ง</th>
+                <th>ผู้รับ</th>
+                <th>ที่อยู่</th>
+                <th style="width:160px" class="text-end">สถานะ / การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex flex-column flex-sm-row gap-2 align-items-stretch align-items-sm-center">
+        <div class="flex-grow-1 text-muted" data-delivery-selected-summary>ยังไม่ได้เลือกรายการจัดส่ง</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong data-delivery-form-title>เพิ่มข้อมูลจัดส่งใหม่</strong>
+        <button type="button" class="btn btn-sm btn-outline-secondary d-none" data-delivery-cancel-edit>ยกเลิกการแก้ไข</button>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-success d-none" data-delivery-feedback></div>
+        <form class="row g-3" data-delivery-form>
+          <input type="hidden" name="id" data-delivery-id>
+          <div class="col-12 col-md-6">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">ผู้รับ *</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="deliverto" class="form-control" required maxlength="150">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">โทรศัพท์ *</label>
+              </div>
+              <div class="col-8">
+                <input type="tel" name="appttel" class="form-control" required maxlength="20">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row g-2">
+              <div class="col-2">
+                <label class="form-label">ที่อยู่</label>
+              </div>
+              <div class="col-10">
+                <textarea name="address_combined" class="form-control" rows="3" maxlength="510" placeholder="กรอกที่อยู่ทั้งหมด"></textarea>
+                <input type="hidden" name="addr2" data-addr2>
+                <input type="hidden" name="addr3" data-addr3>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">บ้านเลขที่</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="homenum1" class="form-control" maxlength="50">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">หมู่</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="mooban1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">อาคาร</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="building1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">ซอย</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="soi1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">ถนน</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="road1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">แขวง / ตำบล</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="kwang1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">เขต / อำเภอ</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="kate1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">จังหวัด</label>
+              </div>
+              <div class="col-8">
+                <input type="text" name="province1" class="form-control" maxlength="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">รหัสไปรษณีย์</label>
+              </div>
+              <div class="col-8">
+                <input type="tel" name="zipcode1" class="form-control" maxlength="10" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">วันที่จัดส่ง</label>
+              </div>
+              <div class="col-8">
+                <input type="date" name="day" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-5">
+            <div class="row g-2">
+              <div class="col-4">
+                <label class="form-label">เวลาจัดส่ง</label>
+              </div>
+              <div class="col-8">
+                <input type="time" name="timein" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-between gap-2">
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-success" data-delivery-new>New</button>
+              <button type="submit" class="btn btn-success" data-delivery-submit>Save</button>
+            </div>
+            <button type="button" class="btn btn-primary" data-delivery-next disabled>Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const customerId = '<%= customerId %>';
+    if (!customerId) return;
+
+    const preview = document.querySelector('[data-delivery-customer-preview]');
+    const tableBody = document.querySelector('[data-delivery-table] tbody');
+    const searchInput = document.querySelector('[data-delivery-search]');
+    const summaryEl = document.querySelector('[data-delivery-selected-summary]');
+    const nextBtn = document.querySelector('[data-delivery-next]');
+    const form = document.querySelector('[data-delivery-form]');
+    const submitBtn = form?.querySelector('[data-delivery-submit]');
+    const newDeliveryBtn = document.querySelector('[data-delivery-new]');
+    const cancelBtn = document.querySelector('[data-delivery-cancel-edit]');
+    const feedback = document.querySelector('[data-delivery-feedback]');
+    const formTitle = document.querySelector('[data-delivery-form-title]');
+
+    const state = {
+      deliveryDraftId: null,
+      customer: null,
+      saved: [],
+      drafts: [],
+      filtered: [],
+      selectedId: null,
+      editingId: null,
+      editingSourceId: null,
+      originalFormData: null, // เก็บข้อมูลเดิมของฟอร์มเพื่อตรวจสอบการเปลี่ยนแปลง
+    };
+
+    const storageKeySelectedDelivery = 'workflow.selectedDelivery';
+    const storageKeyMediaSelection = 'workflow.mediaChannelSelection';
+    sessionStorage.removeItem(storageKeyMediaSelection);
+
+    let storedDeliverySelection = null;
+    try {
+      const raw = sessionStorage.getItem(storageKeySelectedDelivery);
+      if (raw) storedDeliverySelection = JSON.parse(raw);
+    } catch (err) {
+      storedDeliverySelection = null;
+    }
+
+    const getCombinedList = () => [...state.drafts, ...state.saved];
+
+    function determineSelectionSource(item) {
+      if (!item) return 'unknown';
+      if (item.isDraft) {
+        return item.sourceId ? 'draft-from-saved' : 'draft';
+      }
+      return 'saved';
+    }
+
+    function persistSelectedDeliverySelection(item) {
+      if (!item) {
+        sessionStorage.removeItem(storageKeySelectedDelivery);
+        storedDeliverySelection = null;
+        return;
+      }
+      const payload = {
+        customerId,
+        delivery: {
+          id: item.id,
+          source: determineSelectionSource(item),
+          data: JSON.parse(JSON.stringify(item)),
+        },
+      };
+      storedDeliverySelection = payload;
+      sessionStorage.setItem(storageKeySelectedDelivery, JSON.stringify(payload));
+    }
+
+
+
+    function setSummary(text, variant) {
+      if (!summaryEl) return;
+      summaryEl.textContent = text;
+      summaryEl.classList.remove('text-muted', 'text-success');
+      summaryEl.classList.add(variant === 'success' ? 'text-success' : 'text-muted');
+    }
+
+    function setFormMode(mode) {
+      if (!submitBtn || !formTitle) return;
+      if (mode === 'edit') {
+        submitBtn.textContent = 'Save';
+        formTitle.textContent = 'แก้ไขข้อมูลจัดส่ง';
+        cancelBtn?.classList.remove('d-none');
+      } else {
+        submitBtn.textContent = 'Save';
+        formTitle.textContent = 'เพิ่มข้อมูลจัดส่งใหม่';
+        cancelBtn?.classList.add('d-none');
+      }
+    }
+
+    function captureFormState() {
+      if (!form) return null;
+      const formData = new FormData(form);
+      const data = {};
+      Array.from(form.elements).forEach((el) => {
+        if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+        const name = el.name;
+        if (!name || name === 'id') return;
+        data[name] = formData.get(name) || '';
+      });
+      return JSON.stringify(data);
+    }
+
+    function hasFormChanged() {
+      if (!state.originalFormData) return false;
+      const currentData = captureFormState();
+      return state.originalFormData !== currentData;
+    }
+
+    function resetForm() {
+      if (!form) return;
+      form.reset();
+      const idInput = form.querySelector('[data-delivery-id]');
+      if (idInput) idInput.value = '';
+      state.editingId = null;
+      state.editingSourceId = null;
+      state.originalFormData = null;
+      setFormMode('create');
+    }
+
+    function renderCustomerInfo() {
+      if (!preview) return;
+      if (!state.customer) {
+        preview.innerHTML = '<div class="text-danger">ไม่พบข้อมูลลูกค้า</div>';
+        return;
+      }
+      
+      // Get selected delivery data if available
+      const selectedDelivery = state.selectedId ? getCombinedList().find((d) => String(d.id) === String(state.selectedId)) : null;
+      
+      const c = state.customer;
+      let fullName = [c.firstname, c.lastname].filter(Boolean).join(' ') || '(ไม่ระบุชื่อ)';
+      let phone = c.mobiletel || '-';
+      let address = [c.addr1, c.addr2, c.addr3, c.addr4, c.addr5].filter(Boolean).join('<br>') || '-';
+      
+      // If we have selected delivery data, use it to update the preview
+      if (selectedDelivery) {
+        // Update recipient name if available
+        if (selectedDelivery.deliverto) {
+          fullName = selectedDelivery.deliverto;
+        }
+        
+        // Update phone if available
+        if (selectedDelivery.appttel) {
+          phone = selectedDelivery.appttel;
+        }
+        
+        // Update address if available - prioritize delivery address fields (exclude addr1 which is name)
+        const deliveryAddress = [
+          selectedDelivery.addr2, 
+          selectedDelivery.addr3,
+          selectedDelivery.homenum1,
+          selectedDelivery.mooban1,
+          selectedDelivery.building1,
+          selectedDelivery.soi1,
+          selectedDelivery.road1,
+          selectedDelivery.kwang1,
+          selectedDelivery.kate1,
+          selectedDelivery.province1,
+          selectedDelivery.zipcode1
+        ].filter(Boolean).join('<br>');
+        
+        if (deliveryAddress) {
+          address = deliveryAddress;
+        }
+      }
+      
+      // Show customer data vs delivery data separately
+      const customerAddress = [c.addr1, c.addr2, c.addr3, c.addr4, c.addr5].filter(Boolean).join('<br>') || '-';
+      const customerName = [c.firstname, c.lastname].filter(Boolean).join(' ') || '(ไม่ระบุชื่อ)';
+      const customerPhone = c.mobiletel || '-';
+      
+      preview.innerHTML = `
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary mb-2">ข้อมูลลูกค้า</h6>
+            <dl class="row mb-0">
+              <dt class="col-sm-4">รหัสลูกค้า</dt><dd class="col-sm-8">${c.customerid || '-'}</dd>
+              <dt class="col-sm-4">ชื่อ-สกุล</dt><dd class="col-sm-8">${customerName}</dd>
+              <dt class="col-sm-4">เบอร์ติดต่อ</dt><dd class="col-sm-8">${customerPhone}</dd>
+              <dt class="col-sm-4">ที่อยู่</dt><dd class="col-sm-8">${customerAddress}</dd>
+            </dl>
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-success mb-2">ข้อมูลจัดส่งที่เลือก</h6>
+            <dl class="row mb-0">
+              <dt class="col-sm-4">รหัสลูกค้า</dt><dd class="col-sm-8">${c.customerid || '-'}</dd>
+              <dt class="col-sm-4">ชื่อ-สกุล</dt><dd class="col-sm-8">${fullName}</dd>
+              <dt class="col-sm-4">เบอร์ติดต่อ</dt><dd class="col-sm-8">${phone}</dd>
+              <dt class="col-sm-4">ที่อยู่</dt><dd class="col-sm-8">${address}</dd>
+            </dl>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable() {
+      if (!tableBody) return;
+      const list = state.filtered;
+      if (!list.length) {
+        tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">ยังไม่มีข้อมูลจัดส่ง</td></tr>';
+        return;
+      }
+      tableBody.innerHTML = list.map((item) => {
+        const date = item.day || item.workdate || '-';
+        const time = item.timein || '-';
+        const recipient = item.deliverto || '-';
+        // Prefer address-only fields; avoid using name (addr1)
+        const address = (item.addr2 && String(item.addr2).trim()) ? item.addr2
+          : (item.addr3 && String(item.addr3).trim()) ? item.addr3
+          : [
+              item.homenum1 || item.homenum,
+              item.mooban1 || item.moo,
+              item.building1 || item.building,
+              item.road1 || item.road,
+              item.soi1 || item.soi,
+              item.kwang1 || item.kwang,
+              item.kate1 || item.kate,
+              item.province1 || item.province,
+              item.zipcode1 || item.zipcode
+            ].filter(Boolean).join(' ') || '-';
+        const checked = state.selectedId && String(state.selectedId) === String(item.id) ? 'checked' : '';
+        const badge = item.isDraft ? '<span class="badge text-bg-warning ms-2">ร่าง</span>' : '';
+        const actions = `<div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-outline-secondary" data-edit-delivery="${item.id}">Edit</button>
+            <button type="button" class="btn btn-outline-danger" data-delete-delivery="${item.id}">ลบ</button>
+          </div>`;
+        return `
+          <tr data-delivery-id="${item.id}" data-draft="${item.isDraft ? '1' : '0'}">
+            <td><input type="radio" name="selectedDelivery" value="${item.id}" ${checked}></td>
+            <td>${date}${time && time !== '-' ? ' ' + time : ''}</td>
+            <td>${recipient}${badge}</td>
+            <td>${address}</td>
+            <td class="text-end">${actions}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function applyFilter() {
+      const keyword = (searchInput?.value || '').trim().toLowerCase();
+      const combined = getCombinedList();
+      if (!keyword) {
+        state.filtered = combined;
+      } else {
+        state.filtered = combined.filter((item) => {
+          const recipient = String(item.deliverto || '').toLowerCase();
+          const addr = String(item.addr1 || '').toLowerCase();
+          return recipient.includes(keyword) || addr.includes(keyword);
+        });
+      }
+      renderTable();
+    }
+
+    function handleSelect(id) {
+      state.selectedId = id;
+      const item = id ? getCombinedList().find((d) => String(d.id) === String(id)) : null;
+      
+      // Update table to reflect selection (radio button checked state)
+      applyFilter();
+      
+      // Update customer preview with selected delivery data
+      renderCustomerInfo();
+      
+      // Populate form with selected delivery data
+      if (id && item && form) {
+        populateForm(item);
+        state.editingId = item.isDraft ? item.id : null;
+        state.editingSourceId = item.isDraft ? null : item.id;
+        setFormMode('edit');
+        // Scroll to form
+        window.scrollTo({ top: form.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      } else if (!id) {
+        // If no item selected, reset original form data
+        state.originalFormData = null;
+      }
+      
+      if (!nextBtn) {
+        persistSelectedDeliverySelection(item || null);
+        return;
+      }
+      if (id && item) {
+        nextBtn.removeAttribute('disabled');
+        const summary = (item.deliverto || 'ผู้รับไม่ระบุ') + ' – ' + (item.addr1 || '') + (item.isDraft ? ' (ร่าง)' : '');
+        setSummary(summary, 'success');
+      } else {
+        nextBtn.setAttribute('disabled', 'disabled');
+        setSummary('ยังไม่ได้เลือกรายการจัดส่ง');
+      }
+      persistSelectedDeliverySelection(item || null);
+    }
+
+    async function fetchData() {
+      try {
+        const res = await fetch(`/workflow/api/customers/${encodeURIComponent(customerId)}/deliveries`);
+        if (!res.ok) throw new Error('ไม่สามารถโหลดข้อมูลจัดส่ง');
+        const data = await res.json();
+        state.customer = data.customer;
+        // ไม่ดึงข้อมูลประวัติการจัดส่งจาก database แล้ว
+        state.saved = [];
+        state.drafts = [];
+        state.deliveryDraftId = null;
+        state.selectedId = null;
+        state.editingId = null;
+        state.editingSourceId = null;
+        renderCustomerInfo();
+        // สร้าง draft ใหม่จากข้อมูลลูกค้าทุกครั้งเมื่อเข้าหน้า step 2
+        createDraftFromCustomer();
+      } catch (err) {
+        if (preview) preview.innerHTML = `<div class="text-danger">${err.message || 'เกิดข้อผิดพลาดในการโหลดข้อมูลลูกค้า'}</div>`;
+        if (tableBody) tableBody.innerHTML = `<tr><td colspan="5" class="text-danger text-center py-4">${err.message || 'เกิดข้อผิดพลาดในการโหลดข้อมูลจัดส่ง'}</td></tr>`;
+      }
+    }
+
+    function populateForm(record) {
+      if (!form || !record) return;
+      const idInput = form.querySelector('[data-delivery-id]');
+      if (idInput) idInput.value = record.id || '';
+      
+      // Debug: Log the record data to see what we're working with
+      console.log('Populating form with record:', record);
+      
+      // Handle combined address field
+      const addr2 = record.addr2 || '';
+      const addr3 = record.addr3 || '';
+      const combinedAddress = [addr2, addr3].filter(Boolean).join('\n');
+      const addressCombinedField = form.querySelector('[name="address_combined"]');
+      if (addressCombinedField) {
+        addressCombinedField.value = combinedAddress;
+      }
+      
+      // Populate all form fields including customer data
+      Object.keys(record).forEach((key) => {
+        const input = form.elements[key];
+        if (!input) return;
+        if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+          if (input.type === 'date') {
+            input.value = record[key] ? String(record[key]).slice(0, 10) : '';
+          } else if (input.type === 'time') {
+            input.value = record[key] ? String(record[key]).slice(0, 5) : '';
+          } else {
+            // Preserve leading zero for telephone-like fields
+            if (key === 'appttel') {
+              const raw = record[key];
+              let display = '';
+              if (raw != null) {
+                display = String(raw);
+                // If number came without leading 0 (common when stored as INT), add it back for display
+                const digits = display.replace(/\D/g, '');
+                if (digits && digits[0] !== '0') {
+                  display = '0' + display;
+                }
+              }
+              input.value = display;
+            } else {
+              input.value = record[key] == null ? '' : String(record[key]);
+            }
+          }
+        }
+      });
+      
+      // Capture form state after populating for change detection
+      setTimeout(() => {
+        state.originalFormData = captureFormState();
+      }, 100);
+      
+      // Auto-fill customer data from legacy_customers when editing
+      console.log('Customer data fields:', {
+        homenum: record.homenum,
+        moo: record.moo,
+        building: record.building,
+        soi: record.soi,
+        road: record.road,
+        kate: record.kate,
+        kwang: record.kwang,
+        zipcode: record.zipcode,
+        province: record.province
+      });
+      
+      if (record.homenum) {
+        const homenumInput = form.elements['homenum1'];
+        if (homenumInput) {
+          homenumInput.value = record.homenum;
+          console.log('Set homenum1 to:', record.homenum);
+        }
+      }
+      if (record.moo) {
+        const mooInput = form.elements['mooban1'];
+        if (mooInput) {
+          mooInput.value = record.moo;
+          console.log('Set mooban1 to:', record.moo);
+        }
+      }
+      if (record.building) {
+        const buildingInput = form.elements['building1'];
+        if (buildingInput) {
+          buildingInput.value = record.building;
+          console.log('Set building1 to:', record.building);
+        }
+      }
+      if (record.soi) {
+        const soiInput = form.elements['soi1'];
+        if (soiInput) {
+          soiInput.value = record.soi;
+          console.log('Set soi1 to:', record.soi);
+        }
+      }
+      if (record.road) {
+        const roadInput = form.elements['road1'];
+        if (roadInput) {
+          roadInput.value = record.road;
+          console.log('Set road1 to:', record.road);
+        }
+      }
+      if (record.kate) {
+        const kateInput = form.elements['kate1'];
+        if (kateInput) {
+          kateInput.value = record.kate;
+          console.log('Set kate1 to:', record.kate);
+        }
+      }
+      if (record.kwang) {
+        const kwangInput = form.elements['kwang1'];
+        if (kwangInput) {
+          kwangInput.value = record.kwang;
+          console.log('Set kwang1 to:', record.kwang);
+        }
+      }
+      if (record.zipcode) {
+        const zipcodeInput = form.elements['zipcode1'];
+        if (zipcodeInput) {
+          zipcodeInput.value = record.zipcode;
+          console.log('Set zipcode1 to:', record.zipcode);
+        }
+      }
+      if (record.province) {
+        const provinceInput = form.elements['province1'];
+        if (provinceInput) {
+          provinceInput.value = record.province;
+          console.log('Set province1 to:', record.province);
+        }
+      }
+    }
+
+    tableBody?.addEventListener('change', (event) => {
+      if (event.target && event.target.name === 'selectedDelivery') {
+        handleSelect(event.target.value);
+      }
+    });
+
+    tableBody?.addEventListener('click', (event) => {
+      const row = event.target.closest('tr[data-delivery-id]');
+      if (!row) return;
+      const id = row.getAttribute('data-delivery-id');
+      const isDraft = row.getAttribute('data-draft') === '1';
+      const editBtn = event.target.closest('[data-edit-delivery]');
+      if (editBtn) {
+        const record = isDraft
+          ? state.drafts.find((d) => String(d.id) === String(id))
+          : state.saved.find((d) => String(d.id) === String(id));
+        if (record) {
+          populateForm(record);
+          state.editingId = isDraft ? record.id : null;
+          state.editingSourceId = isDraft ? null : record.id;
+          setFormMode('edit');
+          state.selectedId = record.id;
+          handleSelect(record.id);
+          window.scrollTo({ top: form.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+        }
+        event.stopPropagation();
+        return;
+      }
+      const deleteBtn = event.target.closest('[data-delete-delivery]');
+      if (deleteBtn) {
+        if (!confirm('ยืนยันลบรายการจัดส่งนี้หรือไม่?')) {
+          event.stopPropagation();
+          return;
+        }
+        if (isDraft) {
+          removeDraft(id);
+          event.stopPropagation();
+          return;
+        }
+        // Delete saved delivery via API
+        (async () => {
+          try {
+            const res = await fetch(`/workflow/api/customers/${encodeURIComponent(customerId)}/deliveries/${encodeURIComponent(id)}`, { method: 'DELETE' });
+            if (!res.ok) {
+              const txt = await res.text();
+              throw new Error(txt || 'ลบรายการไม่สำเร็จ');
+            }
+            // Refresh data after delete
+            await fetchData();
+            setSummary('ลบรายการแล้ว');
+          } catch (err) {
+            alert(err.message || 'เกิดข้อผิดพลาดขณะลบรายการ');
+          }
+        })();
+        event.stopPropagation();
+        return;
+      }
+      const radio = row.querySelector('input[name="selectedDelivery"]');
+      if (radio) {
+        radio.checked = true;
+        handleSelect(radio.value);
+      }
+    });
+
+    searchInput?.addEventListener('input', applyFilter);
+    cancelBtn?.addEventListener('click', resetForm);
+    newDeliveryBtn?.addEventListener('click', resetForm);
+
+    nextBtn?.addEventListener('click', async () => {
+      // ตรวจสอบว่ามีการแก้ไขฟอร์มที่ยังไม่ได้บันทึกหรือไม่
+      if (hasFormChanged()) {
+        // บันทึกอัตโนมัติก่อนไปขั้นตอนถัดไป
+        if (!form || !submitBtn) {
+          alert('ไม่สามารถบันทึกข้อมูลได้');
+          return;
+        }
+        
+        // แสดงสถานะกำลังบันทึก
+        const originalNextText = nextBtn.textContent;
+        nextBtn.textContent = 'กำลังบันทึก...';
+        nextBtn.setAttribute('disabled', 'disabled');
+        submitBtn.setAttribute('disabled', 'disabled');
+        
+        try {
+          // Handle combined address field - split into addr2 and addr3
+          const addressCombinedField = form.querySelector('[name="address_combined"]');
+          const addr2Field = form.querySelector('[name="addr2"]');
+          const addr3Field = form.querySelector('[name="addr3"]');
+          
+          if (addressCombinedField && addr2Field && addr3Field) {
+            const combinedAddress = addressCombinedField.value.trim();
+            const lines = combinedAddress.split('\n');
+            addr2Field.value = lines[0] || '';
+            addr3Field.value = lines[1] || '';
+          }
+
+          const formData = new FormData(form);
+          const payload = {};
+          Array.from(form.elements).forEach((el) => {
+            if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+            const name = el.name;
+            if (!name || name === 'id' || name === 'address_combined') return;
+            const value = formData.get(name);
+            if (value == null) return;
+            const trimmed = typeof value === 'string' ? value.trim() : value;
+            payload[name] = trimmed === '' ? null : trimmed;
+          });
+
+          if (!payload.deliverto || !payload.appttel) {
+            alert('กรุณากรอกข้อมูลผู้รับ และเบอร์ติดต่อ');
+            nextBtn.textContent = originalNextText;
+            nextBtn.removeAttribute('disabled');
+            submitBtn.removeAttribute('disabled');
+            return;
+          }
+
+          const draftId = state.editingId || `draft-${Date.now()}`;
+          const draft = {
+            ...payload,
+            id: draftId,
+            isDraft: true,
+            day: payload.day || new Date().toISOString().slice(0, 10),
+            timein: payload.timein || new Date().toTimeString().slice(0, 5),
+            sourceId: state.editingSourceId || null,
+          };
+
+          const existingIndex = state.drafts.findIndex((d) => String(d.id) === String(draftId));
+          if (existingIndex >= 0) {
+            state.drafts[existingIndex] = draft;
+          } else {
+            state.drafts.unshift(draft);
+          }
+          state.deliveryDraftId = draft.id;
+          state.selectedId = draft.id;
+          
+          // Update form state after save
+          state.originalFormData = captureFormState();
+          
+          // Show success feedback briefly
+          if (feedback) {
+            feedback.classList.remove('d-none');
+            feedback.textContent = '✓ บันทึกข้อมูลอัตโนมัติแล้ว กำลังไปขั้นตอนถัดไป...';
+          }
+          
+          // Proceed to next step after brief delay
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+        } catch (err) {
+          alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' + (err.message || ''));
+          nextBtn.textContent = originalNextText;
+          nextBtn.removeAttribute('disabled');
+          submitBtn.removeAttribute('disabled');
+          return;
+        }
+      }
+      
+      if (!state.selectedId) {
+        alert('กรุณาเลือกรายการจัดส่ง');
+        return;
+      }
+      const selection = getCombinedList().find((d) => String(d.id) === String(state.selectedId));
+      if (!selection) {
+        alert('ไม่พบข้อมูลจัดส่งที่เลือก');
+        return;
+      }
+      persistSelectedDeliverySelection(selection);
+      sessionStorage.removeItem(storageKeyMediaSelection);
+      const nextUrl = '/workflow/step3?customerId=' + encodeURIComponent(customerId);
+      window.location.href = nextUrl;
+    });
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form) return;
+      submitBtn?.setAttribute('disabled', 'disabled');
+      feedback?.classList.add('d-none');
+
+      // Handle combined address field - split into addr2 and addr3
+      const addressCombinedField = form.querySelector('[name="address_combined"]');
+      const addr2Field = form.querySelector('[name="addr2"]');
+      const addr3Field = form.querySelector('[name="addr3"]');
+      
+      if (addressCombinedField && addr2Field && addr3Field) {
+        const combinedAddress = addressCombinedField.value.trim();
+        const lines = combinedAddress.split('\n');
+        addr2Field.value = lines[0] || '';
+        addr3Field.value = lines[1] || '';
+      }
+
+      const formData = new FormData(form);
+      const payload = {};
+      Array.from(form.elements).forEach((el) => {
+        if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement)) return;
+        const name = el.name;
+        if (!name || name === 'id' || name === 'address_combined') return;
+        const value = formData.get(name);
+        if (value == null) return;
+        const trimmed = typeof value === 'string' ? value.trim() : value;
+        payload[name] = trimmed === '' ? null : trimmed;
+      });
+
+      if (!payload.deliverto || !payload.appttel) {
+        alert('กรุณากรอกข้อมูลผู้รับ และเบอร์ติดต่อ');
+        submitBtn?.removeAttribute('disabled');
+        return;
+      }
+
+      const draftId = state.editingId || `draft-${Date.now()}`;
+      const draft = {
+        ...payload,
+        id: draftId,
+        isDraft: true,
+        day: payload.day || new Date().toISOString().slice(0, 10),
+        timein: payload.timein || new Date().toTimeString().slice(0, 5),
+        sourceId: state.editingSourceId || null,
+      };
+
+      const existingIndex = state.drafts.findIndex((d) => String(d.id) === String(draftId));
+      if (existingIndex >= 0) {
+        state.drafts[existingIndex] = draft;
+      } else {
+        state.drafts.unshift(draft);
+      }
+      state.deliveryDraftId = draft.id;
+
+      feedback?.classList.remove('d-none');
+      feedback && (feedback.textContent = 'บันทึกข้อมูลจัดส่งในรูปแบบร่างเรียบร้อย (จะบันทึกลงระบบเมื่อจบทุกขั้นตอน)');
+
+      resetForm();
+      state.selectedId = draft.id;
+      handleSelect(draft.id);
+      applyFilter();
+      // Update customer preview after form submission
+      renderCustomerInfo();
+      
+      // Update original form data after successful save
+      setTimeout(() => {
+        state.originalFormData = captureFormState();
+      }, 100);
+      
+      submitBtn?.removeAttribute('disabled');
+    });
+
+    function createDraftFromCustomer() {
+      if (!state.customer) return;
+      const existing = state.drafts.find((d) => d.sourceId === 'customer-default');
+      const now = new Date();
+      const draftBase = {
+        deliverto: [state.customer.firstname, state.customer.lastname].filter(Boolean).join(' ') || state.customer.customerid || 'ลูกค้า',
+        appttel: state.customer.mobiletel || '',
+        addr1: [state.customer.prename, state.customer.firstname, state.customer.lastname].filter(Boolean).join(' ') || '', // ชื่อ-นามสกุล
+        addr2: state.customer.addr2 || '', // ที่อยู่บรรทัดหลัก - ดึงจาก addr2
+        addr3: state.customer.addr3 || '', // ที่อยู่บรรทัดเพิ่มเติม - ดึงจาก addr3
+        homenum1: state.customer.homenum1 || state.customer.homenum || '',
+        mooban1: state.customer.mooban1 || state.customer.moo || '',
+        building1: state.customer.building1 || state.customer.building || '',
+        soi1: state.customer.soi1 || state.customer.soi || '',
+        road1: state.customer.road1 || state.customer.road || '',
+        kwang1: state.customer.kwang1 || state.customer.kwang || '',
+        kate1: state.customer.kate1 || state.customer.kate || '',
+        province1: state.customer.province1 || state.customer.province || '',
+        zipcode1: state.customer.zipcode1 || state.customer.zipcode || '',
+        day: now.toISOString().slice(0, 10),
+        timein: now.toTimeString().slice(0, 5),
+        isDraft: true,
+        sourceId: 'customer-default',
+      };
+      
+      // Debug: Log the customer data and draft base
+      console.log('Customer data for draft:', state.customer);
+      console.log('Draft base data:', draftBase);
+      
+      if (existing) {
+        Object.assign(existing, draftBase);
+        state.deliveryDraftId = existing.id;
+      } else {
+        const draft = {
+          id: `draft-${Date.now()}`,
+          ...draftBase,
+        };
+        state.drafts.unshift(draft);
+        state.deliveryDraftId = draft.id;
+      }
+      // handleSelect จะเรียก applyFilter() เพื่ออัพเดทตารางและ populate form
+      if (state.deliveryDraftId) {
+        handleSelect(state.deliveryDraftId);
+      } else {
+        // ถ้าไม่มี deliveryDraftId ให้ render table อย่างเดียว
+        applyFilter();
+      }
+    }
+
+    function removeDraft(id) {
+      const index = state.drafts.findIndex((d) => String(d.id) === String(id));
+      if (index === -1) return;
+      state.drafts.splice(index, 1);
+      if (state.deliveryDraftId && String(state.deliveryDraftId) === String(id)) {
+        state.deliveryDraftId = null;
+      }
+      if (state.selectedId && String(state.selectedId) === String(id)) {
+        state.selectedId = null;
+        handleSelect(null);
+      }
+      if (state.editingId && String(state.editingId) === String(id)) {
+        resetForm();
+      }
+      applyFilter();
+    }
+
+    fetchData();
+  })();
+</script>

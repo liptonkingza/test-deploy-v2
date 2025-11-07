@@ -1,0 +1,84 @@
+﻿<header style="background: #2c3e50; border-bottom: 2px solid #34495e;">
+  <div class="px-4 py-3">
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <a href="/" class="d-flex align-items-center text-decoration-none" style="color: #ecf0f1;">
+          <i class="bi bi-bootstrap-fill fs-2 me-2" style="color: #3498db;"></i>
+          <span class="fw-semibold fs-4">Siamdrug</span>
+        </a>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <ul class="nav gap-2 mb-0">
+          <li class="nav-item">
+            <a href="/" class="nav-link d-flex flex-column align-items-center text-center px-3 rounded" style="color: #bdc3c7; transition: all 0.3s;">
+              <i class="bi bi-list-check fs-5 mb-1"></i>
+              <span style="font-size: 0.75rem;">เวิร์กโฟลว์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard" class="nav-link d-flex flex-column align-items-center text-center px-3 rounded" style="color: #bdc3c7; transition: all 0.3s;">
+              <i class="bi bi-speedometer2 fs-5 mb-1"></i>
+              <span style="font-size: 0.75rem;">แดชบอร์ด</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-sm" data-toggle-theme style="background: #34495e; border: 1px solid #2c3e50; color: #ecf0f1;">
+            <i class="bi bi-moon-stars me-1" data-theme-icon></i>
+            <span class="d-none d-sm-inline">ธีม</span>
+          </button>
+          <% if (user) { %>
+            <span style="color: #ecf0f1; font-size: 0.875rem;">สวัสดี, <%= user.operator %> (<%= user.level %>)</span>
+            <a href="/logout" class="btn btn-sm" style="background: #3498db; border: none; color: #ffffff;">
+              <i class="bi bi-box-arrow-right me-1"></i>ออกจากระบบ
+            </a>
+          <% } else { %>
+            <div class="d-flex align-items-center gap-2">
+              <form method="post" action="/login" class="d-flex align-items-center gap-2" style="flex-wrap: wrap;">
+                <input type="text" class="form-control form-control-sm" name="pn_id" placeholder="รหัสพนักงาน" pattern="\d{4}" inputmode="numeric" maxlength="4" required style="width: 100px; background: #34495e; border-color: #2c3e50; color: #ecf0f1;" />
+                <input type="password" class="form-control form-control-sm" name="pass" placeholder="รหัสผ่าน" pattern="\d{4}" inputmode="numeric" maxlength="4" required style="width: 100px; background: #34495e; border-color: #2c3e50; color: #ecf0f1;" />
+                <button type="submit" class="btn btn-sm" style="background: #3498db; border: none; color: #ffffff;">
+                  <i class="bi bi-box-arrow-in-right me-1"></i>เข้าสู่ระบบ
+                </button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  header .nav-link:hover {
+    background-color: #34495e !important;
+    color: #ffffff !important;
+  }
+  header .nav-link.active {
+    background-color: #3498db !important;
+    color: #ffffff !important;
+  }
+  header input::placeholder {
+    color: #95a5a6 !important;
+  }
+  header input:focus {
+    background-color: #34495e !important;
+    border-color: #3498db !important;
+    color: #ecf0f1 !important;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  }
+  header button:hover {
+    background-color: #2980b9 !important;
+  }
+  header a:hover {
+    color: #3498db !important;
+  }
+  
+  /* Dark theme support */
+  [data-bs-theme="dark"] header {
+    background: #1e1e1e !important;
+    border-bottom-color: #2d2d2d !important;
+  }
+</style>

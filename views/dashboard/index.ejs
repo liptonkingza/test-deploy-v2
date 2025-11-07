@@ -1,0 +1,8 @@
+<% const pageTitle = title || 'Dashboard - ข้อมูลการจัดส่ง'; %>
+<%- include('./layout_fullwidth', {
+  title: pageTitle,
+  body: include('./dashboard_content', {
+    deliveries: deliveries,
+    summary: summary
+  })
+}) %>

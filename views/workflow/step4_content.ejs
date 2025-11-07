@@ -1,0 +1,1294 @@
+﻿<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+  <div>
+    <h1 class="h4 fw-semibold mb-1">ขั้นตอนที่ 4/5 – เลือกสินค้าและการขนส่ง</h1>
+    <p class="text-muted mb-0">จัดการรายการสินค้าและรายละเอียดการจัดส่ง (ข้อมูลนี้จะถูกใช้ต่อในขั้นตอนที่ 5)</p>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    <a class="btn btn-outline-secondary" href="/workflow/step3?customerId=<%= customerId %>">ย้อนกลับไปขั้นตอน 3/5 – เลือกสื่อและช่องทาง</a>
+    <button type="button" class="btn btn-outline-primary" data-step4-save-draft disabled>บันทึกร่างอัตโนมัติ</button>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-12 col-xl-4">
+    <div class="card h-100">
+      <div class="card-header">ข้อมูลจัดส่งที่เลือก</div>
+      <div class="card-body small" data-step4-delivery-summary>
+        <div class="text-muted">กำลังโหลดข้อมูลจัดส่ง...</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card h-100">
+      <div class="card-header">ข้อมูลสื่อและช่องทางที่เลือก</div>
+      <div class="card-body small">
+        <div class="mb-2">
+          <span class="text-muted d-block">สื่อ</span>
+          <div data-step4-media-summary class="fw-semibold">ยังไม่ได้เลือก</div>
+        </div>
+        <div class="mb-2">
+          <span class="text-muted d-block">ช่องทาง</span>
+          <div data-step4-channel-summary class="fw-semibold">ยังไม่ได้เลือก</div>
+        </div>
+        <hr>
+        <div class="mb-2">
+          <span class="text-muted d-block">Keyword</span>
+          <div data-step4-keyword-summary class="fw-semibold">-</div>
+        </div>
+        <div>
+          <span class="text-muted d-block">ติดตามผลใน</span>
+          <div><span data-step4-followup-summary class="fw-semibold">-</span> <span class="text-muted">วัน</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card h-100">
+      <div class="card-header">สถานะรายการ</div>
+      <div class="card-body small">
+        <dl class="row mb-0">
+          <dt class="col-sm-5">จำนวนสินค้า</dt>
+          <dd class="col-sm-7" data-step4-summary-count>0 รายการ</dd>
+          <dt class="col-sm-5">จำนวนชิ้น</dt>
+          <dd class="col-sm-7" data-step4-summary-qty>0</dd>
+          <dt class="col-sm-5">ยอดรวมสินค้า</dt>
+          <dd class="col-sm-7" data-step4-summary-subtotal>0.00</dd>
+          <dt class="col-sm-5">ส่วนลดรวม</dt>
+          <dd class="col-sm-7" data-step4-summary-discount>0.00</dd>
+          <dt class="col-sm-5">ค่าจัดส่ง</dt>
+          <dd class="col-sm-7" data-step4-summary-shipping>0.00</dd>
+          <dt class="col-sm-5">ยอดสุทธิ</dt>
+          <dd class="col-sm-7 fw-semibold" data-step4-summary-total>0.00</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- รายการสินค้าที่เลือก - เต็มความกว้าง -->
+<div class="row g-4 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex flex-wrap gap-2 align-items-center">
+        <div>
+          <strong>รายการสินค้าที่เลือก</strong>
+          <div class="text-muted small">เพิ่มหรือแก้ไขสินค้าในคำสั่งซื้อ</div>
+        </div>
+        <div class="ms-auto d-flex gap-2 flex-wrap">
+          <input type="search" class="form-control form-control-sm" placeholder="ค้นหาสินค้า..." data-step4-product-search>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-step4-product-import disabled>นำเข้าจากรายการเดิม</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="mt-4">
+          <h6 class="fw-semibold mb-2">เลือกรายการสินค้าจากระบบ</h6>
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;" data-step4-product-catalog-wrap>
+            <table class="table table-sm table-striped align-middle mb-0" data-step4-product-catalog>
+              <thead class="table-light sticky-top">
+                <tr>
+                  <th style="width:42px"></th>
+                  <th style="width:110px">Code</th>
+                  <th>Title</th>
+                  <th class="text-end" style="width:110px">Price</th>
+                  <th class="text-end" style="width:90px">Qty</th>
+                  <th class="text-end" style="width:120px">Amount</th>
+                  <th style="width:68px"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="7" class="text-center text-muted py-3">กำลังโหลดข้อมูลสินค้า...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex flex-wrap gap-2 justify-content-end">
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-sm btn-outline-danger" data-step4-product-clear>ล้างรายการ</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-step4-product-export disabled>ส่งออก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- การจัดส่งและการแจ้งเตือนลูกค้า - รวมกันเป็นกล่องเดียว -->
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <strong style="white-space: nowrap;">การจัดส่ง</strong>
+          </div>
+          <div class="col-md-6">
+            <strong></strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- การจัดส่ง -->
+          <div class="col-md-6">
+            <form class="row g-3" data-step4-shipping-form>
+              <div class="col-12">
+                <label class="form-label">คูปองส่วนลด</label>
+                <select class="form-select" name="coupon">
+                  <option value="">ไม่ใช้ Coupon</option>
+                  <option value="COUPON 20.">COUPON 20.- FOLLOW SHOPEE SIAMDRUG</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">เลือกขนส่ง</label>
+                <div class="table-responsive" style="max-height: 200px; overflow-y: auto;" data-step4-shipping-options>
+                  <table class="table table-sm table-hover align-middle mb-0">
+                    <thead class="table-light sticky-top">
+                      <tr>
+                        <th style="width:42px"></th>
+                        <th>ชื่อขนส่ง</th>
+                      </tr>
+                    </thead>
+                    <tbody data-step4-shipping-table>
+                      <tr>
+                        <td colspan="2" class="text-center text-muted py-3">กำลังโหลดข้อมูลขนส่ง...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-muted small d-none" data-step4-shipping-empty>ไม่มีตัวเลือกขนส่ง</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">ค่าจัดส่ง (บาท)</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="shippingCost" min="0" step="0.01" placeholder="0.00">
+                  <span class="input-group-text">บาท</span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1" id="step4NoCharge" data-step4-no-charge>
+                  <label class="form-check-label" for="step4NoCharge">ไม่คิดค่าจัดส่ง</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          <!-- การแจ้งเตือนลูกค้า -->
+          <div class="col-md-6">
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label">แจ้งจัดของ 1</label>
+                <input type="text" class="form-control" data-step4-notify1 placeholder="รายละเอียดแจ้งจัดของ 1">
+              </div>
+              <div class="col-12">
+                <label class="form-label">แจ้งจัดของ 2</label>
+                <input type="text" class="form-control" data-step4-notify2 placeholder="รายละเอียดแจ้งจัดของ 2">
+              </div>
+              <div class="col-12">
+                <label class="form-label">อาการ / หมายเหตุ</label>
+                <textarea class="form-control" rows="2" data-step4-symptom placeholder="ระบุคำอธิบายเพิ่มเติม"></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label d-block">ระดับ</label>
+                <div class="d-flex gap-3 flex-wrap" data-step4-urgency-group>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="urgencyLevel" value="normal" id="urgency-normal">
+                    <label class="form-check-label" for="urgency-normal">วิธีทาน ปกติ</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="urgencyLevel" value="booster" id="urgency-booster">
+                    <label class="form-check-label" for="urgency-booster">Booster</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="urgencyLevel" value="maintain" id="urgency-maintain">
+                    <label class="form-check-label" for="urgency-maintain">Maintain</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end align-items-center mt-4">
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="/workflow/step3?customerId=<%= customerId %>">ย้อนกลับ</a>
+    <a class="btn btn-primary" href="/workflow/step5?customerId=<%= customerId %>">ไปขั้นตอนถัดไป</a>
+  </div>
+</div>
+<script>
+  (function(){
+    const customerId = '<%= customerId %>' || '';
+    const deliveryKey = 'workflow.selectedDelivery';
+    const mediaSelectionKey = 'workflow.mediaChannelSelection';
+    const storageKey = 'workflow.step4Draft';
+
+    const deliverySummaryEl = document.querySelector('[data-step4-delivery-summary]');
+    const mediaSummaryEl = document.querySelector('[data-step4-media-summary]');
+    const channelSummaryEl = document.querySelector('[data-step4-channel-summary]');
+    const keywordSummaryEl = document.querySelector('[data-step4-keyword-summary]');
+    const followUpSummaryEl = document.querySelector('[data-step4-followup-summary]');
+
+    const productCatalogTableBody = document.querySelector('[data-step4-product-catalog] tbody');
+    const productClearBtn = document.querySelector('[data-step4-product-clear]');
+    const productSearchInput = document.querySelector('[data-step4-product-search]');
+
+    const summaryCountEl = document.querySelector('[data-step4-summary-count]');
+    const summaryQtyEl = document.querySelector('[data-step4-summary-qty]');
+    const summarySubtotalEl = document.querySelector('[data-step4-summary-subtotal]');
+    const summaryDiscountEl = document.querySelector('[data-step4-summary-discount]');
+    const summaryShippingEl = document.querySelector('[data-step4-summary-shipping]');
+    const summaryTotalEl = document.querySelector('[data-step4-summary-total]');
+
+    const shippingForm = document.querySelector('[data-step4-shipping-form]');
+    const shippingToggleBtn = document.querySelector('[data-step4-shipping-toggle]');
+    const shippingSelect = document.querySelector('[data-step4-shipping-select]');
+    const shippingTable = document.querySelector('[data-step4-shipping-table]');
+    const shippingEmptyMessage = document.querySelector('[data-step4-shipping-empty]');
+    const noChargeCheckbox = document.querySelector('[data-step4-no-charge]');
+    const notifyInput1 = document.querySelector('[data-step4-notify1]');
+    const notifyInput2 = document.querySelector('[data-step4-notify2]');
+    const symptomInput = document.querySelector('[data-step4-symptom]');
+    const urgencyGroup = document.querySelector('[data-step4-urgency-group]');
+    const nextBtn = document.querySelector('[data-step4-next]');
+
+    const shippingOptions = [
+      { id: 'BYHAND', label: 'BYHAND' },
+      { id: 'EMS', label: 'E.M.S' },
+      { id: 'EMS-1', label: 'พกง.' },
+      { id: 'KERRY EXPRESS', label: 'KERRY EXPRESS' },
+      { id: 'DHL', label: 'DHL' },
+      { id: 'LineMan', label: 'LineMan' },
+      { id: 'Lalamove', label: 'Lalamove' },
+      { id: 'Grab', label: 'Grab' },
+      { id: 'Shopee', label: 'Shopee' },
+      { id: 'LEX EXPRESS', label: 'LEX EXPRESS' },
+      { id: 'FLASH EXPRESS', label: 'FLASH EXPRESS' },
+      { id: 'J&T EXPRESS', label: 'J&T EXPRESS' },
+      { id: 'Kerry COD', label: 'Kerry COD' },
+      { id: 'E.M.S. COD', label: 'E.M.S. COD' },
+      { id: 'J&T. COD', label: 'J&T. COD' },
+    ];
+
+    const catalogState = {
+      products: [],
+      loaded: false,
+      loading: false,
+      lookupByLabel: new Map(),
+      lookupByCode: new Map(),
+      lookupById: new Map(),
+      lookupByTitle: new Map(),
+      lookupByScan: new Map(),
+    };
+
+    let state = {
+      products: [],
+      lastSelectedProductId: null,
+      shipping: {
+        coupon: '',
+        shippingCost: '',
+        noCharge: false,
+        method: '',
+        packageCount: '',
+        deliveryType: 'standard',
+        remark: '',
+        notify1: '',
+        notify2: '',
+        symptom: '',
+        urgency: 'normal',
+      },
+    };
+
+    try {
+      const raw = sessionStorage.getItem(storageKey);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          if (Array.isArray(parsed.products)) {
+            state.products = parsed.products;
+          }
+          if (parsed.shipping && typeof parsed.shipping === 'object') {
+            state.shipping = Object.assign({}, state.shipping, parsed.shipping);
+            if (Object.prototype.hasOwnProperty.call(state.shipping, 'reference')) {
+              delete state.shipping.reference;
+            }
+          }
+          if (Object.prototype.hasOwnProperty.call(parsed, 'lastSelectedProductId')) {
+            state.lastSelectedProductId = parsed.lastSelectedProductId;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('step4: ไม่สามารถอ่านสถานะที่บันทึกไว้จากเบราว์เซอร์', err);
+    }
+
+    const currencyFormatter = new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    function persistState() {
+      try {
+        const payload = {
+          products: state.products,
+          shipping: state.shipping,
+          lastSelectedProductId: state.lastSelectedProductId,
+        };
+        sessionStorage.setItem(storageKey, JSON.stringify(payload));
+      } catch (err) {
+        console.warn('step4: ไม่สามารถบันทึกสถานะของแบบฟอร์ม', err);
+      }
+    }
+    function formatCurrency(value) {
+      const number = Number(value) || 0;
+      return currencyFormatter.format(number);
+    }
+
+    function escapeHtml(value) {
+      return String(value === null || value === undefined ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function numberOrNull(input) {
+      if (input === null || input === undefined || input === '') return null;
+      const num = Number(input);
+      return Number.isFinite(num) ? num : null;
+    }
+
+    function determineProductPrice(product) {
+      if (!product) return null;
+      const candidates = [product.price, product.wholesale, product.sugprice];
+      for (let i = 0; i < candidates.length; i += 1) {
+        const candidate = candidates[i];
+        if (typeof candidate === 'number' && Number.isFinite(candidate)) {
+          return candidate;
+        }
+      }
+      return null;
+    }
+
+    function buildProductOptionValue(product) {
+      if (!product) return '';
+      const code = product.code ? String(product.code).trim() : '';
+      const title = product.title ? String(product.title).trim() : '';
+      const brand = product.ebrandname ? String(product.ebrandname).trim() : '';
+      const parts = [];
+      if (code) parts.push(code);
+      if (title) parts.push(title);
+      let value = parts.join(' - ');
+      if (!value && brand) {
+        value = brand;
+      } else if (value && brand) {
+        value += ' (' + brand + ')';
+      }
+      return value || code || title || brand;
+    }
+
+    function matchesProductTerm(product, term) {
+      if (!term) return true;
+      const lower = term.toLowerCase();
+      const code = product.code ? String(product.code).toLowerCase() : '';
+      const title = product.title ? product.title.toLowerCase() : '';
+      const scan = product.scancode ? product.scancode.toLowerCase() : '';
+      const brand = product.ebrandname ? product.ebrandname.toLowerCase() : '';
+      const sig = product.sigName ? product.sigName.toLowerCase() : (product.sig_name ? product.sig_name.toLowerCase() : '');
+      const unit = product.unitsale ? product.unitsale.toLowerCase() : '';
+      return (code && code.includes(lower)) ||
+        (title && title.includes(lower)) ||
+        (scan && scan.includes(lower)) ||
+        (brand && brand.includes(lower)) ||
+        (sig && sig.includes(lower)) ||
+        (unit && unit.includes(lower));
+    }
+
+    function setProductPickerStatus(message) {
+      // productPickerStatus element was removed, so we'll just log the message
+      console.log('📝 Product Picker Status:', message);
+    }
+
+    function renderProductPickerOptions(filterTerm, suppressStatus) {
+      if (!productPickerList) return;
+      const term = filterTerm ? filterTerm.trim().toLowerCase() : '';
+      const items = catalogState.products;
+      productPickerList.innerHTML = '';
+      catalogState.lookupByLabel.clear();
+      if (!items.length) {
+        if (!suppressStatus) {
+          setProductPickerStatus(catalogState.loaded ? 'ไม่มีข้อมูลสินค้า' : 'ยังไม่ได้ดึงข้อมูลสินค้า');
+        }
+        return;
+      }
+      const filtered = term ? items.filter(function(item){ return matchesProductTerm(item, term); }) : items;
+      const limited = filtered.slice(0, 200);
+      let optionsHtml = '';
+      limited.forEach(function(item){
+        const value = buildProductOptionValue(item);
+        catalogState.lookupByLabel.set(value.toLowerCase(), item);
+        optionsHtml += '<option value="' + escapeHtml(value) + '"></option>';
+      });
+      productPickerList.innerHTML = optionsHtml;
+      if (!suppressStatus) {
+        if (filtered.length) {
+          setProductPickerStatus('พบ ' + filtered.length + ' รายการ (แสดง ' + limited.length + ' รายการแรก)');
+        } else {
+          setProductPickerStatus('ไม่พบสินค้าที่ตรงกับคำค้น');
+        }
+      }
+    }
+
+        function renderProductCatalog(filterTerm) {
+      console.log('🎨 renderProductCatalog called with filterTerm:', filterTerm);
+      console.log('📊 catalogState:', { loading: catalogState.loading, loaded: catalogState.loaded, productsCount: catalogState.products.length });
+      if (!productCatalogTableBody) {
+        console.log('❌ productCatalogTableBody not found');
+        return;
+      }
+      if (catalogState.loading) {
+        console.log('⏳ Still loading, showing loading message');
+        productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">กำลังโหลดข้อมูลสินค้า...</td></tr>';
+        return;
+      }
+      
+      // If not loaded yet, show loading message and try to load
+      if (!catalogState.loaded) {
+        console.log('⏳ Not loaded yet, showing loading message and triggering load');
+        productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">กำลังโหลดข้อมูลสินค้า...</td></tr>';
+        // Trigger load if not already loading
+        if (!catalogState.loading) {
+          loadProductCatalog();
+        }
+        return;
+      }
+      const items = catalogState.products;
+      const term = filterTerm ? filterTerm.trim().toLowerCase() : '';
+      console.log('📊 Items count:', items.length, 'Filter term:', term);
+      if (!items.length) {
+        console.log('❌ No items to display');
+        productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">ไม่มีรายการสินค้า</td></tr>';
+        return;
+      }
+      const filtered = term ? items.filter(function(item){ return matchesProductTerm(item, term); }) : items;
+      console.log('🔍 Filtered items:', filtered.length, 'out of', items.length);
+      if (!filtered.length) {
+        console.log('❌ No filtered items found');
+        productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">ไม่พบสินค้าที่ตรงกับคำค้น</td></tr>';
+        return;
+      }
+      console.log('✅ Rendering', filtered.length, 'items');
+      let rowsHtml = '';
+      filtered.forEach(function(item){
+        const key = item && item.id !== null && item.id !== undefined ? 'id:' + item.id : (item && item.code ? 'code:' + item.code : '');
+        const priceValue = determineProductPrice(item);
+        const priceDisplay = priceValue !== null && Number.isFinite(priceValue) ? formatCurrency(priceValue) : '-';
+        
+        // Check if this product is already in the cart
+        const existingProduct = state.products.find(function(p){ 
+          return p.productId === item.id || p.code === item.code; 
+        });
+        const isSelected = !!existingProduct;
+        const selectedIcon = isSelected ? '▶' : '';
+        const selectedClass = isSelected ? 'table-active' : '';
+        const qty = existingProduct ? existingProduct.qty : 1;
+        const total = priceValue && Number.isFinite(priceValue) ? priceValue * qty : 0;
+        
+        rowsHtml += '<tr class="' + selectedClass + '" data-catalog-row="' + escapeHtml(key) + '">';
+        rowsHtml += '<td>' + selectedIcon + '</td>';
+        rowsHtml += '<td>' + escapeHtml(item && item.code ? item.code : '-') + '</td>';
+        rowsHtml += '<td>' + escapeHtml(item && item.title ? item.title : '-') + '</td>';
+        rowsHtml += '<td class="text-end">' + priceDisplay + '</td>';
+        rowsHtml += '<td class="text-end">';
+        rowsHtml += '<input type="number" class="form-control form-control-sm" style="width: 80px;" min="1" step="1" value="' + qty + '" data-step4-catalog-qty="' + escapeHtml(key) + '">';
+        rowsHtml += '</td>';
+        rowsHtml += '<td class="text-end">' + formatCurrency(total) + '</td>';
+        rowsHtml += '<td class="text-end">';
+        if (isSelected) {
+          rowsHtml += '<button type="button" class="btn btn-sm btn-outline-danger" data-step4-catalog-remove="' + escapeHtml(key) + '">ลบ</button>';
+        } else {
+          rowsHtml += '<button type="button" class="btn btn-sm btn-outline-primary" data-step4-catalog-add="' + escapeHtml(key) + '">เพิ่ม</button>';
+        }
+        rowsHtml += '</td>';
+        rowsHtml += '</tr>';
+      });
+      console.log('🎨 Generated HTML length:', rowsHtml.length);
+      console.log('🎨 Setting innerHTML...');
+      productCatalogTableBody.innerHTML = rowsHtml;
+      console.log('✅ Table updated successfully');
+    }
+
+    async function loadProductCatalog(options) {
+      console.log('🚀 loadProductCatalog called with options:', options);
+      if (catalogState.loading) {
+        console.log('⏳ Already loading, skipping...');
+        return;
+      }
+      if (!options) options = {};
+      if (catalogState.loaded && !options.force) {
+        console.log('✅ Data already loaded, rendering...');
+        const currentFilter = productSearchInput ? productSearchInput.value : '';
+        renderProductCatalog(currentFilter);
+        return;
+      }
+      console.log('🔄 Starting fresh load...');
+      console.log('🔄 Starting to load product catalog...');
+      catalogState.loading = true;
+      setProductPickerStatus('กำลังโหลดข้อมูลสินค้า...');
+      if (productCatalogTableBody) {
+        productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">กำลังโหลดข้อมูลสินค้า...</td></tr>';
+      }
+      try {
+        const params = new URLSearchParams();
+        if (options.search) {
+          params.set('search', options.search);
+        }
+        // Set a default limit to load more products initially
+        const limit = options.limit && Number.isFinite(Number(options.limit)) ? Number(options.limit) : 1000;
+        params.set('limit', String(limit));
+        const query = params.toString();
+        const apiUrl = '/workflow/api/product-options' + (query ? '?' + query : '');
+        console.log('🌐 Fetching from API:', apiUrl);
+        const response = await fetch(apiUrl);
+        console.log('🔍 Product API Response:', response.status, response.statusText);
+        if (!response.ok) {
+          const message = await response.text();
+          console.error('❌ Product API Error:', message);
+          throw new Error(message || 'โหลดข้อมูลสินค้าไม่สำเร็จ');
+        }
+        const data = await response.json();
+        console.log('📦 Product Data Loaded:', data.length, 'items');
+        console.log('📦 First few items:', data.slice(0, 3));
+        const items = Array.isArray(data) ? data.map(normalizeProductRow).filter(function(item){ return !!item; }) : [];
+        console.log('📦 Normalized items:', items.length);
+        catalogState.products = items;
+        catalogState.loaded = true;
+        console.log('📦 Catalog state updated:', { loaded: catalogState.loaded, productsCount: catalogState.products.length });
+        catalogState.lookupByCode.clear();
+        catalogState.lookupById.clear();
+        catalogState.lookupByTitle.clear();
+        catalogState.lookupByScan.clear();
+        items.forEach(function(item){
+          if (!item) return;
+          if (item.id !== null && item.id !== undefined) {
+            catalogState.lookupById.set(String(item.id), item);
+          }
+          if (item.code) {
+            const codeKey = String(item.code).trim();
+            if (codeKey) {
+              catalogState.lookupByCode.set(codeKey, item);
+              const numericKey = Number(codeKey);
+              if (Number.isFinite(numericKey)) {
+                catalogState.lookupByCode.set(String(numericKey), item);
+              }
+            }
+          }
+          if (item.title) {
+            catalogState.lookupByTitle.set(item.title.toLowerCase(), item);
+          }
+          if (item.scancode) {
+            catalogState.lookupByScan.set(item.scancode.toLowerCase(), item);
+          }
+        });
+        const currentFilter = productSearchInput ? productSearchInput.value : '';
+        console.log('🎨 Calling renderProductCatalog with filter:', currentFilter);
+        renderProductCatalog(currentFilter);
+        setProductPickerStatus('พิมพ์เพื่อค้นหาหรือเลือกจากรายการด้านล่าง');
+        
+        // Force render multiple times to ensure table is populated
+        setTimeout(function() {
+          console.log('🔄 Force render after data load (100ms)...');
+          renderProductCatalog(currentFilter);
+        }, 100);
+        
+        setTimeout(function() {
+          console.log('🔄 Force render after data load (300ms)...');
+          renderProductCatalog(currentFilter);
+        }, 300);
+        
+        setTimeout(function() {
+          console.log('🔄 Force render after data load (500ms)...');
+          renderProductCatalog(currentFilter);
+        }, 500);
+      } catch (err) {
+        console.error('❌ Error loading product catalog:', err);
+        catalogState.loaded = false;
+        const message = err && err.message ? err.message : 'เกิดข้อผิดพลาดระหว่างโหลดสินค้า';
+        if (productCatalogTableBody) {
+          productCatalogTableBody.innerHTML = '<tr><td colspan="7" class="text-center text-danger py-3">' + escapeHtml(message) + '</td></tr>';
+        }
+        setProductPickerStatus(message);
+      } finally {
+        console.log('🏁 loadProductCatalog finished, loading:', catalogState.loading);
+        catalogState.loading = false;
+      }
+    }
+
+    function normalizeProductRow(row) {
+      if (!row || typeof row !== 'object') return null;
+      const code = row.code !== null && row.code !== undefined ? String(row.code).trim() : '';
+      const title = row.title !== null && row.title !== undefined ? String(row.title).trim() : '';
+      const scancode = row.scancode !== null && row.scancode !== undefined ? String(row.scancode).trim() : '';
+      const brand = row.ebrandname !== null && row.ebrandname !== undefined ? String(row.ebrandname).trim() : '';
+      const sigName = row.sig_name !== null && row.sig_name !== undefined ? String(row.sig_name).trim() : '';
+      return {
+        id: row.id !== null && row.id !== undefined ? Number(row.id) : null,
+        code: code,
+        title: title,
+        scancode: scancode,
+        ebrandname: brand,
+        sigName: sigName,
+        unitsale: row.unitsale !== null && row.unitsale !== undefined ? String(row.unitsale).trim() : '',
+        cost: numberOrNull(row.cost),
+        price: numberOrNull(row.price),
+        wholesale: numberOrNull(row.wholesale),
+        sugprice: numberOrNull(row.sugprice),
+        active: Number.isFinite(Number(row.active)) ? Number(row.active) : null,
+      };
+    }
+
+    function applyProductSelectionFromProduct(product, options) {
+      if (!product) return;
+      if (!options) options = {};
+      const inputValueMode = Object.prototype.hasOwnProperty.call(options, 'setInputValue') ? options.setInputValue : null;
+      const updateStatus = options.updateStatus !== false;
+      const skipPersist = !!options.skipPersist;
+      const productLabel = buildProductOptionValue(product);
+      if (updateStatus) {
+        setProductPickerStatus('เลือกสินค้า: ' + (product.title || product.code || '-'));
+      }
+      catalogState.lookupByLabel.set(productLabel.toLowerCase(), product);
+      state.lastSelectedProductId = product.id !== null && product.id !== undefined ? product.id : null;
+      if (!skipPersist) {
+        persistState();
+      }
+    }
+    async function applyProductSelectionByInput(rawValue) {
+      const value = rawValue ? rawValue.trim() : '';
+      if (!value || !catalogState.loaded) {
+        return;
+      }
+      const lower = value.toLowerCase();
+      let product = catalogState.lookupByLabel.get(lower);
+      if (!product && catalogState.lookupByCode.has(value)) {
+        product = catalogState.lookupByCode.get(value);
+      }
+      if (!product) {
+        const numericKey = Number(value);
+        if (Number.isFinite(numericKey) && catalogState.lookupByCode.has(String(numericKey))) {
+          product = catalogState.lookupByCode.get(String(numericKey));
+        }
+      }
+      if (!product && catalogState.lookupByTitle.has(lower)) {
+        product = catalogState.lookupByTitle.get(lower);
+      }
+      if (!product && catalogState.lookupByScan.has(lower)) {
+        product = catalogState.lookupByScan.get(lower);
+      }
+      if (!product) {
+        // Try to search for the product in the catalog if not found in lookup
+        const foundProduct = catalogState.products.find(item => {
+          if (!item) return false;
+          const codeMatch = item.code && String(item.code).includes(value);
+          const titleMatch = item.title && item.title.toLowerCase().includes(lower);
+          const scanMatch = item.scancode && item.scancode.toLowerCase().includes(lower);
+          return codeMatch || titleMatch || scanMatch;
+        });
+        
+        if (foundProduct) {
+          product = foundProduct;
+        }
+      }
+      if (!product) {
+        // Try to search on the server for this specific product
+        setProductPickerStatus('กำลังค้นหาสินค้า: ' + value + '...');
+        try {
+          const response = await fetch('/workflow/api/product-options?search=' + encodeURIComponent(value) + '&limit=10');
+          if (response.ok) {
+            const data = await response.json();
+            const items = Array.isArray(data) ? data.map(normalizeProductRow).filter(function(item){ return !!item; }) : [];
+            if (items.length > 0) {
+              // Found the product on server, add it to local catalog and select it
+              const foundProduct = items[0];
+              catalogState.products.push(foundProduct);
+              // Update lookup tables
+              if (foundProduct.code) {
+                catalogState.lookupByCode.set(String(foundProduct.code), foundProduct);
+              }
+              if (foundProduct.title) {
+                catalogState.lookupByTitle.set(foundProduct.title.toLowerCase(), foundProduct);
+              }
+              if (foundProduct.scancode) {
+                catalogState.lookupByScan.set(foundProduct.scancode.toLowerCase(), foundProduct);
+              }
+              product = foundProduct;
+            }
+          }
+        } catch (err) {
+          console.warn('Error searching for product on server:', err);
+        }
+        
+        if (!product) {
+          setProductPickerStatus('ไม่พบสินค้า: ' + value + ' - ลองค้นหาในรายการด้านล่างหรือเพิ่มสินค้าใหม่');
+          return;
+        }
+      }
+      applyProductSelectionFromProduct(product);
+    }
+
+    function clearProductPickerSelection() {
+      state.lastSelectedProductId = null;
+      persistState();
+      if (catalogState.loaded) {
+        setProductPickerStatus('พิมพ์เพื่อค้นหาหรือเลือกจากรายการด้านล่าง');
+      } else {
+        setProductPickerStatus('ยังไม่ได้ดึงข้อมูลสินค้า');
+      }
+    }
+    function renderDeliverySummary() {
+      if (!deliverySummaryEl) {
+        console.log('❌ deliverySummaryEl not found');
+        return;
+      }
+      console.log('🔄 renderDeliverySummary called');
+      let html = '<div class="text-muted">ยังไม่ได้เลือกข้อมูลจัดส่ง</div>';
+      try {
+        const raw = sessionStorage.getItem(deliveryKey);
+        console.log('🔍 Delivery Data from sessionStorage:', raw);
+        if (raw) {
+          const payload = JSON.parse(raw);
+          console.log('📦 Delivery Payload:', payload);
+          const delivery = payload && payload.delivery ? payload.delivery.data : null;
+          if (delivery) {
+            const lines = [];
+            const date = delivery.day || delivery.workdate || '';
+            const time = delivery.timein || delivery.worktime || '';
+            lines.push('<div><strong>' + (delivery.deliverto || 'ไม่มีข้อมูลผู้รับ') + '</strong></div>');
+            const addressParts = [delivery.addr1, delivery.addr2, delivery.homenum1, delivery.mooban1, delivery.soi1, delivery.road1, delivery.kwang1, delivery.kate1, delivery.province1, delivery.zipcode1]
+              .filter(function(part){ return part && String(part).trim(); });
+            if (addressParts.length) {
+              lines.push('<div class="text-muted">' + addressParts.join(' ') + '</div>');
+            }
+            const contact = [delivery.appttel, delivery.mobiletel]
+              .filter(function(part){ return part && String(part).trim(); })
+              .join(' / ');
+            if (contact) {
+              lines.push('<div class="text-muted">โทร: ' + contact + '</div>');
+            }
+            if (date || time) {
+              lines.push('<div class="text-muted">กำหนดจัดส่ง: ' + (date || '-') + ' ' + (time || '') + '</div>');
+            }
+            html = lines.join('');
+          }
+        }
+      } catch (err) {
+        console.warn('step4: ไม่สามารถอ่านข้อมูลจัดส่งจากขั้นก่อนหน้า', err);
+      }
+      deliverySummaryEl.innerHTML = html;
+    }
+
+    async function hydrateMediaSummary() {
+      console.log('🔄 hydrateMediaSummary called');
+      let selection = null;
+      try {
+        const raw = sessionStorage.getItem(mediaSelectionKey);
+        console.log('🔍 Media/Channel Data from sessionStorage:', raw);
+        if (raw) selection = JSON.parse(raw);
+        console.log('📦 Media/Channel Selection:', selection);
+      } catch (err) {
+        console.warn('step4: ไม่สามารถอ่านข้อมูลสื่อ/ช่องทาง', err);
+      }
+      if (!selection) {
+        if (mediaSummaryEl) mediaSummaryEl.textContent = 'ยังไม่ได้เลือก';
+        if (channelSummaryEl) channelSummaryEl.textContent = 'ยังไม่ได้เลือก';
+        if (keywordSummaryEl) keywordSummaryEl.textContent = '-';
+        if (followUpSummaryEl) followUpSummaryEl.textContent = '-';
+        return;
+      }
+      if (keywordSummaryEl) keywordSummaryEl.textContent = selection.keyword ? selection.keyword : '-';
+      if (followUpSummaryEl) {
+        if (selection.followUpDays !== null && selection.followUpDays !== undefined && selection.followUpDays !== '') {
+          followUpSummaryEl.textContent = selection.followUpDays;
+        } else {
+          followUpSummaryEl.textContent = '-';
+        }
+      }
+      try {
+        const responses = await Promise.all([
+          fetch('/workflow/api/media-options'),
+          fetch('/workflow/api/channel-options'),
+        ]);
+        let mediaName = 'ยังไม่ได้เลือก';
+        let channelNames = [];
+        if (responses[0].ok) {
+          const mediaRows = await responses[0].json();
+          const foundMedia = mediaRows.find(function(item){ return String(item.id) === String(selection.mediaId); });
+          if (foundMedia) {
+            mediaName = foundMedia.medianame || foundMedia.mediaid || '-';
+          }
+        }
+        if (responses[1].ok) {
+          const channelRows = await responses[1].json();
+          const idList = [];
+          if (selection.channelId) idList.push(String(selection.channelId));
+          if (Array.isArray(selection.channelIds)) {
+            selection.channelIds.forEach(function(id){ idList.push(String(id)); });
+          }
+          const uniqueIds = Array.from(new Set(idList));
+          channelNames = channelRows
+            .filter(function(item){ return uniqueIds.includes(String(item.id)); })
+            .map(function(item){ return item.channelname || item.channelid || '-'; });
+        }
+        if (mediaSummaryEl) mediaSummaryEl.textContent = mediaName;
+        if (channelSummaryEl) channelSummaryEl.textContent = channelNames.length ? channelNames.join(', ') : 'ยังไม่ได้เลือก';
+      } catch (err) {
+        console.warn('step4: โหลดข้อมูลสื่อ/ช่องทางไม่สำเร็จ', err);
+        if (mediaSummaryEl) mediaSummaryEl.textContent = 'โหลดข้อมูลไม่สำเร็จ';
+        if (channelSummaryEl) channelSummaryEl.textContent = 'โหลดข้อมูลไม่สำเร็จ';
+      }
+    }
+
+    // updateShippingToggleLabel function removed - no longer needed with table selection
+
+    function renderShippingOptions() {
+      if (!shippingTable) return;
+      if (!shippingOptions.length) {
+        shippingTable.innerHTML = '<tr><td colspan="2" class="text-center text-muted py-3">ไม่มีตัวเลือกขนส่ง</td></tr>';
+        if (shippingEmptyMessage) shippingEmptyMessage.classList.remove('d-none');
+        return;
+      }
+      
+      let rowsHtml = '';
+      shippingOptions.forEach(function(option){
+        const isSelected = state.shipping.method === option.id;
+        const selectedIcon = isSelected ? '▶' : '';
+        const selectedClass = isSelected ? 'table-active' : '';
+        
+        rowsHtml += '<tr class="' + selectedClass + '" data-shipping-option="' + escapeHtml(option.id) + '">';
+        rowsHtml += '<td>' + selectedIcon + '</td>';
+        rowsHtml += '<td>' + escapeHtml(option.label) + '</td>';
+        rowsHtml += '</tr>';
+      });
+      
+      shippingTable.innerHTML = rowsHtml;
+      if (shippingEmptyMessage) shippingEmptyMessage.classList.add('d-none');
+    }
+
+    function addProductToCart(product, qty) {
+      if (!product) return;
+      const priceValue = determineProductPrice(product);
+      if (priceValue === null || !Number.isFinite(priceValue)) {
+        alert('ไม่สามารถเพิ่มสินค้านี้ได้ เนื่องจากไม่มีราคา');
+        return;
+      }
+      
+      const existingIndex = state.products.findIndex(function(p){ 
+        return p.productId === product.id || p.code === product.code; 
+      });
+      
+      const productData = {
+        id: 'p-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+        productId: product.id,
+        code: product.code || '',
+        title: product.title || '',
+        ebrandname: product.ebrandname || product.brand || '',
+        sigName: product.sigName || product.sig_name || '',
+        unitsale: product.unitsale || '',
+        cost: product.cost !== null && product.cost !== undefined ? Number(product.cost) : null,
+        price: Number(priceValue),
+        qty: Number(qty) || 1,
+        discount: 0,
+      };
+      
+      if (existingIndex >= 0) {
+        state.products[existingIndex] = productData;
+      } else {
+        state.products.push(productData);
+      }
+      
+      renderProductCatalog(productSearchInput ? productSearchInput.value : '');
+      computeTotals();
+      persistState();
+    }
+    
+    function removeProductFromCart(product) {
+      if (!product) return;
+      const index = state.products.findIndex(function(p){ 
+        return p.productId === product.id || p.code === product.code; 
+      });
+      if (index >= 0) {
+        state.products.splice(index, 1);
+        renderProductCatalog(productSearchInput ? productSearchInput.value : '');
+        computeTotals();
+        persistState();
+      }
+    }
+    
+    function updateProductQuantity(product, qty) {
+      if (!product) return;
+      const index = state.products.findIndex(function(p){ 
+        return p.productId === product.id || p.code === product.code; 
+      });
+      if (index >= 0) {
+        state.products[index].qty = Number(qty) || 1;
+        renderProductCatalog(productSearchInput ? productSearchInput.value : '');
+        computeTotals();
+        persistState();
+      }
+    }
+
+    function computeTotals() {
+      let subtotal = 0;
+      let discountTotal = 0;
+      let qtyTotal = 0;
+      state.products.forEach(function(item){
+        const price = Number(item.price) || 0;
+        const qty = Number(item.qty) || 0;
+        const discount = Number(item.discount) || 0;
+        subtotal += price * qty;
+        discountTotal += discount;
+        qtyTotal += qty;
+      });
+      const shippingCost = state.shipping.noCharge ? 0 : Number(state.shipping.shippingCost) || 0;
+      const total = Math.max(subtotal - discountTotal + shippingCost, 0);
+      if (summaryCountEl) summaryCountEl.textContent = state.products.length + ' รายการ';
+      if (summaryQtyEl) summaryQtyEl.textContent = String(qtyTotal);
+      if (summarySubtotalEl) summarySubtotalEl.textContent = formatCurrency(subtotal);
+      if (summaryDiscountEl) summaryDiscountEl.textContent = formatCurrency(discountTotal);
+      if (summaryShippingEl) summaryShippingEl.textContent = formatCurrency(shippingCost);
+      if (summaryTotalEl) summaryTotalEl.textContent = formatCurrency(total);
+    }
+
+    function syncShippingForm() {
+      if (!shippingForm) return;
+      if (shippingSelect) {
+        if (state.shipping.method && shippingOptions.some(function(option){ return option.id === state.shipping.method; })) {
+          shippingSelect.value = state.shipping.method;
+        } else {
+          shippingSelect.value = '';
+        }
+      }
+      updateShippingToggleLabel();
+      if (shippingForm.elements.coupon) shippingForm.elements.coupon.value = state.shipping.coupon || '';
+      if (shippingForm.elements.shippingCost) {
+        shippingForm.elements.shippingCost.value = state.shipping.noCharge ? '' : (state.shipping.shippingCost || '');
+        shippingForm.elements.shippingCost.disabled = !!state.shipping.noCharge;
+      }
+      if (noChargeCheckbox) noChargeCheckbox.checked = !!state.shipping.noCharge;
+      if (shippingForm.elements.packageCount) shippingForm.elements.packageCount.value = state.shipping.packageCount || '';
+      if (shippingForm.elements.deliveryType) shippingForm.elements.deliveryType.value = state.shipping.deliveryType || 'standard';
+      if (shippingForm.elements.remark) shippingForm.elements.remark.value = state.shipping.remark || '';
+      if (notifyInput1) notifyInput1.value = state.shipping.notify1 || '';
+      if (notifyInput2) notifyInput2.value = state.shipping.notify2 || '';
+      if (symptomInput) symptomInput.value = state.shipping.symptom || '';
+      if (urgencyGroup) {
+        const radios = urgencyGroup.querySelectorAll('input[type="radio"]');
+        radios.forEach(function(radio){
+          radio.checked = radio.value === state.shipping.urgency;
+        });
+      }
+    }
+    setProductPickerStatus('ยังไม่ได้ดึงข้อมูลรายการสินค้า');
+
+
+    if (productSearchInput) {
+      console.log('🔍 Setting up product search input listeners...');
+      productSearchInput.addEventListener('input', function(){
+        console.log('🔍 Product search input changed:', productSearchInput.value);
+        if (catalogState.loaded) {
+          const term = productSearchInput.value;
+          console.log('🔍 Rendering product catalog with search term:', term);
+          renderProductCatalog(term);
+        } else {
+          console.log('⚠️ Catalog not loaded yet, forcing load...');
+          loadProductCatalog({ force: true, search: productSearchInput.value });
+        }
+      });
+      productSearchInput.addEventListener('keydown', function(event){
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          console.log('🔍 Enter pressed, loading product catalog...');
+          loadProductCatalog({ force: true, search: productSearchInput.value });
+        }
+      });
+      productSearchInput.addEventListener('blur', function(){
+        if (!catalogState.loaded && productSearchInput.value.trim()) {
+          console.log('🔍 Search input blurred, loading product catalog...');
+          loadProductCatalog({ force: true, search: productSearchInput.value });
+        }
+      });
+    } else {
+      console.log('❌ productSearchInput not found');
+    }
+
+
+    if (productCatalogTableBody) {
+      productCatalogTableBody.addEventListener('click', function(event){
+        const rawTarget = event.target;
+        if (!rawTarget || !(rawTarget instanceof HTMLElement)) return;
+        
+        // Handle add button
+        const addButton = rawTarget.closest('[data-step4-catalog-add]');
+        if (addButton) {
+          const key = addButton.getAttribute('data-step4-catalog-add') || '';
+          if (!key) return;
+          let product = null;
+          if (key.startsWith('id:')) {
+            const idKey = key.slice(3);
+            if (catalogState.lookupById.has(idKey)) {
+              product = catalogState.lookupById.get(idKey);
+            }
+          } else if (key.startsWith('code:')) {
+            const codeKey = key.slice(5);
+            if (catalogState.lookupByCode.has(codeKey)) {
+              product = catalogState.lookupByCode.get(codeKey);
+            }
+          }
+          if (product) {
+            const qtyInput = addButton.closest('tr').querySelector('[data-step4-catalog-qty]');
+            const qty = qtyInput ? Number(qtyInput.value) || 1 : 1;
+            addProductToCart(product, qty);
+          }
+          return;
+        }
+        
+        // Handle remove button
+        const removeButton = rawTarget.closest('[data-step4-catalog-remove]');
+        if (removeButton) {
+          const key = removeButton.getAttribute('data-step4-catalog-remove') || '';
+          if (!key) return;
+          let product = null;
+          if (key.startsWith('id:')) {
+            const idKey = key.slice(3);
+            if (catalogState.lookupById.has(idKey)) {
+              product = catalogState.lookupById.get(idKey);
+            }
+          } else if (key.startsWith('code:')) {
+            const codeKey = key.slice(5);
+            if (catalogState.lookupByCode.has(codeKey)) {
+              product = catalogState.lookupByCode.get(codeKey);
+            }
+          }
+          if (product) {
+            removeProductFromCart(product);
+          }
+          return;
+        }
+      });
+      
+      // Handle quantity changes
+      productCatalogTableBody.addEventListener('input', function(event){
+        const target = event.target;
+        if (target && target.hasAttribute('data-step4-catalog-qty')) {
+          const key = target.getAttribute('data-step4-catalog-qty') || '';
+          const qty = Number(target.value) || 1;
+          if (key) {
+            let product = null;
+            if (key.startsWith('id:')) {
+              const idKey = key.slice(3);
+              if (catalogState.lookupById.has(idKey)) {
+                product = catalogState.lookupById.get(idKey);
+              }
+            } else if (key.startsWith('code:')) {
+              const codeKey = key.slice(5);
+              if (catalogState.lookupByCode.has(codeKey)) {
+                product = catalogState.lookupByCode.get(codeKey);
+              }
+            }
+            if (product) {
+              updateProductQuantity(product, qty);
+            }
+          }
+        }
+      });
+    }
+
+
+    if (productClearBtn) {
+      productClearBtn.addEventListener('click', function(){
+        if (!state.products.length) return;
+        if (!confirm('ต้องการล้างรายการสินค้าทั้งหมดหรือไม่?')) return;
+        state.products = [];
+        renderProductCatalog();
+        computeTotals();
+        persistState();
+      });
+    }
+
+    if (shippingSelect) {
+      shippingSelect.addEventListener('change', function(){
+        state.shipping.method = shippingSelect.value;
+        persistState();
+        updateShippingToggleLabel();
+      });
+    }
+
+    if (shippingTable) {
+      shippingTable.addEventListener('click', function(event){
+        const target = event.target.closest('[data-shipping-option]');
+        if (!target) return;
+        
+        const optionId = target.getAttribute('data-shipping-option');
+        if (!optionId) return;
+        
+        state.shipping.method = optionId;
+        persistState();
+        renderShippingOptions(); // Re-render to update selection
+        console.log('🚚 Shipping method selected:', optionId);
+      });
+    }
+
+    // Shipping toggle functionality removed - now using table selection
+    if (shippingForm) {
+      shippingForm.addEventListener('input', function(event){
+        const target = event.target;
+        if (!target || (target.nodeName !== 'INPUT' && target.nodeName !== 'TEXTAREA' && target.nodeName !== 'SELECT')) return;
+        const name = target.name;
+        if (!name) return;
+        if (name === 'shippingCost') {
+          state.shipping.shippingCost = target.value;
+        } else if (Object.prototype.hasOwnProperty.call(state.shipping, name)) {
+          state.shipping[name] = target.value;
+        }
+        computeTotals();
+        persistState();
+      });
+    }
+
+    if (noChargeCheckbox) {
+      noChargeCheckbox.addEventListener('change', function(){
+        const checked = !!noChargeCheckbox.checked;
+        state.shipping.noCharge = checked;
+        if (shippingForm && shippingForm.elements.shippingCost) {
+          shippingForm.elements.shippingCost.disabled = checked;
+          if (checked) {
+            shippingForm.elements.shippingCost.value = '';
+          }
+        }
+        computeTotals();
+        persistState();
+      });
+    }
+
+    if (notifyInput1) {
+      notifyInput1.addEventListener('input', function(){
+        state.shipping.notify1 = notifyInput1.value || '';
+        persistState();
+      });
+    }
+
+    if (notifyInput2) {
+      notifyInput2.addEventListener('input', function(){
+        state.shipping.notify2 = notifyInput2.value || '';
+        persistState();
+      });
+    }
+
+    if (symptomInput) {
+      symptomInput.addEventListener('input', function(){
+        state.shipping.symptom = symptomInput.value || '';
+        persistState();
+      });
+    }
+
+    if (urgencyGroup) {
+      urgencyGroup.addEventListener('change', function(event){
+        const target = event.target;
+        if (target && target.nodeName === 'INPUT' && target.name === 'urgencyLevel') {
+          state.shipping.urgency = target.value || 'normal';
+          persistState();
+        }
+      });
+    }
+
+    // next button now navigates via anchor above
+
+    // Load data from previous steps
+    console.log('🔄 Initializing step4...');
+    console.log('🔍 Element checks:');
+    console.log('- deliverySummaryEl:', !!deliverySummaryEl);
+    console.log('- mediaSummaryEl:', !!mediaSummaryEl);
+    console.log('- channelSummaryEl:', !!channelSummaryEl);
+    console.log('- productCatalogTableBody:', !!productCatalogTableBody);
+    console.log('- productSearchInput:', !!productSearchInput);
+    
+    renderDeliverySummary();
+    hydrateMediaSummary();
+    renderShippingOptions();
+    renderProductCatalog();
+    computeTotals();
+    syncShippingForm();
+    console.log('🔄 Calling loadProductCatalog...');
+    loadProductCatalog();
+    
+    // Force load product catalog immediately
+    setTimeout(function() {
+      console.log('🔄 Force loading product catalog immediately...');
+      if (!catalogState.loaded && !catalogState.loading) {
+        loadProductCatalog({ force: true });
+      }
+    }, 100);
+    
+    // Force render product catalog immediately after load
+    setTimeout(function() {
+      console.log('🔄 Force rendering product catalog after delay...');
+      renderProductCatalog();
+    }, 500);
+    
+    // Additional force load and render after 1 second to ensure product catalog loads
+    setTimeout(function() {
+      console.log('🔄 Force loading product catalog after 1 second...');
+      loadProductCatalog({ force: true });
+      setTimeout(function() {
+        console.log('🔄 Force rendering after load...');
+        renderProductCatalog();
+      }, 500);
+    }, 1000);
+    
+    // Final force render after 3 seconds to ensure everything is loaded
+    setTimeout(function() {
+      console.log('🔄 Final force render after 3 seconds...');
+      renderProductCatalog();
+    }, 3000);
+    
+    // Debug: Check what's in sessionStorage
+    console.log('🔍 All sessionStorage keys:', Object.keys(sessionStorage));
+    console.log('🔍 Delivery key exists:', sessionStorage.getItem(deliveryKey) !== null);
+    console.log('🔍 Media key exists:', sessionStorage.getItem(mediaSelectionKey) !== null);
+    
+    // Check if we have data from previous steps
+    const deliveryData = sessionStorage.getItem(deliveryKey);
+    const mediaData = sessionStorage.getItem(mediaSelectionKey);
+    
+    console.log('🔍 Checking sessionStorage keys:');
+    console.log('- deliveryKey:', deliveryKey);
+    console.log('- mediaSelectionKey:', mediaSelectionKey);
+    console.log('- All sessionStorage keys:', Object.keys(sessionStorage));
+    
+      if (!deliveryData) {
+        console.warn('⚠️ No delivery data found in sessionStorage. Please complete step 2 first.');
+        console.log('🔍 Available keys:', Object.keys(sessionStorage));
+        // Show message in UI
+        if (deliverySummaryEl) {
+          deliverySummaryEl.innerHTML = '<div class="text-warning">⚠️ กรุณาไปที่ขั้นตอนที่ 2 เพื่อเลือกข้อมูลจัดส่ง</div>';
+        }
+      } else {
+        console.log('✅ Delivery data found:', deliveryData);
+      }
+      
+      if (!mediaData) {
+        console.warn('⚠️ No media/channel data found in sessionStorage. Please complete step 3 first.');
+        console.log('🔍 Available keys:', Object.keys(sessionStorage));
+        // Show message in UI
+        if (mediaSummaryEl) mediaSummaryEl.textContent = '⚠️ กรุณาไปที่ขั้นตอนที่ 3';
+        if (channelSummaryEl) channelSummaryEl.textContent = '⚠️ กรุณาไปที่ขั้นตอนที่ 3';
+      } else {
+        console.log('✅ Media/Channel data found:', mediaData);
+      }
+  })();
+</script>
+
+

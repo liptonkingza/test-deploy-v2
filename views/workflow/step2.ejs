@@ -1,0 +1,11 @@
+<% const pageTitle = title || 'สร้างรายการใหม่ – ขั้นตอนที่ 2'; %>
+<%- include('../workflow_layout', {
+  title: pageTitle,
+  currentStep: 'step2',
+  customerId: customerId || '',
+  salesRepOptions: salesRepOptions || [],
+  body: include('./step2_content', {
+    customerId: customerId || ''
+  })
+}) %>
+

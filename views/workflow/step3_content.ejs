@@ -1,0 +1,839 @@
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+  <div>
+    <h1 class="h4 fw-semibold mb-1">ขั้นตอนที่ 3/5 – เลือกสื่อและช่องทาง</h1>
+    <p class="text-muted mb-0">กรุณาเลือกสื่อ (Media) และช่องทาง (Channel) ที่ใช้ในรายการนี้ หรือเพิ่มตัวเลือกใหม่ได้ทันที</p>
+  </div>
+  <a class="btn btn-outline-secondary" href="/workflow/step2?customerId=<%= customerId %>">ย้อนกลับข้อมูลการจัดส่ง</a>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">สรุปข้อมูลจัดส่งที่เลือก</div>
+  <div class="card-body" data-delivery-summary>
+    <div class="text-muted">กำลังโหลดข้อมูลจากขั้นตอนก่อนหน้า...</div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>รายการสื่อ (Media)</strong>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-media-refresh>รีเฟรช</button>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">ค้นหาสื่อ</label>
+          <input type="search" class="form-control" placeholder="ค้นหาสื่อ" data-media-search>
+        </div>
+        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+          <table class="table table-hover table-sm align-middle mb-0" data-media-table>
+            <thead class="table-light sticky-top">
+              <tr>
+                <th style="width:42px"></th>
+                <th>วันที่</th>
+                <th>เลขที่</th>
+                <th>สื่อ</th>
+                <th>หมายเหตุ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="text-center text-muted py-4">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3">
+          <div class="row g-2">
+            <div class="col-4">
+              <input type="text" class="form-control form-control-sm" data-media-selected-date readonly>
+            </div>
+            <div class="col-4">
+              <input type="text" class="form-control form-control-sm" data-media-selected-number readonly>
+            </div>
+            <div class="col-4">
+              <input type="text" class="form-control form-control-sm" data-media-selected-name readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-success" data-media-new>New</button>
+          <button type="button" class="btn btn-success" data-media-edit>Edit</button>
+        </div>
+        <form class="row g-2 mt-3 d-none" data-media-form>
+          <div class="col-12 col-sm-4">
+            <input type="text" name="mediaid" class="form-control" placeholder="รหัส (ไม่บังคับ)" maxlength="50">
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" name="medianame" class="form-control" placeholder="ชื่อสื่อ *" required maxlength="255">
+          </div>
+          <div class="col-12">
+            <textarea name="remark" class="form-control" rows="2" placeholder="หมายเหตุ"></textarea>
+          </div>
+          <div class="col-12 d-grid d-sm-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-success" data-media-submit>เพิ่มสื่อใหม่</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>รายการช่องทาง (Channel)</strong>
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-channel-refresh>รีเฟรช</button>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">ค้นหา Channel</label>
+          <input type="search" class="form-control" placeholder="ค้นหา Channel" data-channel-search>
+        </div>
+        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+          <table class="table table-hover table-sm align-middle mb-0" data-channel-table>
+            <thead class="table-light sticky-top">
+              <tr>
+                <th style="width:42px"></th>
+                <th>Channel</th>
+                <th>ช่องทางที่ชื่อ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3" class="text-center text-muted py-4">กำลังโหลดข้อมูล...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3">
+          <div class="row g-2">
+            <div class="col-6">
+              <input type="text" class="form-control form-control-sm" data-channel-selected-id readonly>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control form-control-sm" data-channel-selected-name readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-success" data-channel-new>New</button>
+          <button type="button" class="btn btn-success" data-channel-edit>Edit</button>
+        </div>
+        <form class="row g-2 mt-3 d-none" data-channel-form>
+          <div class="col-12 col-sm-4">
+            <input type="text" name="channelid" class="form-control" placeholder="รหัส (ไม่บังคับ)" maxlength="50">
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" name="channelname" class="form-control" placeholder="ชื่อช่องทาง *" required maxlength="255">
+          </div>
+          <div class="col-12">
+            <textarea name="remark" class="form-control" rows="2" placeholder="หมายเหตุ"></textarea>
+          </div>
+          <div class="col-12 d-grid d-sm-flex gap-2 justify-content-end">
+            <button type="submit" class="btn btn-success" data-channel-submit>เพิ่มช่องทางใหม่</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-header">ข้อมูลเพิ่มเติม</div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-12 col-md-8">
+        <div class="row g-2">
+          <div class="col-3">
+            <label class="form-label">Keyword</label>
+          </div>
+          <div class="col-9">
+            <textarea class="form-control" id="keywordInput" data-keyword-input rows="3" placeholder="ระบุ Keyword สำหรับแคมเปญนี้"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="row g-2">
+          <div class="col-4">
+            <label class="form-label">ติดตามผลใน</label>
+          </div>
+          <div class="col-8">
+            <div class="input-group">
+              <input type="number" class="form-control" id="followUpInput" data-followup-input min="0" step="1" placeholder="เช่น 7">
+              <span class="input-group-text">วัน</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end gap-2 mt-4">
+  <button type="button" class="btn btn-primary" data-step3-next disabled>ไปขั้นตอนถัดไป</button>
+</div>
+
+<script>
+  (function(){
+    const customerId = '<%= customerId %>';
+    const deliveryKey = 'workflow.selectedDelivery';
+    const selectionKey = 'workflow.mediaChannelSelection';
+
+    const deliverySummaryEl = document.querySelector('[data-delivery-summary]');
+    const mediaTable = document.querySelector('[data-media-table] tbody');
+    const channelTable = document.querySelector('[data-channel-table] tbody');
+    const mediaSearch = document.querySelector('[data-media-search]');
+    const channelSearch = document.querySelector('[data-channel-search]');
+    const mediaSelectedDate = document.querySelector('[data-media-selected-date]');
+    const mediaSelectedNumber = document.querySelector('[data-media-selected-number]');
+    const mediaSelectedName = document.querySelector('[data-media-selected-name]');
+    const channelSelectedId = document.querySelector('[data-channel-selected-id]');
+    const channelSelectedName = document.querySelector('[data-channel-selected-name]');
+    const keywordInput = document.querySelector('[data-keyword-input]');
+    const followUpInput = document.querySelector('[data-followup-input]');
+    const mediaForm = document.querySelector('[data-media-form]');
+    const channelForm = document.querySelector('[data-channel-form]');
+    const mediaRefreshBtn = document.querySelector('[data-media-refresh]');
+    const channelRefreshBtn = document.querySelector('[data-channel-refresh]');
+    const mediaNewBtn = document.querySelector('[data-media-new]');
+    const mediaEditBtn = document.querySelector('[data-media-edit]');
+    const channelNewBtn = document.querySelector('[data-channel-new]');
+    const channelEditBtn = document.querySelector('[data-channel-edit]');
+    const nextBtn = document.querySelector('[data-step3-next]');
+
+    function setStatus(element, message) {
+      if (element) {
+        element.textContent = message;
+      }
+    }
+
+    function updateNextButtonState() {
+      if (!nextBtn) return;
+      const canProceed = !!(state.media.selectedId && state.channel.selectedId);
+      if (canProceed) {
+        nextBtn.removeAttribute('disabled');
+      } else {
+        nextBtn.setAttribute('disabled', 'disabled');
+      }
+    }
+
+    let deliverySelection = null;
+    try {
+      const raw = sessionStorage.getItem(deliveryKey);
+      if (raw) {
+        deliverySelection = JSON.parse(raw);
+      }
+    } catch (err) {
+      // ignore parse errors
+    }
+
+    if (!deliverySelection || !deliverySelection.delivery) {
+      if (deliverySummaryEl) {
+        deliverySummaryEl.innerHTML = '<div class="text-danger">ไม่พบข้อมูลจากขั้นตอนก่อนหน้า กรุณากลับไปเลือกข้อมูลการจัดส่ง</div>';
+      }
+    }
+
+    const state = {
+      media: { options: [], selectedId: null, loaded: false, loading: false },
+      channel: { options: [], selectedId: null, loaded: false, loading: false },
+      keyword: '',
+      followUpDays: '',
+      savedSelection: (function(){
+        try {
+          const raw = sessionStorage.getItem(selectionKey);
+          return raw ? JSON.parse(raw) : null;
+        } catch (err) {
+          return null;
+        }
+      })()
+    };
+
+    if (state.savedSelection && state.savedSelection.mediaId) {
+      state.media.selectedId = String(state.savedSelection.mediaId);
+    }
+    if (state.savedSelection) {
+      if (state.savedSelection.channelId) {
+        state.channel.selectedId = String(state.savedSelection.channelId);
+      } else if (Array.isArray(state.savedSelection.channelIds) && state.savedSelection.channelIds.length) {
+        state.channel.selectedId = String(state.savedSelection.channelIds[0]);
+      }
+    }
+
+    if (state.savedSelection && typeof state.savedSelection.keyword === 'string') {
+      state.keyword = state.savedSelection.keyword;
+    }
+    if (state.savedSelection) {
+      const rawFollowUp = state.savedSelection.followUpDays;
+      if (rawFollowUp !== undefined && rawFollowUp !== null && rawFollowUp !== '') {
+        state.followUpDays = String(rawFollowUp);
+      }
+    }
+
+    function renderDeliverySummary() {
+      if (!deliverySummaryEl) {
+        return;
+      }
+      const delivery = deliverySelection && deliverySelection.delivery && deliverySelection.delivery.data;
+      if (!delivery) {
+        deliverySummaryEl.innerHTML = '<div class="text-danger">ไม่พบข้อมูลจัดส่งที่เลือกไว้</div>';
+        return;
+      }
+      const date = delivery.day || delivery.workdate || '';
+      const time = delivery.timein || delivery.worktime || '';
+      const recipient = delivery.deliverto || 'ไม่ระบุ';
+      const phone = delivery.appttel || delivery.mobiletel || '-';
+      const addressParts = [
+        delivery.addr1,
+        delivery.addr2,
+        delivery.homenum1,
+        delivery.mooban1,
+        delivery.soi1,
+        delivery.road1,
+        delivery.kwang1,
+        delivery.kate1,
+        delivery.province1,
+        delivery.zipcode1
+      ].filter(Boolean);
+      const address = addressParts.join(' ');
+      const html = [
+        '<dl class="row mb-0">',
+        '<dt class="col-sm-3">วันเวลา</dt><dd class="col-sm-9">' + (date || '-') + ' ' + (time || '') + '</dd>',
+        '<dt class="col-sm-3">ผู้รับ</dt><dd class="col-sm-9">' + recipient + '</dd>',
+        '<dt class="col-sm-3">โทรศัพท์</dt><dd class="col-sm-9">' + phone + '</dd>',
+        '<dt class="col-sm-3">ที่อยู่</dt><dd class="col-sm-9">' + (address || '-') + '</dd>',
+        '</dl>'
+      ].join('');
+      deliverySummaryEl.innerHTML = html;
+    }
+
+    function renderMediaTable() {
+      if (!mediaTable) {
+        console.log('Media table not found');
+        return;
+      }
+      console.log('Rendering media table with options:', state.media.options);
+      if (!state.media.options.length) {
+        mediaTable.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">ยังไม่มีข้อมูลสื่อ</td></tr>';
+        return;
+      }
+      const currentId = state.media.selectedId ? String(state.media.selectedId) : null;
+      const items = state.media.options.map(function(item){
+        const value = String(item.id);
+        const date = item.created_at ? new Date(item.created_at).toLocaleDateString('th-TH') : '-';
+        const number = item.mediaid || '-';
+        const name = item.medianame || '-';
+        const remark = item.remark || '-';
+        const selectedClass = currentId === value ? 'table-active' : '';
+        const selectedIcon = currentId === value ? '▶' : '';
+        return `
+          <tr class="${selectedClass}" data-media-id="${value}">
+            <td>${selectedIcon}</td>
+            <td>${date}</td>
+            <td>${number}</td>
+            <td>${name}</td>
+            <td>${remark}</td>
+          </tr>
+        `;
+      });
+      mediaTable.innerHTML = items.join('');
+    }
+
+    function renderChannelTable() {
+      if (!channelTable) {
+        console.log('Channel table not found');
+        return;
+      }
+      console.log('Rendering channel table with options:', state.channel.options);
+      if (!state.channel.options.length) {
+        channelTable.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">ยังไม่มีข้อมูลช่องทาง</td></tr>';
+        return;
+      }
+      const currentId = state.channel.selectedId ? String(state.channel.selectedId) : null;
+      const items = state.channel.options.map(function(item){
+        const value = String(item.id);
+        const channelId = item.channelid || '-';
+        const channelName = item.channelname || '-';
+        const selectedClass = currentId === value ? 'table-active' : '';
+        const selectedIcon = currentId === value ? '▶' : '';
+        return `
+          <tr class="${selectedClass}" data-channel-id="${value}">
+            <td>${selectedIcon}</td>
+            <td>${channelId}</td>
+            <td>${channelName}</td>
+          </tr>
+        `;
+      });
+      channelTable.innerHTML = items.join('');
+    }
+
+    function renderSelectedMedia() {
+      if (!state.media.selectedId) {
+        if (mediaSelectedDate) mediaSelectedDate.value = '';
+        if (mediaSelectedNumber) mediaSelectedNumber.value = '';
+        if (mediaSelectedName) mediaSelectedName.value = '';
+        return;
+      }
+      const selectedItem = state.media.options.find(item => String(item.id) === String(state.media.selectedId));
+      if (selectedItem) {
+        if (mediaSelectedDate) {
+          const date = selectedItem.created_at ? new Date(selectedItem.created_at).toLocaleDateString('th-TH') : '';
+          mediaSelectedDate.value = date;
+        }
+        if (mediaSelectedNumber) {
+          mediaSelectedNumber.value = selectedItem.mediaid || '';
+        }
+        if (mediaSelectedName) {
+          mediaSelectedName.value = selectedItem.medianame || '';
+        }
+      }
+    }
+
+    function renderSelectedChannel() {
+      if (!state.channel.selectedId) {
+        if (channelSelectedId) channelSelectedId.value = '';
+        if (channelSelectedName) channelSelectedName.value = '';
+        return;
+      }
+      const selectedItem = state.channel.options.find(item => String(item.id) === String(state.channel.selectedId));
+      if (selectedItem) {
+        if (channelSelectedId) {
+          channelSelectedId.value = selectedItem.channelid || '';
+        }
+        if (channelSelectedName) {
+          channelSelectedName.value = selectedItem.channelname || '';
+        }
+      }
+    }
+
+    function renderExtraFields() {
+      if (keywordInput) {
+        keywordInput.value = state.keyword || '';
+      }
+      if (followUpInput) {
+        followUpInput.value = state.followUpDays || '';
+      }
+    }
+
+    function persistSelection() {
+      try {
+        const keywordValue = (state.keyword || '').trim();
+        const followUpRaw = typeof state.followUpDays === 'string' ? state.followUpDays.trim() : state.followUpDays;
+        let followUpDays = null;
+        if (followUpRaw !== '' && followUpRaw !== null && followUpRaw !== undefined) {
+          const numeric = Number(followUpRaw);
+          followUpDays = Number.isFinite(numeric) && numeric >= 0 ? numeric : null;
+        }
+        const payload = {
+          mediaId: state.media.selectedId,
+          channelId: state.channel.selectedId,
+          keyword: keywordValue,
+          followUpDays: followUpDays
+        };
+        sessionStorage.setItem(selectionKey, JSON.stringify(payload));
+      } catch (err) {
+        // ignore storage errors
+      }
+    }
+
+    async function loadMediaOptions(options) {
+      console.log('Loading media options...');
+      if (!mediaTable) {
+        console.log('Media table not found, cannot load');
+        return;
+      }
+      const opts = options || {};
+      if (state.media.loading) {
+        console.log('Media already loading, skipping');
+        return;
+      }
+      if (state.media.loaded && !opts.force) {
+        console.log('Media already loaded, skipping');
+        return;
+      }
+      console.log('Starting media load...');
+      state.media.loading = true;
+      if (mediaTable) {
+        mediaTable.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">กำลังโหลด...</td></tr>';
+      }
+      try {
+        const res = await fetch('/workflow/api/media-options');
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'โหลดข้อมูลสื่อไม่สำเร็จ');
+        }
+        const data = await res.json();
+        console.log('Media data loaded:', data);
+        state.media.options = Array.isArray(data) ? data : [];
+        state.media.loaded = true;
+        if (state.media.selectedId) {
+          const exists = state.media.options.some(function(item){
+            return String(item.id) === String(state.media.selectedId);
+          });
+          if (!exists) {
+            state.media.selectedId = null;
+          }
+        }
+        if (!state.media.selectedId && opts.selectFirstIfEmpty && state.media.options.length) {
+          state.media.selectedId = String(state.media.options[0].id);
+        }
+        renderMediaTable();
+        renderSelectedMedia();
+        persistSelection();
+        updateNextButtonState();
+      } catch (err) {
+        if (mediaTable) {
+          mediaTable.innerHTML = '<tr><td colspan="5" class="text-center text-danger py-4">' + (err && err.message ? err.message : 'โหลดข้อมูลสื่อไม่สำเร็จ') + '</td></tr>';
+        }
+        state.media.loaded = false;
+      } finally {
+        state.media.loading = false;
+      }
+    }
+
+    async function loadChannelOptions(options) {
+      console.log('Loading channel options...');
+      if (!channelTable) {
+        console.log('Channel table not found, cannot load');
+        return;
+      }
+      const opts = options || {};
+      if (state.channel.loading) {
+        console.log('Channel already loading, skipping');
+        return;
+      }
+      if (state.channel.loaded && !opts.force) {
+        console.log('Channel already loaded, skipping');
+        return;
+      }
+      console.log('Starting channel load...');
+      state.channel.loading = true;
+      if (channelTable) {
+        channelTable.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-4">กำลังโหลด...</td></tr>';
+      }
+      try {
+        const res = await fetch('/workflow/api/channel-options');
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || 'โหลดข้อมูลช่องทางไม่สำเร็จ');
+        }
+        const data = await res.json();
+        console.log('Channel data loaded:', data);
+        state.channel.options = Array.isArray(data) ? data : [];
+        state.channel.loaded = true;
+        if (state.channel.selectedId) {
+          const exists = state.channel.options.some(function(item){
+            return String(item.id) === String(state.channel.selectedId);
+          });
+          if (!exists) {
+            state.channel.selectedId = null;
+          }
+        }
+        if (!state.channel.selectedId && opts.selectFirstIfEmpty && state.channel.options.length) {
+          state.channel.selectedId = String(state.channel.options[0].id);
+        }
+        renderChannelTable();
+        renderSelectedChannel();
+        persistSelection();
+        updateNextButtonState();
+      } catch (err) {
+        if (channelTable) {
+          channelTable.innerHTML = '<tr><td colspan="3" class="text-center text-danger py-4">' + (err && err.message ? err.message : 'โหลดข้อมูลช่องทางไม่สำเร็จ') + '</td></tr>';
+        }
+        state.channel.loaded = false;
+      } finally {
+        state.channel.loading = false;
+      }
+    }
+
+    if (mediaTable) {
+      mediaTable.addEventListener('click', function(event){
+        const row = event.target.closest('tr[data-media-id]');
+        if (row) {
+          const mediaId = row.getAttribute('data-media-id');
+          state.media.selectedId = mediaId;
+          renderMediaTable();
+          renderSelectedMedia();
+          persistSelection();
+          updateNextButtonState();
+        }
+      });
+    }
+
+    if (mediaSearch) {
+      mediaSearch.addEventListener('input', function(event){
+        const keyword = event.target.value.toLowerCase().trim();
+        const filteredOptions = state.media.options.filter(function(item){
+          const name = (item.medianame || '').toLowerCase();
+          const id = (item.mediaid || '').toLowerCase();
+          const remark = (item.remark || '').toLowerCase();
+          return name.includes(keyword) || id.includes(keyword) || remark.includes(keyword);
+        });
+        
+        // Temporarily replace options with filtered results
+        const originalOptions = state.media.options;
+        state.media.options = filteredOptions;
+        renderMediaTable();
+        renderSelectedMedia();
+        
+        // Restore original options for next search
+        state.media.options = originalOptions;
+      });
+    }
+
+    if (channelTable) {
+      channelTable.addEventListener('click', function(event){
+        const row = event.target.closest('tr[data-channel-id]');
+        if (row) {
+          const channelId = row.getAttribute('data-channel-id');
+          state.channel.selectedId = channelId;
+          renderChannelTable();
+          renderSelectedChannel();
+          persistSelection();
+          updateNextButtonState();
+        }
+      });
+    }
+
+    if (channelSearch) {
+      channelSearch.addEventListener('input', function(event){
+        const keyword = event.target.value.toLowerCase().trim();
+        const filteredOptions = state.channel.options.filter(function(item){
+          const name = (item.channelname || '').toLowerCase();
+          const id = (item.channelid || '').toLowerCase();
+          const remark = (item.remark || '').toLowerCase();
+          return name.includes(keyword) || id.includes(keyword) || remark.includes(keyword);
+        });
+        
+        // Temporarily replace options with filtered results
+        const originalOptions = state.channel.options;
+        state.channel.options = filteredOptions;
+        renderChannelTable();
+        renderSelectedChannel();
+        
+        // Restore original options for next search
+        state.channel.options = originalOptions;
+      });
+    }
+
+    if (keywordInput) {
+      keywordInput.addEventListener('input', function(event){
+        state.keyword = event.target.value || '';
+        persistSelection();
+      });
+    }
+
+    if (followUpInput) {
+      followUpInput.addEventListener('input', function(event){
+        if (typeof event.target.value === 'string') {
+          const sanitized = event.target.value.replace(/[^0-9]/g, '');
+          if (sanitized !== event.target.value) {
+            event.target.value = sanitized;
+          }
+          state.followUpDays = sanitized;
+        } else {
+          state.followUpDays = '';
+        }
+        persistSelection();
+      });
+      followUpInput.addEventListener('blur', function(event){
+        const value = typeof event.target.value === 'string' ? event.target.value.trim() : '';
+        if (value === '') {
+          state.followUpDays = '';
+          persistSelection();
+        }
+      });
+    }
+
+    if (mediaForm) {
+      mediaForm.addEventListener('submit', async function(event){
+        event.preventDefault();
+        const formData = new FormData(mediaForm);
+        const payload = {};
+        formData.forEach(function(value, key){
+          if (typeof value === 'string') {
+            const trimmed = value.trim();
+            payload[key] = trimmed === '' ? null : trimmed;
+          } else {
+            payload[key] = value;
+          }
+        });
+        if (!payload.medianame) {
+          alert('กรุณาระบุชื่อสื่อ');
+          return;
+        }
+        const submitBtn = mediaForm.querySelector('[data-media-submit]');
+        if (submitBtn) {
+          submitBtn.setAttribute('disabled', 'disabled');
+        }
+        try {
+          const res = await fetch('/workflow/api/media-options', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            const message = await res.text();
+            throw new Error(message || 'เพิ่มข้อมูลสื่อไม่สำเร็จ');
+          }
+          mediaForm.reset();
+          state.media.loaded = false;
+          state.media.selectedId = null;
+          updateNextButtonState();
+          await loadMediaOptions({ force: true, selectFirstIfEmpty: true });
+        } catch (err) {
+          alert(err && err.message ? err.message : 'เกิดข้อผิดพลาดในการเพิ่มข้อมูลสื่อ');
+        } finally {
+          const submitBtnFinal = mediaForm.querySelector('[data-media-submit]');
+          if (submitBtnFinal) {
+            submitBtnFinal.removeAttribute('disabled');
+          }
+        }
+      });
+    }
+
+    if (channelForm) {
+      channelForm.addEventListener('submit', async function(event){
+        event.preventDefault();
+        const formData = new FormData(channelForm);
+        const payload = {};
+        formData.forEach(function(value, key){
+          if (typeof value === 'string') {
+            const trimmed = value.trim();
+            payload[key] = trimmed === '' ? null : trimmed;
+          } else {
+            payload[key] = value;
+          }
+        });
+        if (!payload.channelname) {
+          alert('กรุณาระบุชื่อช่องทาง');
+          return;
+        }
+        const submitBtn = channelForm.querySelector('[data-channel-submit]');
+        if (submitBtn) {
+          submitBtn.setAttribute('disabled', 'disabled');
+        }
+        try {
+          const res = await fetch('/workflow/api/channel-options', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) {
+            const message = await res.text();
+            throw new Error(message || 'เพิ่มข้อมูลช่องทางไม่สำเร็จ');
+          }
+          channelForm.reset();
+          state.channel.loaded = false;
+          state.channel.selectedId = null;
+          await loadChannelOptions({ force: true, selectFirstIfEmpty: true });
+        } catch (err) {
+          alert(err && err.message ? err.message : 'เกิดข้อผิดพลาดในการเพิ่มข้อมูลช่องทาง');
+        } finally {
+          const submitBtnFinal = channelForm.querySelector('[data-channel-submit]');
+          if (submitBtnFinal) {
+            submitBtnFinal.removeAttribute('disabled');
+          }
+        }
+      });
+    }
+
+    if (mediaRefreshBtn) {
+      mediaRefreshBtn.addEventListener('click', function(){
+        loadMediaOptions({ force: true });
+      });
+    }
+
+    if (channelRefreshBtn) {
+      channelRefreshBtn.addEventListener('click', function(){
+        loadChannelOptions({ force: true });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(){
+        if (!state.media.selectedId) {
+          if (!state.media.loaded) {
+            alert('กรุณาโหลดและเลือกสื่ออย่างน้อย 1 รายการ');
+          } else {
+            alert('กรุณาเลือกสื่ออย่างน้อย 1 รายการ');
+          }
+          return;
+        }
+        if (!state.channel.selectedId) {
+          if (!state.channel.loaded) {
+            alert('กรุณาโหลดและเลือกช่องทางอย่างน้อย 1 รายการ');
+          } else {
+            alert('กรุณาเลือกช่องทางอย่างน้อย 1 รายการ');
+          }
+          return;
+        }
+        persistSelection();
+        let targetUrl = '/workflow/step4';
+        if (customerId) {
+          targetUrl = '/workflow/step4?customerId=' + encodeURIComponent(customerId);
+        }
+        window.location.href = targetUrl;
+      });
+    }
+
+    renderDeliverySummary();
+    renderExtraFields();
+    updateNextButtonState();
+
+    // Load data on page load
+    console.log('Page loaded, starting to load data...');
+    loadMediaOptions();
+    loadChannelOptions();
+
+    // Add event listeners for New/Edit buttons
+    if (mediaNewBtn) {
+      mediaNewBtn.addEventListener('click', function(){
+        if (mediaForm) {
+          mediaForm.classList.remove('d-none');
+          mediaForm.reset();
+        }
+      });
+    }
+
+    if (mediaEditBtn) {
+      mediaEditBtn.addEventListener('click', function(){
+        if (mediaForm && state.media.selectedId) {
+          mediaForm.classList.remove('d-none');
+          const selectedItem = state.media.options.find(item => String(item.id) === String(state.media.selectedId));
+          if (selectedItem) {
+            mediaForm.querySelector('[name="mediaid"]').value = selectedItem.mediaid || '';
+            mediaForm.querySelector('[name="medianame"]').value = selectedItem.medianame || '';
+            mediaForm.querySelector('[name="remark"]').value = selectedItem.remark || '';
+          }
+        }
+      });
+    }
+
+    if (channelNewBtn) {
+      channelNewBtn.addEventListener('click', function(){
+        if (channelForm) {
+          channelForm.classList.remove('d-none');
+          channelForm.reset();
+        }
+      });
+    }
+
+    if (channelEditBtn) {
+      channelEditBtn.addEventListener('click', function(){
+        if (channelForm && state.channel.selectedId) {
+          channelForm.classList.remove('d-none');
+          const selectedItem = state.channel.options.find(item => String(item.id) === String(state.channel.selectedId));
+          if (selectedItem) {
+            channelForm.querySelector('[name="channelid"]').value = selectedItem.channelid || '';
+            channelForm.querySelector('[name="channelname"]').value = selectedItem.channelname || '';
+            channelForm.querySelector('[name="remark"]').value = selectedItem.remark || '';
+          }
+        }
+      });
+    }
+  })();
+</script>

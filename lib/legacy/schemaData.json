@@ -1,0 +1,3234 @@
+[
+  {
+    "key": "customers",
+    "tableName": "legacy_customers",
+    "source": "Structure_Customer.txt",
+    "label": "Legacy Customers",
+    "defaultOrder": "id DESC",
+    "displayColumns": [
+      "customerid",
+      "firstname",
+      "lastname",
+      "mobiletel",
+      "email",
+      "province",
+      "workdate"
+    ],
+    "uniqueKeys": [
+      "customerid"
+    ],
+    "formFields": [
+      "workdate",
+      "worktime",
+      "operator",
+      "customerid",
+      "prename",
+      "firstname",
+      "lastname",
+      "mobiletel",
+      "email",
+      "province",
+      "zipcode",
+      "lineid",
+      "sickness1",
+      "custtag"
+    ],
+    "columns": [
+      {
+        "name": "workdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "worktime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "operator",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "customerid",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "date",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "source",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "salerepid",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "idtype",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "prename",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "firstname",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "lastname",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "nickname",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "comname",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "birthday",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "age",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "weight",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "height",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "sex",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "work",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "homenum",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "moo",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "building",
+        "dbfType": "Character",
+        "width": 60,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "soi",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "road",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kate",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kwang",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "provcode",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "addr1",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr2",
+        "dbfType": "Character",
+        "width": 100,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr3",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr4",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr5",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "province",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "zipcode",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "mobiletel",
+        "dbfType": "Character",
+        "width": 11,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(11)",
+        "allowNull": true
+      },
+      {
+        "name": "officetel",
+        "dbfType": "Character",
+        "width": 11,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(11)",
+        "allowNull": true
+      },
+      {
+        "name": "officeext",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "hometel",
+        "dbfType": "Character",
+        "width": 11,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(11)",
+        "allowNull": true
+      },
+      {
+        "name": "homeext",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "fax",
+        "dbfType": "Character",
+        "width": 11,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(11)",
+        "allowNull": true
+      },
+      {
+        "name": "email",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "media",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "channel",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "remark1",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "remark2",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "signdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "emailaddr",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "sickness1",
+        "dbfType": "Character",
+        "width": 60,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "sickness2",
+        "dbfType": "Character",
+        "width": 60,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "custtag",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "lineid",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "baned",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "banremark",
+        "dbfType": "Character",
+        "width": 60,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      }
+    ],
+    "autoFields": {
+      "operator": "sessionUser.operator",
+      "workdate": "nowDate",
+      "worktime": "nowTime",
+      "source": "constant:5",
+      "signdate": "nowDateTime"
+    }
+  },
+  {
+    "key": "deliveries",
+    "tableName": "legacy_deliveries",
+    "source": "Structure_Deliver9.txt",
+    "label": "Legacy Deliveries",
+    "defaultOrder": "`id` DESC",
+    "displayColumns": [
+      "delivernum",
+      "customerid",
+      "total",
+      "paydesc",
+      "payday",
+      "payment",
+      "statusdesc"
+    ],
+    "uniqueKeys": [
+      "delivernum"
+    ],
+    "formFields": [
+      "workdate",
+      "delivernum",
+      "customerid",
+      "total",
+      "paydesc",
+      "payday",
+      "payment",
+      "statusdesc"
+    ],
+    "columns": [
+      {
+        "name": "workdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "worktime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "operator",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "chkminute",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "delivernum",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "tohomenum",
+        "dbfType": "Character",
+        "width": 14,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(14)",
+        "allowNull": true
+      },
+      {
+        "name": "timein",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "timeout",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "buy",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "datatype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "datadesc",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "processtyp",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "processdes",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "mediatype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "mediadesc",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "channel",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "channeldes",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "paytype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "paydesc",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "paytype1",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "subpay1",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "subpay2",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "payment",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "payday",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "cusbankno",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "cusbankna",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "cusbankbr",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "cusbankac",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "cusbankref",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "credit",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "credittype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "creditdesc",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "creditno",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "creditexpm",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "creditexpy",
+        "dbfType": "Character",
+        "width": 4,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(4)",
+        "allowNull": true
+      },
+      {
+        "name": "creditref",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "last3digit",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "bankno",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "bankna",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "bankbr",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "bankac",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "bankref",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "shiptype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "shipdesc",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "deliverto",
+        "dbfType": "Character",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(3)",
+        "allowNull": true
+      },
+      {
+        "name": "userid",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "username",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "salerepid",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "salename",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "ring",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "ringdesc",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "routerun",
+        "dbfType": "Character",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(3)",
+        "allowNull": true
+      },
+      {
+        "name": "routeno",
+        "dbfType": "Character",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(3)",
+        "allowNull": true
+      },
+      {
+        "name": "routedesc",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "routedist",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "routetimes",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "milesp2p",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "timesp2p",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "msnid",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "msnname",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "handtimes",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "day",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "date",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "source",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "code",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "prdgroup",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "title",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "cost",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "price",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "salprice",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "qty",
+        "dbfType": "Numeric",
+        "width": 7,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "amount",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "postfee",
+        "dbfType": "Numeric",
+        "width": 7,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(7, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "total",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(10, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "freecode",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "dscamt",
+        "dbfType": "Numeric",
+        "width": 7,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(7, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "transno",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "customerid",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "memcode",
+        "dbfType": "Numeric",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "prename",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "firstname",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "lastname",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr1",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "addr2",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "homenum1",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "homenum2",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "precomnam1",
+        "dbfType": "Character",
+        "width": 25,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(25)",
+        "allowNull": true
+      },
+      {
+        "name": "precomnam2",
+        "dbfType": "Character",
+        "width": 25,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(25)",
+        "allowNull": true
+      },
+      {
+        "name": "comname1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "comname2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "lstcomnam1",
+        "dbfType": "Character",
+        "width": 25,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(25)",
+        "allowNull": true
+      },
+      {
+        "name": "lstcomnam2",
+        "dbfType": "Character",
+        "width": 25,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(25)",
+        "allowNull": true
+      },
+      {
+        "name": "building1",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "building2",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "floor1",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "floor2",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "room1",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "room2",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "soi1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "soi2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "road1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "road2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kate1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kate2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kwang1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "kwang2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "mooban1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "mooban2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "tumbon1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "tumbon2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "ampur1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "ampur2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "province1",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "province2",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "zipcode1",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "zipcode2",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "province",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "zipcode",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "beforeaft",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "apptday",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "apptdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "appttime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "appttime1",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "appttime2",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptperson",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "appttel",
+        "dbfType": "Character",
+        "width": 18,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(18)",
+        "allowNull": true
+      },
+      {
+        "name": "apptaddr",
+        "dbfType": "Character",
+        "width": 254,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptaddr1",
+        "dbfType": "Character",
+        "width": 100,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptaddr2",
+        "dbfType": "Character",
+        "width": 100,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptkwang",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptkate",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "appttumbon",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptampur",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptprov",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "apptzip",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "apptremk1",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "apptremk2",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "aftdelical",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "aftdeliti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "aftdelida",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "autobrt9",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "autobrt9da",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "autobrt9ti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "autobrt9by",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "deliver",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "deliverid",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "deliverda",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "deliverti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "deliverby",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "receive",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "receiveda",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "receiveti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "receiveby",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "update",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "updateda",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "updateti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "updateby",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "finance",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "financetyp",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "financedes",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "financeda",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "financeti",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "financeby",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "prnorder",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "prnorddate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "prnordtime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "prnpick",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "prnpicdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "prnpictime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "prnsticker",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "prnstidate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "prnstitime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "prnfinan",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "prnfindate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "prnfintime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "payflag",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "paydate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "paytime",
+        "dbfType": "Character",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(5)",
+        "allowNull": true
+      },
+      {
+        "name": "delvflag",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "delvdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "delvtime",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "taxinv",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "transfer",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "scanflag",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "scandate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "scantime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "scanby",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "feed",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "feedno",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "feedback",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "feeddesc",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "feeddate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "feedtime",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "feedid",
+        "dbfType": "Character",
+        "width": 6,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(6)",
+        "allowNull": true
+      },
+      {
+        "name": "feedmemo",
+        "dbfType": "Memo",
+        "width": 4,
+        "decimals": 0,
+        "mysqlType": "MEDIUMTEXT",
+        "allowNull": true
+      },
+      {
+        "name": "weightloss",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "weight",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "remark1",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "remark2",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "statusid",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "statusdesc",
+        "dbfType": "Character",
+        "width": 80,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "finish",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "mapstat",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "uniqueid",
+        "dbfType": "Character",
+        "width": 32,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "accprint",
+        "dbfType": "Numeric",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "accprintd",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "accprintt",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "nkprint",
+        "dbfType": "Numeric",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "nkprintd",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "nkprintt",
+        "dbfType": "Character",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(8)",
+        "allowNull": true
+      },
+      {
+        "name": "routedate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "editno",
+        "dbfType": "Character",
+        "width": 12,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(12)",
+        "allowNull": true
+      },
+      {
+        "name": "editflag",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "cnflag",
+        "dbfType": "Logical",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      },
+      {
+        "name": "emailaddr",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "followup",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "followupdays",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "symptom",
+        "dbfType": "Memo",
+        "width": 255,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "urgency",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "products",
+    "tableName": "legacy_products",
+    "source": "Structure_SiamMst.txt",
+    "label": "Legacy Products",
+    "defaultOrder": "`id` DESC",
+    "displayColumns": [
+      "code",
+      "title",
+      "price",
+      "sugprice",
+      "wholesale",
+      "unitsale"
+    ],
+    "uniqueKeys": [
+      "code"
+    ],
+    "formFields": [
+      "code",
+      "scancode",
+      "title",
+      "price",
+      "wholesale",
+      "unitsale",
+      "active"
+    ],
+    "columns": [
+      {
+        "name": "code",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "oldcode",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "scancode1",
+        "dbfType": "Character",
+        "width": 13,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(13)",
+        "allowNull": true
+      },
+      {
+        "name": "scancode",
+        "dbfType": "Character",
+        "width": 13,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(13)",
+        "allowNull": true
+      },
+      {
+        "name": "sprcode",
+        "dbfType": "Character",
+        "width": 13,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(13)",
+        "allowNull": true
+      },
+      {
+        "name": "batch",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "subcode",
+        "dbfType": "Character",
+        "width": 16,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(16)",
+        "allowNull": true
+      },
+      {
+        "name": "groupname",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "prodgroup",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "ebrandname",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "brandname",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "sprtitle",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "ttitle",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "etitle",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "title",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "sig_name",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "unit",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "unitsale",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "cost",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "vat",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "sugprice",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "price",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "greenprice",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "redprice",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "pricelist",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "wholesale",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "holdsale",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "drawqty",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "stepqty",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "BIGINT",
+        "allowNull": true
+      },
+      {
+        "name": "stepprice",
+        "dbfType": "Numeric",
+        "width": 9,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(9, 2)",
+        "allowNull": true
+      },
+      {
+        "name": "discount1",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "discount2",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "discount3",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "discount4",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "discount5",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "discount6",
+        "dbfType": "Numeric",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "mfd",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "expire",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "active",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "method",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "pur_type",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "barcode",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "special",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "promotion",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "autorpln",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "patient",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "weekaudt",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "firstin",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "important",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "stickqty",
+        "dbfType": "Numeric",
+        "width": 4,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "stickdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "sticktime",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(10)",
+        "allowNull": true
+      },
+      {
+        "name": "lastdate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "reddate",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "promodate1",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "promodate2",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATE",
+        "allowNull": true
+      },
+      {
+        "name": "autopo",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "dele",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      },
+      {
+        "name": "linkgroup",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "codegroup",
+        "dbfType": "Numeric",
+        "width": 5,
+        "decimals": 0,
+        "mysqlType": "INT",
+        "allowNull": true
+      },
+      {
+        "name": "pic",
+        "dbfType": "General",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "LONGBLOB",
+        "allowNull": true
+      },
+      {
+        "name": "callcentre",
+        "dbfType": "Character",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(1)",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "media",
+    "tableName": "mediamst",
+    "label": "Media Master",
+    "defaultOrder": "id DESC",
+    "uniqueKeys": [
+      "mediaid"
+    ],
+    "columns": [
+      {
+        "name": "mediaid",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": true
+      },
+      {
+        "name": "medianame",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": false
+      },
+      {
+        "name": "remark",
+        "dbfType": "Memo",
+        "width": 255,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "created_at",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATETIME",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "channels",
+    "tableName": "channelmst",
+    "label": "Channel Master",
+    "defaultOrder": "id DESC",
+    "uniqueKeys": [
+      "channelid"
+    ],
+    "columns": [
+      {
+        "name": "channelid",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": true
+      },
+      {
+        "name": "channelname",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": false
+      },
+      {
+        "name": "remark",
+        "dbfType": "Memo",
+        "width": 255,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "created_at",
+        "dbfType": "Date",
+        "width": 8,
+        "decimals": 0,
+        "mysqlType": "DATETIME",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "shipping",
+    "tableName": "shippingmst",
+    "label": "Shipping Options",
+    "defaultOrder": "id DESC",
+    "uniqueKeys": [
+      "shipcode"
+    ],
+    "columns": [
+      {
+        "name": "shiptype",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": true
+      },
+      {
+        "name": "shipdesc",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "shipcode",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": false
+      },
+      {
+        "name": "shiptitle",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": false
+      },
+      {
+        "name": "shipprice",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(12,2)",
+        "allowNull": true
+      },
+      {
+        "name": "freecode",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": true
+      },
+      {
+        "name": "freetitle",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "freeprice",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(12,2)",
+        "allowNull": true
+      },
+      {
+        "name": "remark",
+        "dbfType": "Memo",
+        "width": 255,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      },
+      {
+        "name": "fingrptype",
+        "dbfType": "Numeric",
+        "width": 1,
+        "decimals": 0,
+        "mysqlType": "TINYINT(1)",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "coupons",
+    "tableName": "couponmst",
+    "label": "Coupon Master",
+    "defaultOrder": "id DESC",
+    "uniqueKeys": [
+      "couponid",
+      "code"
+    ],
+    "columns": [
+      {
+        "name": "couponid",
+        "dbfType": "Character",
+        "width": 30,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": false
+      },
+      {
+        "name": "code",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(100)",
+        "allowNull": false
+      },
+      {
+        "name": "subcode",
+        "dbfType": "Character",
+        "width": 50,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(100)",
+        "allowNull": true
+      },
+      {
+        "name": "title",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": false
+      },
+      {
+        "name": "price",
+        "dbfType": "Numeric",
+        "width": 10,
+        "decimals": 2,
+        "mysqlType": "DECIMAL(12,2)",
+        "allowNull": true
+      },
+      {
+        "name": "remark",
+        "dbfType": "Memo",
+        "width": 255,
+        "decimals": 0,
+        "mysqlType": "TEXT",
+        "allowNull": true
+      }
+    ]
+  },
+  {
+    "key": "finance",
+    "tableName": "financemst",
+    "label": "Finance Master",
+    "defaultOrder": "financetype ASC",
+    "uniqueKeys": [
+      "financetype"
+    ],
+    "columns": [
+      { "name": "tohomenum", "dbfType": "Character", "width": 20, "decimals": 0, "mysqlType": "VARCHAR(50)", "allowNull": true },
+      { "name": "paytype", "dbfType": "Numeric", "width": 3, "decimals": 0, "mysqlType": "SMALLINT", "allowNull": true },
+      { "name": "paydesc", "dbfType": "Character", "width": 120, "decimals": 0, "mysqlType": "VARCHAR(255)", "allowNull": true },
+      { "name": "paytype1", "dbfType": "Character", "width": 2, "decimals": 0, "mysqlType": "VARCHAR(2)", "allowNull": true },
+      { "name": "subpay1", "dbfType": "Character", "width": 2, "decimals": 0, "mysqlType": "VARCHAR(2)", "allowNull": true },
+      { "name": "subpay2", "dbfType": "Character", "width": 2, "decimals": 0, "mysqlType": "VARCHAR(2)", "allowNull": true },
+      { "name": "payment", "dbfType": "Logical", "width": 1, "decimals": 0, "mysqlType": "TINYINT(1)", "allowNull": true },
+      { "name": "payday", "dbfType": "Date", "width": 8, "decimals": 0, "mysqlType": "DATE", "allowNull": true },
+      { "name": "cusbankno", "dbfType": "Character", "width": 10, "decimals": 0, "mysqlType": "VARCHAR(20)", "allowNull": true },
+      { "name": "cusbankna", "dbfType": "Character", "width": 120, "decimals": 0, "mysqlType": "VARCHAR(255)", "allowNull": true },
+      { "name": "cusbankbr", "dbfType": "Character", "width": 120, "decimals": 0, "mysqlType": "VARCHAR(255)", "allowNull": true },
+      { "name": "cusbankac", "dbfType": "Character", "width": 40, "decimals": 0, "mysqlType": "VARCHAR(120)", "allowNull": true },
+      { "name": "cusbankref", "dbfType": "Character", "width": 40, "decimals": 0, "mysqlType": "VARCHAR(120)", "allowNull": true },
+      { "name": "credit", "dbfType": "Logical", "width": 1, "decimals": 0, "mysqlType": "TINYINT(1)", "allowNull": true },
+      { "name": "credittype", "dbfType": "Numeric", "width": 3, "decimals": 0, "mysqlType": "SMALLINT", "allowNull": true },
+      { "name": "creditdesc", "dbfType": "Character", "width": 120, "decimals": 0, "mysqlType": "VARCHAR(255)", "allowNull": true },
+      { "name": "creditno", "dbfType": "Character", "width": 40, "decimals": 0, "mysqlType": "VARCHAR(120)", "allowNull": true },
+      { "name": "creditexpm", "dbfType": "Character", "width": 2, "decimals": 0, "mysqlType": "VARCHAR(2)", "allowNull": true },
+      { "name": "creditexpy", "dbfType": "Character", "width": 4, "decimals": 0, "mysqlType": "VARCHAR(4)", "allowNull": true },
+      { "name": "creditref", "dbfType": "Character", "width": 40, "decimals": 0, "mysqlType": "VARCHAR(120)", "allowNull": true },
+      { "name": "last3digit", "dbfType": "Character", "width": 5, "decimals": 0, "mysqlType": "VARCHAR(5)", "allowNull": true },
+      {
+        "name": "financetype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": false
+      },
+      { "name": "financetyp", "dbfType": "Numeric", "width": 3, "decimals": 0, "mysqlType": "SMALLINT", "allowNull": true },
+      {
+        "name": "financedes",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": false
+      },
+      {
+        "name": "fingrptype",
+        "dbfType": "Numeric",
+        "width": 3,
+        "decimals": 0,
+        "mysqlType": "SMALLINT",
+        "allowNull": true
+      },
+      {
+        "name": "fingrpdesc",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "bankcode",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "bankno",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "bankname",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "bankna",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "bankbranch",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "bankbr",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "accountno",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(120)",
+        "allowNull": true
+      },
+      {
+        "name": "bankac",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(120)",
+        "allowNull": true
+      },
+      {
+        "name": "accountname",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      { "name": "accode", "dbfType": "Character", "width": 20, "decimals": 0, "mysqlType": "VARCHAR(50)", "allowNull": true },
+      { "name": "acname", "dbfType": "Character", "width": 120, "decimals": 0, "mysqlType": "VARCHAR(255)", "allowNull": true },
+      {
+        "name": "financecode",
+        "dbfType": "Character",
+        "width": 20,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(50)",
+        "allowNull": true
+      },
+      {
+        "name": "financedetail",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "cardno",
+        "dbfType": "Character",
+        "width": 40,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(120)",
+        "allowNull": true
+      },
+      {
+        "name": "expmonth",
+        "dbfType": "Character",
+        "width": 2,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(2)",
+        "allowNull": true
+      },
+      {
+        "name": "expyear",
+        "dbfType": "Character",
+        "width": 4,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(4)",
+        "allowNull": true
+      },
+      {
+        "name": "cvv",
+        "dbfType": "Character",
+        "width": 4,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(4)",
+        "allowNull": true
+      },
+      {
+        "name": "custbankcode",
+        "dbfType": "Character",
+        "width": 10,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(20)",
+        "allowNull": true
+      },
+      {
+        "name": "custbankname",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "custbankbranch",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      },
+      {
+        "name": "remark",
+        "dbfType": "Character",
+        "width": 120,
+        "decimals": 0,
+        "mysqlType": "VARCHAR(255)",
+        "allowNull": true
+      }
+    ]
+  }
+]

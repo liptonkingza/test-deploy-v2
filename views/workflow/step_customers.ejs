@@ -1,0 +1,13 @@
+<% const pageTitle = title || 'สร้างรายการใหม่ – เลือกลูกค้า'; %>
+<%- include('../workflow_layout', {
+  title: pageTitle,
+  currentStep: 'step1',
+  customerId: typeof customerId !== 'undefined' ? customerId : '',
+  salesRepOptions: salesRepOptions || [],
+  body: include('./step_customers_content', {
+    customersApi: '/api/legacy/customers',
+    nextStepUrl: '/workflow/step2',
+    salesRepOptions: salesRepOptions || []
+  })
+}) %>
+

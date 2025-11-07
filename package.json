@@ -1,0 +1,49 @@
+{
+  "name": "siamdrug-ejs-mysql-app",
+  "version": "0.1.0",
+  "description": "Express + EJS + MySQL starter with single-binary build via pkg",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build:pkg": "pkg . --out-path dist -t node18-win-x64,node18-linux-x64,node18-macos-x64",
+    "postinstall": "echo 'Installation completed successfully'",
+    "railway:start": "./start.sh",
+    "railway:health": "curl -f http://localhost:3000/health || exit 1",
+    "setup:db": "node setup-database.js",
+    "railway:setup": "npm run setup:db && npm start"
+  },
+  "keywords": [
+    "express",
+    "ejs",
+    "mysql",
+    "pkg",
+    "ssr",
+    "crud"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "mysql2": "^3.11.0",
+    "bcryptjs": "^2.4.3",
+    "iconv-lite": "^0.4.24"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0",
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "views/**/*",
+      "public/**/*"
+    ]
+  }
+}

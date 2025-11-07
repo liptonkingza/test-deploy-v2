@@ -1,0 +1,778 @@
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+  <div>
+    <h1 class="h4 fw-semibold mb-1">ขั้นตอนที่ 5/5 – ข้อมูลการชำระเงิน</h1>
+    <p class="text-muted mb-0">เลือกวิธีชำระเงิน กรอกข้อมูลธุรกรรม และตรวจสอบยอดสุทธิ</p>
+  </div>
+  <a class="btn btn-outline-secondary" href="/workflow/step4?customerId=<%= customerId %>">ย้อนกลับไปขั้นตอน 4/5</a>
+  </div>
+
+<div class="row g-3 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">สรุปรายการสินค้าและค่าจัดส่ง</div>
+      <div class="card-body small py-2" data-step5-order-summary style="padding-top: 0.5rem !important;">
+        <div class="text-muted">กำลังโหลดข้อมูลจากขั้นตอนที่ 4...</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">วิธีชำระเงิน</div>
+      <div class="card-body">
+        <form data-step5-payment-form>
+          
+          <div class="mb-3">
+            <label class="form-label">ประเภทการชำระเงิน</label>
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto;" data-step5-finance-options>
+              <table class="table table-sm table-hover align-middle mb-0">
+                <thead class="table-light sticky-top">
+                  <tr>
+                    <th style="width:42px"></th>
+                    <th style="width:80px">Financetyp</th>
+                    <th>Financedes</th>
+                    <th style="width:100px">Fingrptype</th>
+                    <th>Fingrpdesc</th>
+                  </tr>
+                </thead>
+                <tbody data-step5-finance-table>
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-3">กำลังโหลดข้อมูลการชำระเงิน...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="form-text text-muted" data-step5-finance-status>ยังไม่ได้เลือก</div>
+          </div>
+          
+          <!-- Payment Details Display -->
+          <div class="payment-details" data-payment-details>
+            <!-- Payment Method Group -->
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">วิธีชำระเงิน:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-payment-method value="">
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">การเงิน:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-finance-group value="">
+              </div>
+            </div>
+            
+            <!-- Bank Group: Bank + Branch on one line, Account + Reference on next line -->
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">ธนาคาร:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-bank-info value="">
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">สาขา:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-bank-branch value="">
+              </div>
+            </div>
+            
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">เลขที่ บ/ช:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-bank-account value="">
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">อ้างอิง:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-bank-ref value="">
+              </div>
+            </div>
+            
+            <!-- Group divider -->
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(0,0,0,.25);">
+            
+            <!-- Credit Card Group -->
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">บัตรเครดิต:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-credit-card value="0">
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">เลขที่บัตร:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-card-number value="">
+              </div>
+            </div>
+            
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">หมดอายุ เดือน/ปี:</label>
+              </div>
+              <div class="col-sm-3">
+                <div class="d-flex gap-2">
+                  <input type="text" class="form-control" readonly data-exp-month style="width: 60px;" value="">
+                  <span class="align-self-center">/</span>
+                  <input type="text" class="form-control" readonly data-exp-year style="width: 60px;" value="">
+                </div>
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">รหัส 3 ตัว:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-cvv style="width: 80px;" value="">
+              </div>
+            </div>
+            
+            <div class="row mb-2 gx-2">
+              <div class="col-sm-3">
+                <label class="form-label fw-semibold">อ้างอิง:</label>
+          </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" readonly data-card-ref value="">
+          </div>
+          </div>
+
+            <!-- Group divider -->
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(0,0,0,.25);">
+            
+            <!-- Customer Bank Group -->
+            <div class="row mb-2 gx-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">ธ. ของลูกค้า:</label>
+          </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-customer-bank value="">
+          </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">สาขา:</label>
+          </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-customer-branch value="">
+          </div>
+          </div>
+
+            <div class="row mb-2">
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">เลขที่ บ/ช:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-customer-account value="">
+              </div>
+              <div class="col-auto pe-2">
+                <label class="form-label fw-semibold">อ้างอิง:</label>
+              </div>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" readonly data-customer-ref value="">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-secondary" href="/workflow/step4?customerId=<%= customerId %>">ย้อนกลับ</a>
+          <button type="button" class="btn btn-success" data-step5-finish disabled>Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const orderKey = 'workflow.step4Draft';
+    const finishBtn = document.querySelector('[data-step5-finish]');
+    const summaryEl = document.querySelector('[data-step5-order-summary]');
+    
+    const paymentForm = document.querySelector('[data-step5-payment-form]');
+    const financeOptions = document.querySelector('[data-step5-finance-options]');
+    const financeTable = document.querySelector('[data-step5-finance-table]');
+    const financeStatus = document.querySelector('[data-step5-finance-status]');
+    const paymentDetails = document.querySelector('[data-payment-details]');
+    const paymentMethod = document.querySelector('[data-payment-method]');
+    const financeGroup = document.querySelector('[data-finance-group]');
+    const bankInfo = document.querySelector('[data-bank-info]');
+    const bankBranch = document.querySelector('[data-bank-branch]');
+    const bankAccount = document.querySelector('[data-bank-account]');
+    const bankRef = document.querySelector('[data-bank-ref]');
+    const creditCard = document.querySelector('[data-credit-card]');
+    const cardNumber = document.querySelector('[data-card-number]');
+    const expMonth = document.querySelector('[data-exp-month]');
+    const expYear = document.querySelector('[data-exp-year]');
+    const cvv = document.querySelector('[data-cvv]');
+    const cardRef = document.querySelector('[data-card-ref]');
+    const customerBank = document.querySelector('[data-customer-bank]');
+    const customerBranch = document.querySelector('[data-customer-branch]');
+    const customerAccount = document.querySelector('[data-customer-account]');
+    const customerRef = document.querySelector('[data-customer-ref]');
+    
+    let financeOptionsData = [];
+    let selectedFinance = null;
+
+    function format(num){
+      const n = Number(num) || 0;
+      return new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+    }
+
+    function renderSummary(){
+      let state = null;
+      try {
+        const raw = sessionStorage.getItem(orderKey);
+        state = raw ? JSON.parse(raw) : null;
+      } catch(e) { state = null; }
+      if (!state || !Array.isArray(state.products)) {
+        summaryEl.innerHTML = '<div class="text-danger">ไม่พบข้อมูลจากขั้นตอนที่ 4</div>';
+        if (finishBtn) finishBtn.setAttribute('disabled','disabled');
+        return;
+      }
+      const subtotal = state.products.reduce((s,i)=> s + (Number(i.price)||0)*(Number(i.qty)||0), 0);
+      const discount = state.products.reduce((s,i)=> s + (Number(i.discount)||0), 0);
+      const shipping = state.shipping && state.shipping.noCharge ? 0 : Number(state.shipping && state.shipping.shippingCost) || 0;
+      const total = Math.max(subtotal - discount + shipping, 0);
+
+      const lines = [
+        '<dl class="row mb-0" style="margin-bottom: 0 !important;">',
+        '<dt class="col-sm-3" style="margin-bottom: 0.25rem !important;">จำนวนสินค้า</dt><dd class="col-sm-9" style="margin-bottom: 0.25rem !important;">' + state.products.length + ' รายการ</dd>',
+        '<dt class="col-sm-3" style="margin-bottom: 0.25rem !important;">ยอดรวมสินค้า</dt><dd class="col-sm-9" style="margin-bottom: 0.25rem !important;">' + format(subtotal) + '</dd>',
+        '<dt class="col-sm-3" style="margin-bottom: 0.25rem !important;">ส่วนลดรวม</dt><dd class="col-sm-9" style="margin-bottom: 0.25rem !important;">' + format(discount) + '</dd>',
+        '<dt class="col-sm-3" style="margin-bottom: 0.25rem !important;">ค่าจัดส่ง</dt><dd class="col-sm-9" style="margin-bottom: 0.25rem !important;">' + format(shipping) + '</dd>',
+        '<dt class="col-sm-3" style="margin-bottom: 0.25rem !important;">ยอดสุทธิ</dt><dd class="col-sm-9 fw-semibold" style="margin-bottom: 0.25rem !important;">' + format(total) + '</dd>',
+        '</dl>'
+      ];
+      summaryEl.innerHTML = lines.join('');
+      if (finishBtn) finishBtn.removeAttribute('disabled');
+    }
+
+    if (finishBtn) {
+      finishBtn.addEventListener('click', async function(){
+        try {
+          finishBtn.disabled = true;
+          finishBtn.textContent = 'กำลังบันทึก...';
+          
+          // Collect all workflow data from sessionStorage
+          const customerData = await getCustomerData();
+          const deliveryData = getDeliveryData();
+          const mediaChannelData = await getMediaChannelData();
+          const productData = getProductData();
+          const paymentData = await getPaymentData();
+          
+          // Debug: Log all data being sent
+          console.log('Customer data being sent:', customerData);
+          console.log('Delivery data being sent:', deliveryData);
+          console.log('Media/Channel data being sent:', mediaChannelData);
+          console.log('Product data being sent:', productData);
+          console.log('Payment data being sent:', paymentData);
+          
+          // Debug shipping data specifically
+          console.log('Shipping data details:', productData.shipping);
+          console.log('Shipping cost:', productData.shipping?.shippingCost);
+          console.log('No charge flag:', productData.shipping?.noCharge);
+          
+          // Get selected sales rep from sidebar first (most reliable)
+          let selectedSalesRep = '';
+          const sidebarSalesRepSelect = document.getElementById('sidebar-sales-rep');
+          console.log('🔍 Debug - sidebarSalesRepSelect found:', !!sidebarSalesRepSelect);
+          
+          if (sidebarSalesRepSelect && sidebarSalesRepSelect.value && sidebarSalesRepSelect.value !== '') {
+            selectedSalesRep = sidebarSalesRepSelect.value;
+            console.log('🔍 Debug - selectedSalesRep from sidebar:', selectedSalesRep);
+          } else {
+            // Fallback to localStorage
+            selectedSalesRep = localStorage.getItem('selectedSalesRep') || '';
+            console.log('🔍 Debug - selectedSalesRep from localStorage:', selectedSalesRep);
+          }
+          
+          // If still no data, use 0
+          if (!selectedSalesRep || selectedSalesRep === '' || selectedSalesRep === '0') {
+            selectedSalesRep = '0';
+            console.log('🔍 Debug - No sales rep selected, using 0');
+          }
+          
+          // Get sales rep options from the sidebar
+          const salesRepOptions = [];
+          if (sidebarSalesRepSelect) {
+            Array.from(sidebarSalesRepSelect.options).forEach(option => {
+              if (option.value) {
+                salesRepOptions.push({
+                  value: option.value,
+                  label: option.textContent
+                });
+              }
+            });
+          }
+          
+          console.log('🔍 Debug - salesRepOptions:', salesRepOptions);
+          console.log('🔍 Debug - selectedSalesRep final:', selectedSalesRep);
+          
+          // Send to save API
+          const response = await fetch('/workflow/api/save-workflow', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              customerData,
+              deliveryData,
+              mediaChannelData,
+              productData,
+              paymentData,
+              selectedSalesRep,
+              salesRepOptions
+            })
+          });
+          
+          // Check if response is JSON
+          const contentType = response.headers.get('content-type');
+          if (!contentType || !contentType.includes('application/json')) {
+            const text = await response.text();
+            console.error('Non-JSON response:', text);
+            throw new Error('Server returned non-JSON response. Status: ' + response.status);
+          }
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            let message = `บันทึกข้อมูลสำเร็จ!\nหมายเลขการจัดส่ง: ${result.deliverNum}\nยอดรวม: ${format(result.total)} บาท\nสร้าง ${result.recordsCreated} รายการ`;
+            
+            if (result.records && result.records.length > 0) {
+              message += '\n\nรายการที่สร้าง:';
+              result.records.forEach((record, index) => {
+                message += `\n${index + 1}. ${record.datadesc} - ${record.title} (${record.code}) - ${format(record.amount)} บาท`;
+              });
+            }
+            
+            alert(message);
+            // Clear session storage
+            sessionStorage.removeItem('workflow.step4Draft');
+            sessionStorage.removeItem('workflow.selectedDelivery');
+            sessionStorage.removeItem('workflow.mediaChannelSelection');
+            sessionStorage.removeItem('workflow.paymentSelection');
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
+          } else {
+            throw new Error(result.error || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+          }
+        } catch (error) {
+          console.error('Save error:', error);
+          alert('เกิดข้อผิดพลาด: ' + error.message);
+        } finally {
+          finishBtn.disabled = false;
+          finishBtn.textContent = 'Finish';
+        }
+      });
+    }
+    
+    async function getCustomerData() {
+      // Get customer data from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const customerId = urlParams.get('customerId');
+      
+      if (!customerId) {
+        console.warn('No customer ID found in URL');
+        return { customerid: null };
+      }
+      
+      try {
+        // Fetch full customer data from API
+        const response = await fetch(`/workflow/api/customers/${encodeURIComponent(customerId)}/deliveries`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Customer data from API:', data.customer);
+          return data.customer;
+        } else {
+          console.warn('Failed to fetch customer data:', response.status);
+          return { customerid: customerId };
+        }
+      } catch (error) {
+        console.warn('Error fetching customer data:', error);
+        return { customerid: customerId };
+      }
+    }
+    
+    function getDeliveryData() {
+      try {
+        const raw = sessionStorage.getItem('workflow.selectedDelivery');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return parsed.delivery?.data || {};
+        }
+      } catch (e) {
+        console.warn('Could not parse delivery data from session');
+      }
+      return {};
+    }
+    
+    async function getMediaChannelData() {
+      try {
+        const raw = sessionStorage.getItem('workflow.mediaChannelSelection');
+        if (raw) {
+          const selection = JSON.parse(raw);
+          
+          // Fetch media and channel names from API
+          const responses = await Promise.all([
+            fetch('/workflow/api/media-options'),
+            fetch('/workflow/api/channel-options'),
+          ]);
+          
+          let mediaName = '';
+          let channelName = '';
+          
+          if (responses[0].ok) {
+            const mediaRows = await responses[0].json();
+            const foundMedia = mediaRows.find(function(item){ 
+              return String(item.id) === String(selection.mediaId); 
+            });
+            if (foundMedia) {
+              mediaName = foundMedia.medianame || foundMedia.mediaid || '';
+            }
+          }
+          
+          if (responses[1].ok) {
+            const channelRows = await responses[1].json();
+            const foundChannel = channelRows.find(function(item){ 
+              return String(item.id) === String(selection.channelId); 
+            });
+            if (foundChannel) {
+              channelName = foundChannel.channelname || foundChannel.channelid || '';
+            }
+          }
+          
+          return {
+            mediaId: selection.mediaId,
+            mediaName: mediaName,
+            channelId: selection.channelId,
+            channelName: channelName,
+            keyword: selection.keyword,
+            followUpDays: selection.followUpDays
+          };
+        }
+      } catch (e) {
+        console.warn('Could not parse media/channel data from session');
+      }
+      return {};
+    }
+    
+    function getProductData() {
+      try {
+        const raw = sessionStorage.getItem('workflow.step4Draft');
+        if (raw) {
+          return JSON.parse(raw);
+        }
+      } catch (e) {
+        console.warn('Could not parse product data from session');
+      }
+      return { products: [], shipping: {} };
+    }
+    
+    async function getPaymentData() {
+      try {
+        const raw = sessionStorage.getItem('workflow.paymentSelection');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          
+          // Fetch bank details from finance options if financetype is available
+          let bankNo = '';
+          let bankNa = '';
+          let bankBr = '';
+          let bankAc = '';
+          
+          if (parsed.financetype) {
+            try {
+              const response = await fetch('/workflow/api/finance-options');
+              if (response.ok) {
+                const financeOptions = await response.json();
+                const selectedFinance = financeOptions.find(option => 
+                  String(option.financetype) === String(parsed.financetype)
+                );
+                if (selectedFinance) {
+                  bankNo = selectedFinance.bankno || '';
+                  bankNa = selectedFinance.bankna || '';
+                  bankBr = selectedFinance.bankbr || '';
+                  bankAc = selectedFinance.bankac || '';
+                }
+              }
+            } catch (err) {
+              console.warn('Could not fetch bank details:', err);
+            }
+          }
+          
+          return {
+            payType: parsed.financetype || '',
+            payDesc: parsed.financedes || '',
+            payType1: '',
+            subPay1: '',
+            subPay2: '',
+            cusBankNo: '',
+            cusBankNa: '',
+            cusBankBr: '',
+            cusBankAc: '',
+            cusBankRef: '',
+            credit: false,
+            creditType: '',
+            creditDesc: '',
+            creditNo: '',
+            creditExpM: '',
+            creditExpY: '',
+            creditRef: '',
+            last3Digit: '',
+            bankNo: bankNo,
+            bankNa: bankNa,
+            bankBr: bankBr,
+            bankAc: bankAc,
+            bankRef: '',
+            financeType: parsed.financetype || '', // เก็บค่า financetype
+            financeDesc: parsed.financedes || '', // เก็บค่า financedes
+            remark: ''
+          };
+        }
+      } catch (e) {
+        console.warn('Could not parse payment data from session');
+      }
+      return {};
+    }
+
+    async function loadFinanceOptions(){
+      try {
+        console.log('🔄 Loading finance options...');
+        const res = await fetch('/workflow/api/finance-options');
+        if (!res.ok) throw new Error(await res.text() || 'โหลดข้อมูลล้มเหลว');
+        const rows = await res.json();
+        console.log('📊 Finance options loaded:', rows.length, 'items');
+        console.log('📊 First few items:', rows.slice(0, 3));
+        financeOptionsData = rows;
+        renderFinanceTable();
+      } catch(err){
+        if (financeStatus) financeStatus.textContent = err && err.message ? err.message : 'โหลดข้อมูลล้มเหลว';
+        if (financeTable) {
+          financeTable.innerHTML = '<tr><td colspan="5" class="text-center text-danger py-3">' + (err && err.message ? err.message : 'โหลดข้อมูลล้มเหลว') + '</td></tr>';
+        }
+      }
+    }
+    
+    function renderFinanceTable() {
+      if (!financeTable) {
+        console.log('❌ financeTable not found');
+        return;
+      }
+      
+      console.log('🎨 Rendering finance table with', financeOptionsData.length, 'items');
+      
+      if (!financeOptionsData.length) {
+        financeTable.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">ไม่มีข้อมูลการชำระเงิน</td></tr>';
+        return;
+      }
+      
+      console.log('📊 Finance options data:', financeOptionsData);
+      console.log('📊 First item financetype:', financeOptionsData[0]?.financetype);
+      
+      let rowsHtml = '';
+      financeOptionsData.forEach(function(r){
+        console.log('📦 Processing finance item:', r);
+        console.log('📦 financetype value:', r.financetype, 'type:', typeof r.financetype);
+        const financetyp = (r.financetype !== null && r.financetype !== undefined) ? String(r.financetype) : '-';
+        const financedes = (r.financedes ? String(r.financedes) : '-');
+        const fingrptype = (r.fingrptype ?? '');
+        const fingrpdesc = (r.fingrpdesc ? String(r.fingrpdesc) : '-');
+        
+        // Use actual fingrptype and fingrpdesc from database
+        const displayFingrptype = String(fingrptype || '-');
+        const displayFingrpdesc = String(fingrpdesc || '-');
+        
+        const isSelected = selectedFinance && selectedFinance.financetype === financetyp;
+        const selectedIcon = isSelected ? '▶' : '';
+        const selectedClass = isSelected ? 'table-active' : '';
+        
+        const optionData = {
+          financetype: String(financetyp),
+          financedes: financedes,
+          fingrptype: String(fingrptype || ''),
+          fingrpdesc: fingrpdesc,
+          bankno: (r.bankno ? String(r.bankno) : ''),
+          bankna: (r.bankna ? String(r.bankna) : ''),
+          bankbr: (r.bankbr ? String(r.bankbr) : ''),
+          bankac: (r.bankac ? String(r.bankac) : ''),
+        };
+        
+        rowsHtml += '<tr class="' + selectedClass + '" data-finance-option="' + escapeHtml(String(financetyp)) + '" data-finance-data="' + encodeURIComponent(JSON.stringify(optionData)) + '" style="cursor: pointer;">';
+        rowsHtml += '<td>' + selectedIcon + '</td>';
+        rowsHtml += '<td>' + escapeHtml(financetyp) + '</td>';
+        rowsHtml += '<td>' + escapeHtml(financedes) + '</td>';
+        rowsHtml += '<td>' + escapeHtml(displayFingrptype) + '</td>';
+        rowsHtml += '<td>' + escapeHtml(displayFingrpdesc) + '</td>';
+        rowsHtml += '</tr>';
+      });
+      
+      financeTable.innerHTML = rowsHtml;
+    }
+
+    // Add escapeHtml function
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Add event listener for finance table clicks using event delegation
+    if (financeTable) {
+      console.log('🔧 Adding click listener to finance table');
+      financeTable.addEventListener('click', function(event) {
+        console.log('🖱️ Finance table clicked:', event.target);
+        
+        // Find the closest row with data-finance-option
+        let target = event.target.closest('tr[data-finance-option]');
+        if (!target) {
+          // If not found, try to find from parent elements
+          target = event.target.closest('[data-finance-option]');
+        }
+        
+        console.log('🎯 Closest finance option:', target);
+        if (!target) {
+          console.log('❌ No finance option found');
+          return;
+        }
+        
+        const financeDataRaw = target.getAttribute('data-finance-data');
+        console.log('📊 Finance data raw:', financeDataRaw);
+        if (!financeDataRaw) {
+          console.log('❌ No finance data found');
+          return;
+        }
+        
+        try {
+          const decodedData = decodeURIComponent(financeDataRaw);
+          console.log('📊 Decoded data:', decodedData);
+          const financeData = JSON.parse(decodedData);
+          selectedFinance = financeData;
+          
+          // Update status
+          if (financeStatus) financeStatus.textContent = financeData.financedes || 'เลือกแล้ว';
+          
+          // Save to session storage
+          sessionStorage.setItem('workflow.paymentSelection', JSON.stringify({ 
+            financetype: financeData.financetype, 
+            financedes: financeData.financedes,
+            fingrptype: financeData.fingrptype,
+            fingrpdesc: financeData.fingrpdesc,
+            bankno: financeData.bankno,
+            bankna: financeData.bankna,
+            bankbr: financeData.bankbr,
+            bankac: financeData.bankac
+          }));
+          
+          // Show payment details
+          if (paymentDetails) {
+            // Update payment method (financetype + financedes)
+            if (paymentMethod) {
+              paymentMethod.value = `${financeData.financetype} ${financeData.financedes}`;
+            }
+            
+            // Update finance group (fingrpdesc)
+            if (financeGroup) {
+              financeGroup.value = financeData.fingrpdesc || '';
+            }
+            
+            // Update bank info (bankno + bankna)
+            if (bankInfo) {
+              const bankInfoText = [financeData.bankno, financeData.bankna].filter(Boolean).join(' ');
+              bankInfo.value = bankInfoText || '';
+            }
+            
+            // Update bank branch
+            if (bankBranch) {
+              bankBranch.value = financeData.bankbr || '';
+            }
+            
+            // Update bank account
+            if (bankAccount) {
+              bankAccount.value = financeData.bankac || '';
+            }
+            
+            // Update bank reference (empty for now)
+            if (bankRef) {
+              bankRef.value = '';
+            }
+            
+            // Update credit card info
+            if (creditCard) {
+              creditCard.value = '0';
+            }
+            
+            if (cardNumber) {
+              cardNumber.value = '';
+            }
+            
+            if (expMonth) {
+              expMonth.value = '';
+            }
+            
+            if (expYear) {
+              expYear.value = '';
+            }
+            
+            if (cvv) {
+              cvv.value = '';
+            }
+            
+            if (cardRef) {
+              cardRef.value = '';
+            }
+            
+            // Update customer bank info
+            if (customerBank) {
+              customerBank.value = '';
+            }
+            
+            if (customerBranch) {
+              customerBranch.value = '';
+            }
+            
+            if (customerAccount) {
+              customerAccount.value = '';
+            }
+            
+            if (customerRef) {
+              customerRef.value = '';
+            }
+          }
+          
+          // Enable finish button
+          if (finishBtn) finishBtn.removeAttribute('disabled');
+          
+          // Update table row selection without re-rendering entire table
+          const allRows = financeTable.querySelectorAll('tr[data-finance-option]');
+          allRows.forEach(row => {
+            row.classList.remove('table-active');
+            const iconCell = row.querySelector('td:first-child');
+            if (iconCell) iconCell.textContent = '';
+          });
+          
+          // Highlight selected row
+          target.classList.add('table-active');
+          const selectedIconCell = target.querySelector('td:first-child');
+          if (selectedIconCell) selectedIconCell.textContent = '▶';
+          
+        } catch (err) {
+          console.error('Error parsing finance data:', err);
+        }
+      });
+    }
+
+    renderSummary();
+    loadFinanceOptions();
+    
+    // Debug: Check if elements exist
+    console.log('🔍 Debug - financeTable exists:', !!financeTable);
+    console.log('🔍 Debug - financeOptions exists:', !!financeOptions);
+    console.log('🔍 Debug - financeStatus exists:', !!financeStatus);
+  })();
+</script>
+
+
