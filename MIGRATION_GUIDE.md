@@ -92,7 +92,15 @@ SELECT * FROM railway.users LIMIT 10;
 
 ## การแก้ไขปัญหาเพิ่มเติม
 
-หากยังพบปัญหา:
+### ปัญหา: Encoding Error (`'charmap' codec can't decode byte`)
+
+หากพบข้อผิดพลาดเกี่ยวกับ encoding ดูคู่มือในไฟล์ `fix-csv-encoding.md`
+
+**วิธีแก้ไขเร็ว:**
+1. ใน MySQL Workbench เปลี่ยน Encoding จาก `utf-8` เป็น `Windows-1252` หรือ `cp1252`
+2. หรือแปลงไฟล์ CSV เป็น UTF-8 ก่อน import (ใช้ Notepad++ หรือ script `convert_csv_encoding.py`)
+
+### ปัญหาอื่นๆ
 
 1. **ตรวจสอบ SQL Mode**:
    ```sql
