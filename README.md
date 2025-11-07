@@ -1,4 +1,4 @@
-﻿Siamdrug EJS + Node.js + MySQL Starter 2
+﻿Siamdrug EJS + Node.js + MySQL Starter
 ======================================
 
 Overview
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS users (
   operator VARCHAR(50) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   pn_id CHAR(4) NOT NULL UNIQUE,
-  source DATE NULL,  -- NULL allowed for Railway compatibility (no '0000-00-00')
+  source DATE NOT NULL,
   level VARCHAR(50) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
