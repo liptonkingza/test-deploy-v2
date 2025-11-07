@@ -1,4 +1,4 @@
-﻿Siamdrug EJS + Node.js + MySQL Starter
+﻿Siamdrug EJS + Node.js + MySQL Starter 2
 ======================================
 
 Overview
