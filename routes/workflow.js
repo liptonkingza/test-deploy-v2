@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const pool = require('../db');
 const {
   legacyTables,
@@ -550,6 +550,13 @@ router.post('/api/save-workflow', async (req, res, next) => {
         productData, 
         paymentData 
       } = req.body;
+
+      const products = Array.isArray(productData?.products) ? productData.products : [];
+      const shippingInfo = productData?.shipping || {};
+
+      if (!deliveriesTable) {
+        return res.status(500).json({ success: false, error: 'ไม่พบโครงสร้างตาราง legacy_deliveries' });
+      }
       
       // Debug: Log received data
       console.log('Received customerData:', customerData);
@@ -574,12 +581,12 @@ router.post('/api/save-workflow', async (req, res, next) => {
     const deliverNum = nextNum.toString().padStart(10, '0'); // 10 หลักพร้อม 0 นำหน้า
     
     // Calculate totals
-    const subtotal = productData.products.reduce((sum, item) => 
+    const subtotal = products.reduce((sum, item) => 
       sum + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
-    const discount = productData.products.reduce((sum, item) => 
+    const discount = products.reduce((sum, item) => 
       sum + (Number(item.discount) || 0), 0);
-    const shippingCost = productData.shipping.noCharge ? 0 : 
-      (Number(productData.shipping.shippingCost) || 0);
+    const shippingCost = shippingInfo.noCharge ? 0 : 
+      (Number(shippingInfo.shippingCost) || 0);
     const total = Math.max(subtotal - discount + shippingCost, 0);
 
     // Prepare legacy_deliveries record
@@ -887,8 +894,8 @@ router.post('/api/save-workflow', async (req, res, next) => {
       feedmemo: '',
       weightloss: 0, // เก็บค่า integer
       weight: 0, // เก็บค่า integer
-      remark1: productData.shipping.notify1 || '', // เก็บข้อมูลจาก แจ้งจัดของ 1 ใน step 4/5
-      remark2: productData.shipping.notify2 || '', // เก็บข้อมูลจาก แจ้งจัดของ 2 ใน step 4/5
+      remark1: shippingInfo.notify1 || '', // เก็บข้อมูลจาก แจ้งจัดของ 1 ใน step 4/5
+      remark2: shippingInfo.notify2 || '', // เก็บข้อมูลจาก แจ้งจัดของ 2 ใน step 4/5
       statusid: 0, // เก็บค่า integer
       statusdesc: 0, // เก็บค่า integer
       finish: 0, // เก็บค่า integer
@@ -914,8 +921,8 @@ router.post('/api/save-workflow', async (req, res, next) => {
         }
         return null;
       })(), // จำนวนวันติดตามผล จาก Step 3
-      symptom: productData.shipping.symptom || '', // อาการ/หมายเหตุ จาก Step 4
-      urgency: productData.shipping.urgency || 'normal' // ระดับความเร่งด่วน จาก Step 4 (normal, booster, maintain)
+      symptom: shippingInfo.symptom || '', // อาการ/หมายเหตุ จาก Step 4
+      urgency: shippingInfo.urgency || 'normal' // ระดับความเร่งด่วน จาก Step 4 (normal, booster, maintain)
     };
 
     // Insert into legacy_deliveries
@@ -930,8 +937,8 @@ router.post('/api/save-workflow', async (req, res, next) => {
       const recordsToInsert = [];
       
       // 1. Add records for each product
-      if (productData.products && Array.isArray(productData.products)) {
-        for (const product of productData.products) {
+      if (products.length) {
+        for (const product of products) {
           const productRecord = { ...deliveryRecord };
           
           // Determine datadesc and datatype based on price and title
@@ -962,11 +969,11 @@ router.post('/api/save-workflow', async (req, res, next) => {
       }
       
       // 2. Add shipping cost record if there are products and shipping cost > 0 and not marked as no charge
-      const shippingCostAmount = parseFloat(productData.shipping?.shippingCost || 0);
-      const noCharge = productData.shipping?.noCharge || false;
+      const shippingCostAmount = parseFloat(shippingInfo.shippingCost || 0);
+      const noCharge = shippingInfo.noCharge || false;
       console.log('Shipping cost amount:', shippingCostAmount);
       console.log('No charge flag:', noCharge);
-      console.log('Shipping data:', productData.shipping);
+      console.log('Shipping data:', shippingInfo);
       
       // Always add shipping record if there are products, regardless of cost
       if (recordsToInsert.length > 0) {
@@ -990,30 +997,14 @@ router.post('/api/save-workflow', async (req, res, next) => {
         recordsToInsert.push(deliveryRecord);
       }
 
-      // Insert all records
-      const columns = Object.keys(deliveryRecord).map(col => `\`${col}\``).join(', ');
-      const placeholders = Object.keys(deliveryRecord).map(() => '?').join(', ');
-      
-      // Debug: Log all values being inserted
-      console.log('🔍 Debug - Values being inserted:');
-      console.log('Columns:', columns);
-      console.log('Sample record values:', Object.entries(deliveryRecord).slice(0, 10));
-      
+      // Insert all records with schema-aware sanitization (avoids strict-mode errors)
       for (const record of recordsToInsert) {
-        const values = Object.values(record);
-        
-        // Debug: Log problematic values
-        console.log('🔍 Debug - Record values:');
-        Object.entries(record).forEach(([key, value]) => {
-          if (value === '' && (key.includes('flag') || key.includes('id') || key.includes('no') || key.includes('type') || key.includes('count') || key.includes('feedback'))) {
-            console.log(`⚠️  Problematic field: ${key} = '${value}' (should be integer)`);
-          }
-        });
-        
-        await pool.execute(
-          `INSERT INTO legacy_deliveries (${columns}) VALUES (${placeholders})`,
-          values
-        );
+        const sanitizedRecord = sanitizePayload(deliveriesTable, record);
+        const { sql, values } = buildInsertStatement(deliveriesTable, sanitizedRecord);
+
+        console.log('🔍 Debug - Sanitized record preview:', Object.entries(sanitizedRecord).slice(0, 10));
+
+        await pool.execute(sql, values);
         console.log(`Inserted record with datadesc: ${record.datadesc}, code: ${record.code}, title: ${record.title}`);
       }
 
@@ -1042,5 +1033,6 @@ router.post('/api/save-workflow', async (req, res, next) => {
 });
 
 module.exports = router;
+
 
 
