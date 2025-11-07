@@ -46,7 +46,7 @@ async function setupDatabase() {
         operator VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
         pn_id CHAR(4) NOT NULL UNIQUE,
-        source DATE NULL,
+        source DATE NOT NULL,
         level VARCHAR(50) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
