@@ -369,36 +369,83 @@
           }
           
           if (data.errors && data.errors.length > 0) {
-            message += ` (มี ${data.errorCount} รายการที่เกิดข้อผิดพลาด)`;
+            message += ` (มี ${data.errorCount} รายการที่เกิดข้อผิดพลาด - ดูรายละเอียดใน Console)`;
             
-            // Show detailed errors in console
-            console.group('📋 Import Errors Details');
-            console.error('Total errors:', data.errorCount);
-            console.table(data.errors);
-            console.groupEnd();
-            
-            // Store errors for modal display
+            // Store errors globally for later access
             window.lastImportErrors = data.errors;
             window.lastErrorSummary = data.errorSummary;
+            window.lastImportResult = {
+              inserted: data.inserted,
+              skipped: data.skipped,
+              total: data.total,
+              errorCount: data.errorCount,
+              timestamp: new Date().toISOString()
+            };
+            
+            // Show detailed errors in console with full details
+            console.group('🚨 ===== IMPORT ERRORS DETAILS =====');
+            console.log(`📊 Import Summary:`, {
+              'Total Records': data.total,
+              'Successfully Inserted': data.inserted,
+              'Skipped (Duplicates)': data.skipped,
+              'Errors': data.errorCount,
+              'Timestamp': new Date().toLocaleString('th-TH')
+            });
+            
+            if (data.errorSummary) {
+              console.group('📈 Error Summary');
+              console.log('Duplicate Keys:', data.errorSummary.duplicateKeys);
+              console.log('Constraint Violations:', data.errorSummary.constraintViolations);
+              console.log('Data Type Errors:', data.errorSummary.dataTypeErrors);
+              console.log('Other Errors:', data.errorSummary.otherErrors);
+              console.groupEnd();
+            }
+            
+            console.group('📋 Error Details (Table Format)');
+            console.table(data.errors.map(err => ({
+              Row: err.row,
+              Error: err.error,
+              DuplicateKey: err.duplicateKey || '-',
+              Data: err.data ? JSON.stringify(err.data).substring(0, 100) + '...' : '-'
+            })));
+            console.groupEnd();
+            
+            console.group('📝 Full Error Details (JSON)');
+            console.log('To view full details, type: window.lastImportErrors');
+            console.log('To view summary, type: window.lastErrorSummary');
+            console.log('To view all results, type: window.lastImportResult');
+            console.log(JSON.stringify(data.errors, null, 2));
+            console.groupEnd();
+            
+            console.group('💡 Tips');
+            console.log('1. Type "window.lastImportErrors" to see all errors');
+            console.log('2. Type "window.lastErrorSummary" to see error summary');
+            console.log('3. Type "window.lastImportResult" to see import result');
+            console.log('4. Errors are stored in browser memory until page reload');
+            console.groupEnd();
+            
+            console.groupEnd();
           }
           
           // Show alert with appropriate type
           const alertType = data.inserted > 0 ? 'success' : 'warning';
           const alertId = showAlert(alertType, message, data.errors && data.errors.length > 0);
           
-          // Add button to view error details if there are errors
+          // Add button to open console if there are errors
           if (data.errors && data.errors.length > 0) {
             setTimeout(() => {
               const alertDiv = document.querySelector(`[data-alert-id="${alertId}"]`);
               if (alertDiv) {
                 const messageDiv = alertDiv.querySelector('div');
                 if (messageDiv) {
-                  const viewDetailsBtn = document.createElement('button');
-                  viewDetailsBtn.className = 'btn btn-sm btn-outline-dark ms-2 mt-2';
-                  viewDetailsBtn.innerHTML = '<i class="bi bi-eye me-1"></i>ดูรายละเอียด';
-                  viewDetailsBtn.onclick = () => showErrorDetailsModal(data.errors, data.errorSummary);
+                  const consoleBtn = document.createElement('button');
+                  consoleBtn.className = 'btn btn-sm btn-outline-info ms-2 mt-2';
+                  consoleBtn.innerHTML = '<i class="bi bi-terminal me-1"></i>เปิด Console (F12)';
+                  consoleBtn.onclick = () => {
+                    alert('กรุณากด F12 เพื่อเปิด Developer Console\n\nจากนั้นพิมพ์:\n- window.lastImportErrors (ดู errors ทั้งหมด)\n- window.lastErrorSummary (ดูสรุป)\n- window.lastImportResult (ดูผลลัพธ์)');
+                  };
                   messageDiv.appendChild(document.createElement('br'));
-                  messageDiv.appendChild(viewDetailsBtn);
+                  messageDiv.appendChild(consoleBtn);
                 }
               }
             }, 100);
@@ -478,90 +525,22 @@
       }
     }
     
-    // Show error details modal
-    function showErrorDetailsModal(errors, errorSummary) {
-      // Cancel any alert timeouts to prevent alerts from disappearing
-      Object.keys(alertTimeouts).forEach(alertId => {
-        cancelAlertTimeout(alertId);
-      });
-      
-      const modalContent = document.getElementById('errorDetailsContent');
-      let html = '';
-      
-      // Error Summary
-      if (errorSummary) {
-        html += '<div class="mb-4">';
-        html += '<h6><i class="bi bi-bar-chart me-2"></i>สรุปข้อผิดพลาด</h6>';
-        html += '<div class="row g-3">';
-        if (errorSummary.duplicateKeys > 0) {
-          html += `<div class="col-md-3"><div class="card border-warning"><div class="card-body text-center"><h5 class="text-warning">${errorSummary.duplicateKeys}</h5><small>รหัสซ้ำ</small></div></div></div>`;
-        }
-        if (errorSummary.constraintViolations > 0) {
-          html += `<div class="col-md-3"><div class="card border-danger"><div class="card-body text-center"><h5 class="text-danger">${errorSummary.constraintViolations}</h5><small>ผิดเงื่อนไข</small></div></div></div>`;
-        }
-        if (errorSummary.dataTypeErrors > 0) {
-          html += `<div class="col-md-3"><div class="card border-info"><div class="card-body text-center"><h5 class="text-info">${errorSummary.dataTypeErrors}</h5><small>ประเภทข้อมูลผิด</small></div></div></div>`;
-        }
-        if (errorSummary.otherErrors > 0) {
-          html += `<div class="col-md-3"><div class="card border-secondary"><div class="card-body text-center"><h5 class="text-secondary">${errorSummary.otherErrors}</h5><small>อื่นๆ</small></div></div></div>`;
-        }
-        html += '</div></div>';
+    // Helper function to view errors in console (kept for backward compatibility)
+    function viewErrorsInConsole() {
+      if (window.lastImportErrors) {
+        console.group('🚨 ===== IMPORT ERRORS (From Memory) =====');
+        console.log('Import Result:', window.lastImportResult);
+        console.log('Error Summary:', window.lastErrorSummary);
+        console.log('All Errors:', window.lastImportErrors);
+        console.table(window.lastImportErrors);
+        console.groupEnd();
+      } else {
+        console.warn('No import errors found in memory. Please run import again.');
       }
-      
-      // Error List
-      html += '<div class="mb-3">';
-      html += `<h6><i class="bi bi-list-ul me-2"></i>รายละเอียดข้อผิดพลาด (${errors.length} รายการ)</h6>`;
-      html += '<div class="table-responsive" style="max-height: 500px; overflow-y: auto;">';
-      html += '<table class="table table-sm table-hover">';
-      html += '<thead class="table-light sticky-top"><tr><th>แถว</th><th>ข้อผิดพลาด</th><th>ข้อมูล</th></tr></thead>';
-      html += '<tbody>';
-      
-      errors.forEach((err, idx) => {
-        const rowClass = idx % 2 === 0 ? '' : 'table-secondary';
-        html += `<tr class="${rowClass}">`;
-        html += `<td><strong>${err.row}</strong></td>`;
-        html += `<td><span class="badge bg-danger">${err.error}</span></td>`;
-        
-        // Show data (limit to key fields)
-        let dataPreview = '';
-        if (err.data) {
-          const keyFields = Object.keys(err.data).slice(0, 3);
-          dataPreview = keyFields.map(k => {
-            const val = err.data[k];
-            return `${k}: ${val !== null && val !== undefined ? val : '(ว่าง)'}`;
-          }).join(', ');
-          if (Object.keys(err.data).length > 3) {
-            dataPreview += '...';
-          }
-        }
-        html += `<td><small class="text-muted">${dataPreview || '-'}</small></td>`;
-        html += '</tr>';
-      });
-      
-      html += '</tbody></table></div></div>';
-      
-      modalContent.innerHTML = html;
-      
-      // Get or create modal instance
-      const modalElement = document.getElementById('errorDetailsModal');
-      let modal = bootstrap.Modal.getInstance(modalElement);
-      if (!modal) {
-        modal = new bootstrap.Modal(modalElement);
-      }
-      
-      // Prevent modal from closing on backdrop click when viewing errors
-      modalElement.setAttribute('data-bs-backdrop', 'static');
-      modalElement.setAttribute('data-bs-keyboard', 'false');
-      
-      modal.show();
-      
-      // Restore normal behavior when modal is hidden
-      modalElement.addEventListener('hidden.bs.modal', function onHidden() {
-        modalElement.removeAttribute('data-bs-backdrop');
-        modalElement.removeAttribute('data-bs-keyboard');
-        modalElement.removeEventListener('hidden.bs.modal', onHidden);
-      }, { once: true });
     }
+    
+    // Make function globally available
+    window.viewImportErrors = viewErrorsInConsole;
   </script>
 </body>
 </html>
