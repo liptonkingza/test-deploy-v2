@@ -22,6 +22,7 @@ const legacyDeliveriesRouter = require('./routes/legacyDeliveries');
 const legacyProductsRouter = require('./routes/legacyProducts');
 const workflowRouter = require('./routes/workflow');
 const dashboardRouter = require('./routes/dashboard');
+const dataImportExportRouter = require('./routes/dataImportExport');
 
 const app = express();
 
@@ -376,6 +377,7 @@ app.get('/', (req, res) => {
 
 app.use('/workflow', workflowRouter);
 app.use('/dashboard', requireAuth, dashboardRouter);
+app.use('/data-import-export', requireAuth, dataImportExportRouter);
 
 // Basic error handler
 // eslint-disable-next-line no-unused-vars
