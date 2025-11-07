@@ -269,8 +269,16 @@ router.post('/import/:tableName',
     const [tableColumns] = await pool.query(`SHOW COLUMNS FROM \`${tableName}\``);
     const validColumns = tableColumns.map(col => col.Field);
     
+    console.log(`📋 CSV columns: ${columns.length}`, columns);
+    console.log(`📋 Table columns: ${validColumns.length}`, validColumns);
+    
     // Filter out invalid columns
     const validDataColumns = columns.filter(col => validColumns.includes(col));
+    
+    if (validDataColumns.length < columns.length) {
+      const invalidColumns = columns.filter(col => !validColumns.includes(col));
+      console.warn(`⚠️  Invalid columns in CSV (will be ignored):`, invalidColumns);
+    }
     
     if (validDataColumns.length === 0) {
       return res.status(400).json({ 
@@ -286,40 +294,111 @@ router.post('/import/:tableName',
     }
 
     // Prepare insert statement
+    // Use INSERT IGNORE to skip duplicate keys instead of failing
     const placeholders = validDataColumns.map(() => '?').join(', ');
     const columnNames = validDataColumns.map(col => `\`${col}\``).join(', ');
-    const insertSql = `INSERT INTO \`${tableName}\` (${columnNames}) VALUES (${placeholders})`;
+    const insertSql = `INSERT IGNORE INTO \`${tableName}\` (${columnNames}) VALUES (${placeholders})`;
 
     // Insert records in batches
     const batchSize = 100;
     let inserted = 0;
     let errors = [];
+    let skipped = 0;
+
+    console.log(`📊 Starting import: ${records.length} records, ${validDataColumns.length} columns`);
 
     for (let i = 0; i < records.length; i += batchSize) {
       const batch = records.slice(i, i + batchSize);
       
-      for (const record of batch) {
+      for (let j = 0; j < batch.length; j++) {
+        const record = batch[j];
+        const rowNumber = i + j + 1; // 1-based row number
+        
         try {
-          const values = validDataColumns.map(col => {
-            const value = record[col];
-            // Handle empty strings as NULL for certain types
+          const values = validDataColumns.map((col, idx) => {
+            let value = record[col];
+            const columnInfo = tableColumns.find(c => c.Field === col);
+            
+            // Handle empty strings as NULL
             if (value === '' || value === null || value === undefined) {
               return null;
             }
+            
+            // Trim string values
+            if (typeof value === 'string') {
+              value = value.trim();
+              if (value === '') return null;
+            }
+            
+            // Handle date fields
+            if (columnInfo && columnInfo.Type.includes('date')) {
+              if (value === null || value === '') return null;
+              
+              // Try to parse date
+              const dateStr = String(value);
+              
+              // Handle '0000-00-00' as NULL
+              if (dateStr === '0000-00-00' || dateStr.startsWith('0000-')) {
+                return null;
+              }
+              
+              // Try to parse various date formats
+              try {
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) {
+                  // Invalid date, return NULL
+                  return null;
+                }
+                // Return in YYYY-MM-DD format
+                return date.toISOString().split('T')[0];
+              } catch (e) {
+                // If parsing fails, return NULL
+                return null;
+              }
+            }
+            
+            // Handle numeric fields
+            if (columnInfo && (columnInfo.Type.includes('int') || columnInfo.Type.includes('decimal') || columnInfo.Type.includes('float'))) {
+              if (value === null || value === '') return null;
+              
+              const num = Number(value);
+              if (isNaN(num)) {
+                // If not a valid number, return NULL
+                return null;
+              }
+              return num;
+            }
+            
             return value;
           });
 
-          await pool.query(insertSql, values);
-          inserted++;
+          const [result] = await pool.query(insertSql, values);
+          
+          if (result.affectedRows === 0) {
+            // INSERT IGNORE returns 0 affected rows for duplicates
+            skipped++;
+            errors.push({
+              row: rowNumber,
+              error: 'Duplicate key or constraint violation (skipped)',
+              data: Object.fromEntries(validDataColumns.map((col, idx) => [col, values[idx]]))
+            });
+          } else {
+            inserted++;
+          }
         } catch (err) {
+          console.error(`❌ Error inserting row ${rowNumber}:`, err.message);
           errors.push({
-            row: i + batch.indexOf(record) + 1,
+            row: rowNumber,
             error: err.message,
-            data: record
+            errorCode: err.code,
+            sqlState: err.sqlState,
+            data: Object.fromEntries(validDataColumns.map(col => [col, record[col]]))
           });
         }
       }
     }
+    
+    console.log(`✅ Import completed: ${inserted} inserted, ${skipped} skipped, ${errors.length - skipped} errors`);
 
     // Clean up uploaded file
     if (uploadedFilePath && fs.existsSync(uploadedFilePath)) {
@@ -330,8 +409,16 @@ router.post('/import/:tableName',
       success: true,
       message: `Imported ${inserted} records successfully`,
       inserted,
+      skipped,
       total: records.length,
-      errors: errors.length > 0 ? errors : undefined
+      errors: errors.length > 0 ? errors.slice(0, 10) : undefined, // Limit to first 10 errors
+      errorCount: errors.length,
+      errorSummary: errors.length > 0 ? {
+        duplicateKeys: errors.filter(e => e.error.includes('Duplicate')).length,
+        constraintViolations: errors.filter(e => e.error.includes('constraint') || e.error.includes('foreign key')).length,
+        dataTypeErrors: errors.filter(e => e.error.includes('Incorrect') || e.error.includes('type')).length,
+        otherErrors: errors.filter(e => !e.error.includes('Duplicate') && !e.error.includes('constraint') && !e.error.includes('Incorrect')).length
+      } : undefined
     });
 
   } catch (err) {

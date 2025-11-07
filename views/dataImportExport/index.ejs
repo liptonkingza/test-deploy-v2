@@ -342,11 +342,45 @@
         progressDiv.classList.add('d-none');
         
         if (data.success) {
-          showAlert('success', 
-            `นำเข้าข้อมูลสำเร็จ! ${data.inserted} รายการจาก ${data.total} รายการ` +
-            (data.errors && data.errors.length > 0 ? 
-              ` (มี ${data.errors.length} รายการที่เกิดข้อผิดพลาด)` : '')
-          );
+          let message = `นำเข้าข้อมูลสำเร็จ! ${data.inserted} รายการจาก ${data.total} รายการ`;
+          
+          if (data.skipped > 0) {
+            message += ` (ข้าม ${data.skipped} รายการที่ซ้ำ)`;
+          }
+          
+          if (data.errors && data.errors.length > 0) {
+            message += ` (มี ${data.errorCount} รายการที่เกิดข้อผิดพลาด)`;
+            
+            // Show detailed errors in console
+            console.error('Import errors:', data.errors);
+            
+            // Show error summary if available
+            if (data.errorSummary) {
+              const summary = data.errorSummary;
+              let summaryText = '\n\nสรุปข้อผิดพลาด:\n';
+              if (summary.duplicateKeys > 0) summaryText += `- รหัสซ้ำ: ${summary.duplicateKeys} รายการ\n`;
+              if (summary.constraintViolations > 0) summaryText += `- ผิดเงื่อนไข: ${summary.constraintViolations} รายการ\n`;
+              if (summary.dataTypeErrors > 0) summaryText += `- ประเภทข้อมูลผิด: ${summary.dataTypeErrors} รายการ\n`;
+              if (summary.otherErrors > 0) summaryText += `- อื่นๆ: ${summary.otherErrors} รายการ\n`;
+              
+              // Show first few errors
+              if (data.errors.length > 0) {
+                summaryText += '\nตัวอย่างข้อผิดพลาด:\n';
+                data.errors.slice(0, 3).forEach((err, idx) => {
+                  summaryText += `${idx + 1}. แถว ${err.row}: ${err.error}\n`;
+                });
+                if (data.errors.length > 3) {
+                  summaryText += `... และอีก ${data.errors.length - 3} รายการ (ดูใน Console)`;
+                }
+              }
+              
+              message += summaryText;
+            }
+          }
+          
+          // Show alert with appropriate type
+          const alertType = data.inserted > 0 ? 'success' : 'warning';
+          showAlert(alertType, message);
           
           // Close modal and reload page
           const modal = bootstrap.Modal.getInstance(document.getElementById('importModal'));
@@ -354,7 +388,7 @@
           
           setTimeout(() => {
             location.reload();
-          }, 1500);
+          }, 2000);
         } else {
           const errorMsg = data.error || data.message || 'ไม่ทราบสาเหตุ';
           const details = data.details ? `\nรายละเอียด: ${data.details}` : '';
