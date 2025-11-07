@@ -425,6 +425,9 @@
       });
     }
 
+    // Store alert timeouts
+    const alertTimeouts = {};
+    
     // Show alert
     function showAlert(type, message, hasErrors = false) {
       const alertId = 'alert-' + Date.now();
@@ -444,23 +447,44 @@
       closeBtn.type = 'button';
       closeBtn.className = 'btn-close';
       closeBtn.setAttribute('data-bs-dismiss', 'alert');
+      closeBtn.onclick = () => {
+        // Clear timeout when manually closed
+        if (alertTimeouts[alertId]) {
+          clearTimeout(alertTimeouts[alertId]);
+          delete alertTimeouts[alertId];
+        }
+      };
       alertDiv.appendChild(closeBtn);
       
       document.body.appendChild(alertDiv);
       
-      // Keep alert longer if there are errors
-      const timeout = hasErrors ? 10000 : 5000;
-      setTimeout(() => {
+      // Keep alert longer if there are errors, but don't auto-close if user might want to see details
+      const timeout = hasErrors ? 30000 : 5000; // 30 seconds for errors, 5 seconds for success
+      alertTimeouts[alertId] = setTimeout(() => {
         if (alertDiv.parentNode) {
           alertDiv.remove();
         }
+        delete alertTimeouts[alertId];
       }, timeout);
       
       return alertId;
     }
     
+    // Function to cancel alert timeout
+    function cancelAlertTimeout(alertId) {
+      if (alertTimeouts[alertId]) {
+        clearTimeout(alertTimeouts[alertId]);
+        delete alertTimeouts[alertId];
+      }
+    }
+    
     // Show error details modal
     function showErrorDetailsModal(errors, errorSummary) {
+      // Cancel any alert timeouts to prevent alerts from disappearing
+      Object.keys(alertTimeouts).forEach(alertId => {
+        cancelAlertTimeout(alertId);
+      });
+      
       const modalContent = document.getElementById('errorDetailsContent');
       let html = '';
       
@@ -502,7 +526,10 @@
         let dataPreview = '';
         if (err.data) {
           const keyFields = Object.keys(err.data).slice(0, 3);
-          dataPreview = keyFields.map(k => `${k}: ${err.data[k] || '(ว่าง)'}`).join(', ');
+          dataPreview = keyFields.map(k => {
+            const val = err.data[k];
+            return `${k}: ${val !== null && val !== undefined ? val : '(ว่าง)'}`;
+          }).join(', ');
           if (Object.keys(err.data).length > 3) {
             dataPreview += '...';
           }
@@ -515,8 +542,25 @@
       
       modalContent.innerHTML = html;
       
-      const modal = new bootstrap.Modal(document.getElementById('errorDetailsModal'));
+      // Get or create modal instance
+      const modalElement = document.getElementById('errorDetailsModal');
+      let modal = bootstrap.Modal.getInstance(modalElement);
+      if (!modal) {
+        modal = new bootstrap.Modal(modalElement);
+      }
+      
+      // Prevent modal from closing on backdrop click when viewing errors
+      modalElement.setAttribute('data-bs-backdrop', 'static');
+      modalElement.setAttribute('data-bs-keyboard', 'false');
+      
       modal.show();
+      
+      // Restore normal behavior when modal is hidden
+      modalElement.addEventListener('hidden.bs.modal', function onHidden() {
+        modalElement.removeAttribute('data-bs-backdrop');
+        modalElement.removeAttribute('data-bs-keyboard');
+        modalElement.removeEventListener('hidden.bs.modal', onHidden);
+      }, { once: true });
     }
   </script>
 </body>
