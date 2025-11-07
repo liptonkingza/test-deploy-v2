@@ -377,9 +377,40 @@ router.post('/import/:tableName',
           if (result.affectedRows === 0) {
             // INSERT IGNORE returns 0 affected rows for duplicates
             skipped++;
+            
+            // Try to identify which key is duplicate
+            let duplicateKey = 'unknown';
+            try {
+              // Check for unique constraints
+              const uniqueColumns = tableColumns.filter(col => 
+                col.Key === 'UNI' || col.Key === 'PRI'
+              );
+              
+              // Try to find which unique key might be duplicate
+              for (const col of uniqueColumns) {
+                const colIdx = validDataColumns.indexOf(col.Field);
+                if (colIdx >= 0 && values[colIdx] !== null) {
+                  // Check if this value already exists
+                  const [existing] = await pool.query(
+                    `SELECT COUNT(*) as count FROM \`${tableName}\` WHERE \`${col.Field}\` = ?`,
+                    [values[colIdx]]
+                  );
+                  if (existing[0].count > 0) {
+                    duplicateKey = col.Field;
+                    break;
+                  }
+                }
+              }
+            } catch (checkErr) {
+              // Ignore check errors
+            }
+            
             errors.push({
               row: rowNumber,
-              error: 'Duplicate key or constraint violation (skipped)',
+              error: duplicateKey !== 'unknown' 
+                ? `Duplicate key: ${duplicateKey} (skipped)`
+                : 'Duplicate key or constraint violation (skipped)',
+              duplicateKey: duplicateKey,
               data: Object.fromEntries(validDataColumns.map((col, idx) => [col, values[idx]]))
             });
           } else {
